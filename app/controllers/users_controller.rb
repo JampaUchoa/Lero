@@ -11,7 +11,6 @@ class UsersController < ApplicationController
     else
       # Invalid
     end
-    render js: "location.reload()"
   end
 
   private

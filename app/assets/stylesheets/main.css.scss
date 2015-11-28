@@ -44,11 +44,12 @@ $anchor-color: #565656;
   /* margin: 10px 0; */
   padding: 7px 10px 7px;
   left: 0;
-  background-color: #81E581;
+  background-color: $primary-color; //#81E581;
 
   h3{
     color: #fff;
     margin: 0;
+    transition: all 0.2s linear;
   }
   textarea{
   outline: none;

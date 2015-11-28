@@ -234,7 +234,17 @@ $("#compose").keypress(function (e) {
       e.preventDefault();
       }
   });
+// ================= USER LOGIC=====================
 
+$("#user_username").keypress(function (e) {
+
+	if ($(this).val() != ""){
+
+		$("h3",".chat-insert").css({"height":"30px"});
+
+
+	}
+});
  //=====
 
 $("#show-mobile-chat").click(function(){

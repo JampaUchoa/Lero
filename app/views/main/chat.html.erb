@@ -22,14 +22,20 @@
     </div>
 
     <div class="chat-insert">
-    <% if current_user.username %>
+      <div id="error-div">
+      </div>
+    <% if !current_user.username.nil? %>
       <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1"></textarea>
     <% else %>
-    <h3 style="height:0px"> Para começar digite um nome </h3>
-      <%= form_for current_user, url: user_path(current_user), method: :patch, remote: true do |f| %>
-        <%= f.text_field :username, minlength: "3", maxlength: "15", placeholder: "Para começar diga o seu nome", rows: 1, required: true %>
+      <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1" class="hidden"></textarea>
+
+      <div class="form-username">
+      <h3 style="height:0px"> Digite um nome </h3>
+        <%= form_for current_user, url: user_path(current_user), method: :patch, remote: true do |f| %>
+          <%= f.text_field :username, minlength: "3", maxlength: "15", placeholder: "Para começar diga o seu nome", rows: 1, required: true %>
+        <% end %>
       <% end %>
-    <% end %>
+      </div>
     </div>
 
   </div>
