@@ -1,13 +1,14 @@
 class ChatsController < ApplicationController
 
     def sendmsg
-      room_id = (params[:roomId])
-      @message = (params[:message])
-      Chat.create(message: @message, room_id: room_id)
-      render json: {}
+      if logged_in && !current_user.username.nil?
+        room_id = (params[:roomId])
+        @message = (params[:message])
+        Chat.create(user_id: current_user.id, message: @message, room_id: room_id)
+        render json: {}
+      end
     end
 
-=begin
     def receive
       if logged_in
         lastmsg = (params[:id]).to_i

@@ -1,7 +1,7 @@
+
+$(document).on('page:change', function () {
 // ============================[ Room logic] =============
-
 //Join a room
-
 $(".room-pick").click(function() {
 
 
@@ -111,7 +111,6 @@ function roomTabbing(roomId, roomName) {
 
 //==============================[ CHAT BOX ]==============
 
-if ($("#chat-container").length != 0) {
 	var intervalID = window.setInterval(poll, 1500);
 	originalTitle = $(document).find("title").text();
 //	window_focus = true;
@@ -134,8 +133,6 @@ if ($("#chat-container").length != 0) {
 			window_focus = false;
 	});
 
-}
-
 // Scrolls bottom when it's called
 
 function chatbottom() {
@@ -149,7 +146,7 @@ function poll() {
 activeTab = parseInt($(".room-tab-active").attr("data-id"));
 
 	$.ajax({
-	    url: "/receive/" + lastId,
+	    url: "/message/receive/" + lastId,
 			timeout: 1000,
 	    type: "GET",
 	    complete: function(data) {
@@ -196,7 +193,7 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 }
 
  // Auto resize textarea on typing
-
+/*
  function autoline(e) {
    $(e).css({'height':'auto','overflow-y':'hidden'}).height(e.scrollHeight);
  }
@@ -205,7 +202,7 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
  }).on('input', function () {
    autoline(this);
  });
-
+*/
 // Prevent scrolling page
 
 $('#chat-container').bind('mousewheel', function(e){
@@ -223,7 +220,7 @@ $("#compose").keypress(function (e) {
 			}
 
 			$.ajax({
-					url: "/sendmsg",
+					url: "/message/send",
 					type: "POST",
 					data: {
 						roomId: $(this).attr("data-room-id"),
@@ -234,7 +231,6 @@ $("#compose").keypress(function (e) {
 				});
 
 			$(this).val("");
-			autoline(this);
       e.preventDefault();
       }
   });
@@ -248,41 +244,12 @@ $("#show-mobile-chat").click(function(){
 	$(this).toggleClass("tab-active");
 });
 
-$("#show-mobile-community").click(function(){
-
-	mainPage = !mainPage;
-	$(".mid, .leftcol, .footer-margin").toggleClass("hidden-mobile");
-	$(this).toggleClass("tab-active");
-});
-
-//’secret’ specifies the numerical keystrokes that make up the word “mario”
-var secret = "3838404037393739666513";
-var input = "";
-var timer;
-//The following function sets a timer that checks for user input. You can change the variation in how long the user has to input by changing the number in ‘setTimeout.’ In this case, it’s set for 500 milliseconds or ½ second.
-$(document).keyup(function(e) {
-   input += e.which;
-   clearTimeout(timer);
-   timer = setTimeout(function() { input = ""; }, 500);
-   check_input();
-});
-//Once the time is up, this function is run to see if the user’s input is the same as the secret code
-function check_input() {
-    if(input == secret) {
-			$(".topbar").addClass("rainbow");
-
-			$.ajax({
-			    url: "/s3cr3t",
-			    type: "POST",
-			});
-
-    }
-};
-
-
 function setCookie(cname, cvalue) {
     var d = new Date();
     d.setTime(d.getTime() + (20*12*30*24*60*60*1000));
     var expires = "expires="+d.toUTCString();
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }
+
+
+});

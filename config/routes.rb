@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :rooms, only: [:index, :create, :update]
   post '/room/join/:id/' => 'rooms#join'
   post '/room/leave/:id/' => 'rooms#leave'
+  get '/message/receive/:id' => 'chats#receive'
+  post '/message/send' => 'chats#sendmsg'
+  resources :users
   # You can have the root of your site routed with "root"
   root 'main#chat'
 

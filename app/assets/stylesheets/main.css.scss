@@ -46,6 +46,10 @@ $anchor-color: #565656;
   left: 0;
   background-color: #81E581;
 
+  h3{
+    color: #fff;
+    margin: 0;
+  }
   textarea{
   outline: none;
   resize: none;
@@ -54,5 +58,15 @@ $anchor-color: #565656;
   padding: 7px 7px 4px 7px;
   font-size: 125%;
   border-radius: 7px;
+  }
+
+  input{
+    outline: none;
+    resize: none;
+    width: 100%;
+    border: none;
+    padding: 7px 7px 4px 7px;
+    font-size: 125%;
+    border-radius: 7px;
   }
 }

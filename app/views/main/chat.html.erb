@@ -3,7 +3,7 @@
 </div>
 
 <div class="containerd">
-  <aside class="control col-md-3 col-lg-2 col-sm-4">
+  <aside class="control col-md-3 col-lg-2 col-sm-4 hidden-xs">
     <h3> Rooms </h3>
     <p> lol </p>
 
@@ -12,7 +12,6 @@
       <%= f.text_field :name, minlength: "3", maxlength: "10", placeholder: "Room name", class: "form-input", required: true %>
       <%= f.submit "Create", class: "form-submit" %>
     <% end %>
-
   </aside>
 
 
@@ -21,8 +20,17 @@
     <div id="chat-container">
 
     </div>
+
     <div class="chat-insert">
+    <% if current_user.username %>
       <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1"></textarea>
+    <% else %>
+    <h3 style="height:0px"> Para começar digite um nome </h3>
+      <%= form_for current_user, url: user_path(current_user), method: :patch, remote: true do |f| %>
+        <%= f.text_field :username, minlength: "3", maxlength: "15", placeholder: "Para começar diga o seu nome", rows: 1, required: true %>
+      <% end %>
+    <% end %>
     </div>
+
   </div>
 </div>
