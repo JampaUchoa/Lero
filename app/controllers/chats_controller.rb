@@ -23,13 +23,13 @@ class ChatsController < ApplicationController
               room: m.room_id,
               created_at: m.created_at.utc.to_i*1000,
               userid: m.user.username,
-              username: m.user.name,
+              username: m.user.username,
               photo:
-              if m.user.photo?
-                m.user.photo.to_s
-              else
+              #if m.user.photo?
+              #  m.user.photo.to_s
+              #else
                 ActionController::Base.helpers.asset_path('user-default.png')
-              end
+              #end
             }
           end
         end

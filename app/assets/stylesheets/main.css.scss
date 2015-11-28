@@ -71,3 +71,65 @@ $anchor-color: #565656;
     border-radius: 7px;
   }
 }
+
+.chat::-webkit-scrollbar-track {
+    background: rgba(255,255,255,.2);
+}
+.chat::-webkit-scrollbar {
+    width: 6px!important;
+}
+.chat::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.5);
+}
+
+.message{
+
+  margin: 10px 0;
+}
+
+.message-user-photo{
+
+  display: inline-block;
+  width: 50px;
+  vertical-align: top;
+  margin-top: 5px;
+
+ img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  }
+
+}
+
+.message-info-content{
+  width: calc(100% - 55px);
+  display: inline-block;
+}
+
+.message-user-name{
+  display: inline;
+  vertical-align: top;
+  font-weight: bold;
+}
+
+.message-content{
+  display: inline-block;
+  width: 100%;
+  line-height: 1.3;
+  word-break: break-word;
+  p{
+    margin: 0;
+  }
+}
+
+.message-content + .message-content {
+    padding-top: 5px;
+}
+
+.message-time{
+
+  float: right;
+  color: #696969;
+
+}
