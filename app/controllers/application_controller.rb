@@ -8,9 +8,14 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     if !logged_in
-  #    require "geoip"
-  #    g = GeoIP.new("GeoLiteCity.dat").city(request.remote_ip)
-      @user = User.create
+      @user = User.new
+      require "geoip"
+      g = GeoIP.new("GeoLiteCity.dat").city(request.remote_ip)
+      if !g.nil?
+        @user.latitude = g.latitude
+        @user.longitude = g.longitude
+      end
+      @user.save
       remember(@user)
       log_in @user
     end
