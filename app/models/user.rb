@@ -6,10 +6,10 @@ class User < ActiveRecord::Base
   has_many :chats
   has_many :tenancies, foreign_key: "user_id", class_name: "Tenant"
 
-  VALID_USER_REGEX = /\A[a-zA-Z0-9]+\z/
-  validates :username, length: {minimum: 2, maximum: 15 },
-                       format: { with: VALID_USER_REGEX },
-                       uniqueness: { case_sensitive: false }
+#  VALID_USER_REGEX = /\A[a-zA-Z0-9]+\z/
+#  validates :username, length: {minimum: 2, maximum: 15 },
+#                       format: { with: VALID_USER_REGEX },
+#                       uniqueness: { case_sensitive: false }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, allow_blank: true,
