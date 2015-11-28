@@ -39,14 +39,19 @@ $anchor-color: #565656;
 
   position: absolute;
   bottom: 0;
-  width: 98%;
-  margin: 10px 0;
+  width: 100%;
+  /* margin: 10px 0; */
+  padding: 7px 10px 7px;
+  left: 0;
+  background-color: #81E581;
 
   textarea{
+  outline: none;
   resize: none;
   width: 100%;
-  border: 1px solid $border-color;
+  border: none;
   padding: 7px 7px 4px 7px;
   font-size: 125%;
+  border-radius: 7px;
   }
 }
