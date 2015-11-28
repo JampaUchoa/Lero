@@ -1,0 +1,20 @@
+// Place all the styles related to the Main controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.top-bar{
+  height: 50px;
+  background-color: #00cc00;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.control{
+  width: 20%;
+  background-color: #aa00cc;
+  height: 100vh;
+  margin-left: -8px;
+  margin-top: 50px;
+}
