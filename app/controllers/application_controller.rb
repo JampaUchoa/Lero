@@ -16,8 +16,8 @@ class ApplicationController < ActionController::Base
         @user.longitude = g.longitude
       end
       @user.save
-      remember(@user)
       log_in @user
+      remember(@user)
     end
   end
 
