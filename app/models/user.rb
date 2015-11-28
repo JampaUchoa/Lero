@@ -7,8 +7,7 @@ class User < ActiveRecord::Base
   has_many :tenancies, foreign_key: "user_id", class_name: "Tenant"
 
   VALID_USER_REGEX = /\A[a-zA-Z0-9]+\z/
-  validates :username, presence: true,
-                       length: {minimum: 2, maximum: 15 },
+  validates :username, length: {minimum: 2, maximum: 15 },
                        format: { with: VALID_USER_REGEX },
                        uniqueness: { case_sensitive: false }
 
@@ -17,8 +16,6 @@ class User < ActiveRecord::Base
                     length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-
-  validates_length_of :name, within: 2..15 #, too_long: 'pick a shorter name', too_short: 'pick a longer name'
 
   has_secure_password
 
