@@ -1,0 +1,58 @@
+$border-color: #DEE1E5;
+$primary-color: #00cc00;
+$anchor-color: #565656;
+
+.form-input{
+  border: none;
+  border-bottom: 1px solid $border-color;
+  outline: none;
+  width: 100% !important;
+  resize:none;
+  min-height: 24px;
+  margin: 4px 0;
+  font-size: 17px;
+}
+
+.form-input:focus{
+
+  border-bottom: 1px solid $primary-color;
+
+}
+
+
+.form-textarea-sm{
+  border: 1px solid $border-color;
+  outline: none;
+  width: 100% !important;
+  resize:none;
+  min-height: 48px !important;
+  margin: 4px 0;
+  font-size: 17px;
+}
+
+.form-textarea-sm:focus{
+
+  border: 1px solid $primary-color;
+
+}
+
+.form-submit{
+
+	background-color: $primary-color;
+  color: #fff;
+	display: inline-block;
+	margin-bottom: 0;
+	font-size: 18px;
+  width: 100%;
+  border: 1px solid transparent;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}

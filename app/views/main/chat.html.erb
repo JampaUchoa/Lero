@@ -6,7 +6,13 @@
   <aside class="control col-md-3 col-lg-2 col-sm-4">
     <h3> Rooms </h3>
     <p> lol </p>
-    
+
+    <div class="room-error"></div>
+    <%= form_for Room.new, remote: true do |f| %>
+      <%= f.text_field :name, minlength: "3", maxlength: "10", placeholder: "Room name", class: "form-input", required: true %>
+      <%= f.submit "Create", class: "form-submit" %>
+    <% end %>
+
   </aside>
 
 

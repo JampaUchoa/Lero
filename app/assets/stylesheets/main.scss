@@ -2,12 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $border-color: #DEE1E5;
-$primary-color: #0857D6;
+$primary-color: #00cc00;
 $anchor-color: #565656;
 
 .top-bar{
   height: 50px;
-  background-color: #00cc00;
+  background-color: $primary-color;
   position: fixed;
   top: 0;
   left: 0;
@@ -16,9 +16,10 @@ $anchor-color: #565656;
 }
 
 .control{
-  background-color: #4CDB4C;
+//  background-color: #4CDB4C;
   height: calc(100vh - 50px);
-  color: white;
+//    color: white;
+  border-right: 1px solid $border-color;
 }
 
 .containerd{
