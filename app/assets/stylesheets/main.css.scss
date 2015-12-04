@@ -167,7 +167,19 @@ ul, li{
 }
 
 .room-tab{
+  cursor: pointer;
+  font-size: 18px;
+  padding: 3px 10px;
+}
 
+.room-tab-active{
+  background-color: #00cc00;
+  color: #fff;
+}
+
+.room-tab-new{
+  background-color: #FF9C19;
+  color: #fff;
 }
 
 .room{
