@@ -1,11 +1,30 @@
+<% joined = current_user.tenancies %>
+<% not_joined = Room.where.not(id: joined.pluck(:room_id)) %>
+<% console %>
+
 <div class="top-bar">
   <div class="">
 </div>
 
 <div class="containerd">
   <aside class="control col-md-3 col-lg-2 col-sm-4 hidden-xs">
+    <span class="toggle-console"> Toggle console </span>
     <h3> Rooms </h3>
-    <p> lol </p>
+    <ul class="room-list">
+      <% if joined.any? %>
+        <% joined.each do |t| %>
+          <li class="room-tab" data-id="<%= t.room.id %>"> <%= t.room.name %> </li>
+        <% end %>
+      <% end %>
+    </ul>
+
+    <h3> Suggest </h3>
+    <%= not_joined.count %>
+    <ul class="room-list">
+      <% not_joined.each do |t| %>
+        <li class="room-tab" data-id="<%= t.id %>"> <%= t.name %> </li>
+      <% end %>
+    </ul>
 
     <div class="room-error"></div>
     <%= form_for Room.new, remote: true do |f| %>
@@ -18,9 +37,17 @@
   <div class="chat col-md-9 col-lg-10 col-sm-8">
     <h3 class="chat-title"> Chat </h3>
     <div id="chat-container">
+
+      <% joined.each do |t| %>
+        <div class="room" data-id="<%= t.room.id %>">
+        </div>
+      <% end %>
+
       <div class="room <%= 'room-active' %>" data-id="1">
       </div>
     </div>
+
+
 
     <div class="chat-insert">
       <div id="error-div">
@@ -31,9 +58,9 @@
       <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1" class="hidden"></textarea>
 
       <div class="form-username">
-      <h3 style="height:0px"> Digite um nome </h3>
+      <h3> Digite um nome </h3>
         <%= form_for current_user, url: user_path(current_user), method: :patch, remote: true do |f| %>
-          <%= f.text_field :username, minlength: "3", maxlength: "15", placeholder: "Para começar diga o seu nome", rows: 1, required: true %>
+          <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: "Para começar diga o seu nome", rows: 1, required: true %>
         <% end %>
       <% end %>
       </div>

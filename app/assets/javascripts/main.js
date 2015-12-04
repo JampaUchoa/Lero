@@ -1,7 +1,9 @@
 
 $(document).on('page:change', function () {
 // ============================[ Room logic] =============
+
 //Join a room
+
 $(".room-pick").click(function() {
 
 
@@ -20,14 +22,13 @@ $(".room-pick").click(function() {
 				roomTabbing(roomId, roomName);
 				$(".room-leave").removeClass("hidden");
 
-
 			}
 		});
 });
 
 // Select a room
 
-$('.chat').on('click', ".room-tab", function(){
+$('html').on('click', ".room-tab", function(){
 
 roomTabbing($(this).attr('data-id'), $(this).text());
 
@@ -94,9 +95,8 @@ function roomTabbing(roomId, roomName) {
 	$(".room-tab[data-id="+ roomId +"]").addClass("room-tab-active");
 	$(".room-tab[data-id="+ roomId +"]").removeClass("room-tab-new");
 
-
 	$(".room[data-id="+ roomId +"]").addClass("room-active"); // then show the target room
-	$(".chat-room-active").html(roomName) // change the header
+	$(".chat-title").html(roomName) // change the header
 	chatbottom(); // scroll to bottom
 	setCookie("lastRoom", roomId); // saves preference
 
@@ -253,6 +253,13 @@ $("#show-mobile-chat").click(function(){
 	$(".containerd, .footer-margin, .chat").toggleClass("hidden-mobile");
 	$(this).toggleClass("tab-active");
 });
+
+$(".toggle-console").click(function(){
+
+	$("#console").toggleClass("console-show");
+
+});
+
 
 function setCookie(cname, cvalue) {
     var d = new Date();

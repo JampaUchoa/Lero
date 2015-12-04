@@ -5,6 +5,20 @@ $border-color: #DEE1E5;
 $primary-color: #00cc00;
 $anchor-color: #565656;
 
+ul, li{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#console{
+  display: none;
+}
+
+.console-show{
+  display: block !important;
+}
+
 .top-bar{
   height: 50px;
   background-color: $primary-color;
@@ -14,7 +28,7 @@ $anchor-color: #565656;
   right: 0;
   z-index: 100;
 }
-
+//=========
 .control{
 //  background-color: #4CDB4C;
   height: calc(100vh - 50px);
@@ -30,9 +44,15 @@ $anchor-color: #565656;
   height: calc(100vh - 50px);
 }
 
+#chat-container{
+  overflow-y: scroll;
+  height: calc(100vh - 162px);
+
+}
+
 .chat-title{
   border-bottom: 1px solid $border-color;
-  margin-bottom: 5px;
+  margin-bottom: 0;
   padding-bottom: 5px;
 }
 
@@ -131,5 +151,9 @@ $anchor-color: #565656;
 
   float: right;
   color: #696969;
+
+}
+
+.room-tab{
 
 }

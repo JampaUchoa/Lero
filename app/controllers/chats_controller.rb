@@ -14,7 +14,7 @@ class ChatsController < ApplicationController
         lastmsg = (params[:id]).to_i
         usertenancy = current_user.tenancies.pluck(:room_id)
         if usertenancy.any?
-          @newchats = Chat.where('id > ?', lastmsg).where(room_id: usertenancy).last(30)
+          @newchats = Chat.where('id > ?', lastmsg).where(room_id: usertenancy).order("id ASC").last(30)
           @chatmsgs = Array.new
           @newchats.each do |m|
             @chatmsgs << {
@@ -36,12 +36,6 @@ class ChatsController < ApplicationController
         render json: @chatmsgs
       end
     end
-
-
-
-
-
-
 
       def markdown(text)
         options = {
