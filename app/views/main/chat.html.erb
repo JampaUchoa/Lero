@@ -33,7 +33,10 @@
 
 
   <div class="chat col-md-9 col-lg-10 col-sm-8">
-    <h2 class="chat-title"> Chat </h2>
+    <div class="chat-head">
+      <h2 class="chat-title"> Chat </h2>
+      <%= image_tag("room-leave.png", class: "room-leave") %>
+    </div>
     <div id="chat-container">
 
       <% joined.each do |t| %>

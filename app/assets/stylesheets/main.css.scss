@@ -22,6 +22,11 @@ h3{
   font-size: 20px;
 }
 
+body{
+-webkit-font-smoothing: antialiased;
+letter-spacing: -0.003em;
+}
+
 #console{
   display: none;
 }
@@ -61,12 +66,27 @@ h3{
 
 }
 
-.chat-title{
+.chat-head{
+
   border-bottom: 1px solid $border-color;
+
+  img{
+    float: right;
+    width: 27px;
+    height: 27px;
+//    background-color: #00cc00;
+    margin: 10px 0;
+    cursor: pointer;
+  }
+
+}
+
+.chat-title{
   margin: 0;
   padding: 10px 0;
   font-weight: normal;
   font-size: 25px;
+  display: inline-block;
 }
 
 .chat-insert{
@@ -159,10 +179,12 @@ h3{
 .message-content{
   display: inline-block;
   width: 100%;
-  line-height: 1.3;
+  line-height: 1.38;
   word-break: break-word;
+
   p{
     margin: 0;
+    max-width: 700px;
   }
 }
 
@@ -184,6 +206,14 @@ h3{
   @include user-select;
 
 }
+
+.room-pick{
+  cursor: pointer;
+  font-size: 16px;
+  padding: 3px 10px;
+  @include user-select;
+}
+
 
 .room-tab-active{
   background-color: #00cc00;

@@ -9,6 +9,7 @@ $(document).on('page:change', function () {
 $(".room-pick").click(function() {
 
 	roomId = $(this).attr('data-id');
+	roomName = $(this).text();
 	$(this).remove();
 
 	$.ajax({
