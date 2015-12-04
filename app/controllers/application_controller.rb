@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
         @user.latitude = g.latitude
         @user.longitude = g.longitude
       end
+      @user.username = rand(1000..999999999999999)
       @user.save!
       log_in @user
       Tenant.create(user_id: current_user.id, room_id: 1)
