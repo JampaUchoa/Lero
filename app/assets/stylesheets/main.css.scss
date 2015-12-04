@@ -64,13 +64,8 @@ ul, li{
   /* margin: 10px 0; */
   padding: 7px 10px 7px;
   left: 0;
-  background-color: $primary-color; //#81E581;
+  border-top: 1px solid $border-color;
 
-  h3{
-    color: #fff;
-    margin: 0;
-    transition: all 0.2s linear;
-  }
   textarea{
   outline: none;
   resize: none;
@@ -80,16 +75,31 @@ ul, li{
   font-size: 125%;
   border-radius: 7px;
   }
+}
 
+.form-username{
+
+  h3{
+    margin: 0;
+    display: inline-block;
+    font-weight: normal;
+  }
+
+  form{
+    display: inline-block;
+    width: 50%;
+  }
   input{
+    width: 100%;
+    display: inline-block;
     outline: none;
     resize: none;
-    width: 100%;
     border: none;
     padding: 7px 7px 4px 7px;
     font-size: 125%;
     border-radius: 7px;
   }
+
 }
 
 .chat::-webkit-scrollbar-track {

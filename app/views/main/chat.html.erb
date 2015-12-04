@@ -47,8 +47,6 @@
       </div>
     </div>
 
-
-
     <div class="chat-insert">
       <div id="error-div">
       </div>
@@ -58,9 +56,9 @@
       <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1" class="hidden"></textarea>
 
       <div class="form-username">
-      <h3> Digite um nome </h3>
+      <h3> Seu nome: </h3>
         <%= form_for current_user, url: user_path(current_user), method: :patch, remote: true do |f| %>
-          <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: "Para começar diga o seu nome", rows: 1, required: true %>
+          <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: "Nome", rows: 1, required: true %>
         <% end %>
       <% end %>
       </div>
