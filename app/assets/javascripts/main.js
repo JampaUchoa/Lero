@@ -1,7 +1,17 @@
 
 $(document).on('page:change', function () {
 
-	roomTabbing(localStorage.lastRoom, "works");
+if (localStorage.lastRoom && ($(".room-tab[data-id="+ localStorage.lastRoom +"]").length > 0)) {// if a room preference exists  && it exists in the DOM
+
+		roomTabbing(localStorage.lastRoom); // show it
+
+	}
+
+else if ($(".room-tab").length > 0) { // One exists at all
+	firstRoom = $(".room-tab").first().attr("data-id");
+	roomTabbing(firstRoom); // show the first one
+	}
+
 // ============================[ Room logic] =============
 
 //Join a room
