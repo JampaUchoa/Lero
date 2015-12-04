@@ -45,6 +45,7 @@ $anchor-color: #565656;
 	font-size: 18px;
   width: 100%;
   border: 1px solid transparent;
+  border-bottom: 2px solid $primary-color;
 	text-align: center;
 	white-space: nowrap;
 	vertical-align: middle;
@@ -55,4 +56,12 @@ $anchor-color: #565656;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+
+.form-submit:hover{
+  border-bottom: 2px solid #008000;
+}
+
+.form-submit:focus{
+  outline: none;
 }

@@ -6,7 +6,6 @@ $(document).on('page:change', function () {
 
 $(".room-pick").click(function() {
 
-
 	roomId = $(this).attr('data-id');
 	roomName = $(this).text();
 	$(this).remove();
@@ -16,14 +15,14 @@ $(".room-pick").click(function() {
 			type: "POST",
 			complete: function(data) {
 
-				$(".room-tabs ul").append("<li data-id="+ roomId +" class='room-tab'> "+ roomName + " </li>");
+				$(".room-tabs").append("<li data-id="+ roomId +" class='room-tab'> "+ roomName + " </li>");
 				$("#chat-container").append("<div class='room room-active' data-id="+ roomId +"> </div>");
 				$(".message-section, .room-section").toggleClass("hidden");
 				roomTabbing(roomId, roomName);
 				$(".room-leave").removeClass("hidden");
 
 			}
-		});
+	});
 });
 
 // Select a room
