@@ -5,6 +5,13 @@ $border-color: #DEE1E5;
 $primary-color: #00cc00;
 $anchor-color: #565656;
 
+@mixin user-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
 ul, li{
   list-style-type: none;
   margin: 0;
@@ -50,16 +57,16 @@ h3{
 
 #chat-container{
   overflow-y: scroll;
-  height: calc(100vh - 145px);
+  height: calc(100vh - 153px);
 
 }
 
 .chat-title{
   border-bottom: 1px solid $border-color;
-  margin-top: 7px;
-  margin-bottom: 0;
-  padding-bottom: 5px;
+  margin: 0;
+  padding: 10px 0;
   font-weight: normal;
+  font-size: 25px;
 }
 
 .chat-insert{
@@ -174,6 +181,8 @@ h3{
   cursor: pointer;
   font-size: 16px;
   padding: 3px 10px;
+  @include user-select;
+
 }
 
 .room-tab-active{

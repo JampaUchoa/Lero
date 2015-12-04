@@ -1,5 +1,7 @@
 
 $(document).on('page:change', function () {
+
+	roomTabbing(localStorage.lastRoom, "works");
 // ============================[ Room logic] =============
 
 //Join a room
@@ -7,7 +9,6 @@ $(document).on('page:change', function () {
 $(".room-pick").click(function() {
 
 	roomId = $(this).attr('data-id');
-	roomName = $(this).text();
 	$(this).remove();
 
 	$.ajax({
@@ -18,7 +19,7 @@ $(".room-pick").click(function() {
 				$(".room-tabs").append("<li data-id="+ roomId +" class='room-tab'> "+ roomName + " </li>");
 				$("#chat-container").append("<div class='room room-active' data-id="+ roomId +"> </div>");
 				$(".message-section, .room-section").toggleClass("hidden");
-				roomTabbing(roomId, roomName);
+				roomTabbing(roomId);
 				$(".room-leave").removeClass("hidden");
 
 			}
@@ -29,7 +30,7 @@ $(".room-pick").click(function() {
 
 $('html').on('click', ".room-tab", function(){
 
-roomTabbing($(this).attr('data-id'), $(this).text());
+roomTabbing($(this).attr('data-id'));
 
 });
 
@@ -55,14 +56,15 @@ $(".room-leave").click(function() {
 				$(".room-tab[data-id="+ roomId +"]").remove(); //remove the tab from DOM
 				$(".room-active").remove();// remove this room
 					setCookie("lastRoom", ""); // clear cookie
-
+					localStorage.lastRoom = ""
 
 				if ($(".room-tab").length > 0) { // if another room exists...
 
 					nextId = $(".room-tab").last().attr("data-id");
 					nextName = $(".room-tab").last().text();
-					roomTabbing(nextId, nextName); // go there!
+					roomTabbing(nextId); // go there!
 					setCookie("lastRoom", nextId); // and make sure it saves
+					localStorage.lastRoom = nextId
 
 				}
 				else {
@@ -85,7 +87,7 @@ $(".view-switch").click(function() {
 
 // Switches room
 
-function roomTabbing(roomId, roomName) {
+function roomTabbing(roomId) {
 
 	$('#compose').attr('data-room-id', roomId); // change the input target
 	$(".room").removeClass("room-active"); // all rooms hide
@@ -95,9 +97,14 @@ function roomTabbing(roomId, roomName) {
 	$(".room-tab[data-id="+ roomId +"]").removeClass("room-tab-new");
 
 	$(".room[data-id="+ roomId +"]").addClass("room-active"); // then show the target room
-	$(".chat-title").html(roomName) // change the header
+
+	name = $(".room-tab[data-id="+ roomId +"]").text();
+	$(".chat-title").html(name) // change the header
+
+
 	chatbottom(); // scroll to bottom
 	setCookie("lastRoom", roomId); // saves preference
+	localStorage.lastRoom = roomId;
 
 	$(".room-section").addClass("hidden"); // if the user is in add room tab...
 	$(".message-section").removeClass("hidden"); // take him out
