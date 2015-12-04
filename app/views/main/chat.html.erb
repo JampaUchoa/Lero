@@ -3,7 +3,6 @@
 <% console %>
 
 <div class="top-bar">
-  <div class="">
 </div>
 
 <div class="containerd">
@@ -19,10 +18,9 @@
     </ul>
 
     <h3> Suggest </h3>
-    <%= not_joined.count %>
     <ul class="room-list">
       <% not_joined.each do |t| %>
-        <li class="room-tab" data-id="<%= t.id %>"> <%= t.name %> </li>
+        <li class="room-pick" data-id="<%= t.id %>"> <%= t.name %> </li>
       <% end %>
     </ul>
 

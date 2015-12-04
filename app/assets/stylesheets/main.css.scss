@@ -46,14 +46,16 @@ ul, li{
 
 #chat-container{
   overflow-y: scroll;
-  height: calc(100vh - 162px);
+  height: calc(100vh - 150px);
 
 }
 
 .chat-title{
   border-bottom: 1px solid $border-color;
+  margin-top: 7px;
   margin-bottom: 0;
   padding-bottom: 5px;
+
 }
 
 .chat-insert{
@@ -166,4 +168,12 @@ ul, li{
 
 .room-tab{
 
+}
+
+.room{
+  display: none;
+}
+
+.room-active{
+  display: block !important;
 }
