@@ -7,9 +7,8 @@ if (localStorage.lastRoom && ($(".room-tab[data-id="+ localStorage.lastRoom +"]"
 
 	}
 
-else if ($(".room-tab").length > 0) { // One exists at all
-	firstRoom = $(".room-tab").first().attr("data-id");
-	roomTabbing(firstRoom); // show the first one
+else {
+	roomTabbing(); // take me to first one or not
 	}
 
 // ============================[ Room logic] =============
@@ -29,9 +28,7 @@ $(".room-pick").click(function() {
 
 				$(".room-tabs").append("<li data-id="+ roomId +" class='room-tab'> "+ roomName + " </li>");
 				$("#chat-container").append("<div class='room room-active' data-id="+ roomId +"> </div>");
-				$(".message-section, .room-section").toggleClass("hidden");
 				roomTabbing(roomId);
-				$(".room-leave").removeClass("hidden");
 
 			}
 	});
@@ -50,7 +47,6 @@ roomTabbing($(this).attr('data-id'));
 $('.chat').on('click', ".room-add", function(){
 
 	$(".room-form").toggleClass("hidden");
-	$(".room-index").toggleClass("hidden");
 
 });
 
@@ -67,32 +63,10 @@ $(".room-leave").click(function() {
 				$(".room-tab[data-id="+ roomId +"]").remove(); //remove the tab from DOM
 				$(".room-active").remove();// remove this room
 					setCookie("lastRoom", ""); // clear cookie
-					localStorage.lastRoom = ""
-
-				if ($(".room-tab").length > 0) { // if another room exists...
-
-					nextId = $(".room-tab").last().attr("data-id");
-					nextName = $(".room-tab").last().text();
-					roomTabbing(nextId); // go there!
-					setCookie("lastRoom", nextId); // and make sure it saves
-					localStorage.lastRoom = nextId
-
-				}
-				else {
-					$(".chat-room-active").html("Chat"); // resets the name to Chat
-					$(".room-leave").addClass("hidden");
-				}
-
+					localStorage.lastRoom = "";
+					roomTabbing();
 			}
 		});
-
-});
-
-// Changes view
-
-$(".view-switch").click(function() {
-
-	$(".message-section, .room-section").toggleClass("hidden");
 
 });
 
@@ -100,31 +74,36 @@ $(".view-switch").click(function() {
 
 function roomTabbing(roomId) {
 
+	if (!roomId){ // Room not set
+
+		if ($(".room-tab").length > 0) { // if another room exists...
+			nextId = $(".room-tab").last().attr("data-id");
+			roomTabbing(nextId); // go there!
+		}
+		else {
+			$(".chat-title").html("Chat"); // resets the name to Chat
+			$(".room-leave").addClass("hidden");
+			return;
+		}
+	}
+
 	$('#compose').attr('data-room-id', roomId); // change the input target
 	$(".room").removeClass("room-active"); // all rooms hide
 
-	$(".room-tab").removeClass("room-tab-active");
-	$(".room-tab[data-id="+ roomId +"]").addClass("room-tab-active");
-	$(".room-tab[data-id="+ roomId +"]").removeClass("room-tab-new");
+	$(".room-tab").removeClass("room-tab-active"); // Remove all rooms as active
+	$(".room-tab[data-id="+ roomId +"]").addClass("room-tab-active"); // this room mark as active
+	$(".room-tab[data-id="+ roomId +"]").removeClass("room-tab-new"); // Remove room notifications
 
 	$(".room[data-id="+ roomId +"]").addClass("room-active"); // then show the target room
 
 	name = $(".room-tab[data-id="+ roomId +"]").text();
 	$(".chat-title").html(name) // change the header
 
-
 	chatbottom(); // scroll to bottom
 	setCookie("lastRoom", roomId); // saves preference
 	localStorage.lastRoom = roomId;
 
-	$(".room-section").addClass("hidden"); // if the user is in add room tab...
-	$(".message-section").removeClass("hidden"); // take him out
-
-
 }
-
-
-
 
 //==============================[ CHAT BOX ]==============
 
@@ -251,17 +230,7 @@ $("#compose").keypress(function (e) {
       e.preventDefault();
       }
   });
-// ================= USER LOGIC=====================
 
-$("#user_username").keypress(function (e) {
-
-	if ($(this).val() != ""){
-
-		$("h3",".chat-insert").css({"height":"30px"});
-
-
-	}
-});
  //=====
 
 $("#show-mobile-chat").click(function(){
