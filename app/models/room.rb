@@ -5,8 +5,11 @@ class Room < ActiveRecord::Base
 
   before_create{
     self.slug = self.name.parameterize
+    self.name.squish!
   }
-  validates :name, uniqueness: { case_sensitive: false }
+  validates :name, length: {minimum: 2, maximum: 15 },
+                   uniqueness: { case_sensitive: false }
+
   validates :slug, uniqueness: { case_sensitive: false }
 
 end

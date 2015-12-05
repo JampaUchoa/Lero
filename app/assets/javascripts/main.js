@@ -11,6 +11,41 @@ else {
 	roomTabbing(); // take me to first one or not
 	}
 
+// ============================[ Window logic] =================
+
+$(".room-new").click(function() {
+
+	windowTabbing("room-new");
+
+});
+
+$(".side-back").click(function() {
+
+	windowTabbing("main");
+
+});
+
+
+function windowTabbing(name){
+
+	target = $(".window-"+ name)
+
+	$(".window").addClass("hidden");
+	target.removeClass("hidden");
+	$(".side-title").text(target.attr("data-name"));
+
+	if (name != "main"){
+		$(".side-back").removeClass("hidden");
+		$(".side-actions").addClass("hidden");
+	}
+	else
+	{
+		$(".side-back").addClass("hidden");
+		$(".side-actions").removeClass("hidden");
+
+	}
+
+}
 // ============================[ Room logic] =============
 
 //Join a room
@@ -39,14 +74,6 @@ $(".room-pick").click(function() {
 $('html').on('click', ".room-tab", function(){
 
 	roomTabbing($(this).attr('data-id'));
-
-});
-
-// Opens up the form
-
-$('.chat').on('click', ".room-add", function(){
-
-	$(".room-form").toggleClass("hidden");
 
 });
 

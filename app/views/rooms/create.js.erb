@@ -1,7 +1,7 @@
 <% if @room.save %>
 //  $(".room-tabs").append("<li data-id='<%= @room.id %>' class='room-tab'> <%= @room.name %> </li>");
 //  $("#chat-container").append("<div class='room room-active' data-id='<%= @room.id %>'> </div>");
-localStorage.lastRoom = <%= @room.id %>;
+<%= cookies.permanent[:lastRoom] =  @room.id %>;
 location.reload();
 <% else %>
   $('.room-error').html('<%= j(render 'layouts/error', :object => @room) %>');

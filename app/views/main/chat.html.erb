@@ -10,52 +10,61 @@
 <div class="containerd">
   <aside class="control col-md-3 col-lg-2 col-sm-4 hidden-xs">
     <div class="side-head">
+      <div class="side-back hidden">
+        <%= image_tag("side-back.png", class: "side-back") %>
+      </div>
+
       <h2 class="side-title"> Salas </h2>
+
       <div class="side-actions">
         <%= image_tag("room-new.png", class: "room-new") %>
       </div>
     </div>
 
-    <% if current_user.password_digest.nil? %>
-    <div class="alert-card" id="pass-set">
-      <h3> Fique Seguro! </h3>
-      <p> Defina uma senha para conseguir conversar com o Lero em outros lugares! </p>
+    <div class="window window-main" data-name="Salas">
+      <% if current_user.password_digest.nil? %>
+      <div class="alert-card" id="pass-set">
+        <h3> Fique Seguro! </h3>
+        <p> Defina uma senha para conseguir conversar com o Lero em outros lugares! </p>
 
-      <%= form_for current_user, url: user_password_set_path, method: :patch, remote: true do |f| %>
-        <%= f.password_field :password, minlength: "4", maxlength: "80", placeholder: "Senha",class: "form-input" ,rows: 1, required: true %>
-      <% end %>
-    </div>
-
-    <% elsif false && current_user.photo.nil? %>
-
-    <div class="alert-card">
-      <h3> Defina seu perfil </h3>
-      <p> Adicione uma foto para as pessoas lhe reconhecer! </p>
-    </div>
-
-    <% end %>
-
-    <ul class="room-tabs">
-      <% if joined.any? %>
-        <% joined.each do |t| %>
-          <li class="room-tab" data-id="<%= t.room.id %>"> <%= t.room.name %> </li>
+        <%= form_for current_user, url: user_password_set_path, method: :patch, remote: true do |f| %>
+          <%= f.password_field :password, minlength: "4", maxlength: "80", placeholder: "Senha",class: "form-input" ,rows: 1, required: true %>
         <% end %>
-      <% end %>
-    </ul>
+      </div>
 
-    <% if not_joined.any? %>
-    <h3> Sugeridos </h3>
-    <ul class="room-list">
-      <% not_joined.each do |t| %>
-        <li class="room-pick" data-id="<%= t.id %>"> <%= t.name %> </li>
-      <% end %>
-    </ul>
-    <% end %>
+      <% elsif false && current_user.photo.nil? %>
 
-    <div class="room-new hidden">
+      <div class="alert-card">
+        <h3> Defina seu perfil </h3>
+        <p> Adicione uma foto para as pessoas lhe reconhecer! </p>
+      </div>
+
+      <% end %>
+
+      <ul class="room-tabs">
+        <% if joined.any? %>
+          <% joined.each do |t| %>
+            <li class="room-tab" data-id="<%= t.room.id %>"> <%= t.room.name %> </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="window window-room-discover hidden" data-name="Explorar">
+      <% if not_joined.any? %>
+      <h3> Sugeridos </h3>
+      <ul class="room-list">
+        <% not_joined.each do |t| %>
+          <li class="room-pick" data-id="<%= t.id %>"> <%= t.name %> </li>
+        <% end %>
+      </ul>
+      <% end %>
+    </div>
+
+    <div class="window window-room-new hidden" data-name="Nova sala">
       <div class="room-error"></div>
       <%= form_for Room.new, remote: true do |f| %>
-        <%= f.text_field :name, minlength: "3", maxlength: "10", placeholder: "Room name", class: "form-input", required: true %>
+        <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: "Room name", class: "form-input", required: true %>
         <%= f.submit "Create", class: "form-submit" %>
       <% end %>
     </div>

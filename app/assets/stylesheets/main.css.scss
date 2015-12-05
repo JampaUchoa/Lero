@@ -229,6 +229,7 @@ margin-left: 3px;
   border-bottom: 1px solid $border-color;
   margin-left: -15px;
   padding-left: 15px;
+  margin-bottom: 10px
 }
 
 .side-title{
@@ -245,6 +246,17 @@ margin-left: 3px;
     height: 50px;
 //    background-color: #00cc00;
     padding: 10px 0;
+    cursor: pointer;
+  }
+}
+
+.side-back{
+  float: left;
+  img{
+    height: 50px;
+//    background-color: #00cc00;
+    padding: 10px 0;
+    margin: 0 10px 0 0px;
     cursor: pointer;
   }
 }
