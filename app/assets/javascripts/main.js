@@ -1,8 +1,10 @@
 
 $(document).on('page:change', function () {
 
-if (localStorage.lastRoom && ($(".room-tab[data-id="+ localStorage.lastRoom +"]").length > 0)) {// if a room preference exists  && it exists in the DOM
-	roomTabbing(localStorage.lastRoom); // show it
+lastRoom = getCookie("lastRoom")
+
+if (lastRoom && ($(".room-tab[data-id="+ lastRoom +"]").length > 0)) {// if a room preference exists  && it exists in the DOM
+	roomTabbing(lastRoom); // show it
 	}
 
 else {
@@ -61,8 +63,21 @@ $(".room-leave").click(function() {
 				$(".room-tab[data-id="+ roomId +"]").remove(); //remove the tab from DOM
 				$(".room-active").remove();// remove this room
 					setCookie("lastRoom", ""); // clear cookie
-					localStorage.lastRoom = "";
 					roomTabbing();
+			}
+		});
+
+});
+
+$(".room-hotlink").click(function() {
+
+	roomId = $(".room-active").attr('data-id');
+
+	$.ajax({
+			url: "/room/share/" + roomId,
+			type: "GET",
+			success: function(data, textStatus) {
+				console.log("http://localhost:3000/?join=" + data.shareurl);
 			}
 		});
 
@@ -100,7 +115,7 @@ function roomTabbing(roomId) {
 
 	chatbottom(); // scroll to bottom
 	setCookie("lastRoom", roomId); // saves preference
-	localStorage.lastRoom = roomId;
+//	localStorage.lastRoom = roomId;
 
 }
 
@@ -253,5 +268,15 @@ function setCookie(cname, cvalue) {
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
 
 });

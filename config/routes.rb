@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :rooms, only: [:index, :create, :update]
   post '/room/join/:id/' => 'rooms#join'
   post '/room/leave/:id/' => 'rooms#leave'
+  get '/room/share/:id/' => 'rooms#share'
   get '/message/receive/:id' => 'chats#receive'
   post '/message/send' => 'chats#sendmsg'
   resources :users

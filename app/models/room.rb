@@ -1,6 +1,6 @@
 class Room < ActiveRecord::Base
   has_many :chats
-  has_many :tenants
+  has_many :tenants, dependent: :destroy
   belongs_to :user
 
   before_create{

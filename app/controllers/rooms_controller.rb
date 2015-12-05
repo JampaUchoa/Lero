@@ -31,6 +31,14 @@ class RoomsController < ApplicationController
     render json: {}
   end
 
+  def share
+    @room = (params[:id])
+    if current_user
+      to_share = Tenant.find_by(user_id: current_user, room_id: @room)
+    end
+    render json: {shareurl: to_share.room.slug}
+  end
+
   private
 
   def room_params

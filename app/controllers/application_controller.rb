@@ -27,8 +27,9 @@ class ApplicationController < ActionController::Base
   def join_via_hotilink
     if params[:join].present?
       directroom = Room.find_by(slug: params[:join].to_s)
-      if !directroom.nil? && Room.where(user_id: current_user.id, room_id: directroom.id).nil?
-        Tenant.create(user_id: current_user.id, room_id: directroom.id)
+      if !directroom.nil?
+        Tenant.first_or_create(user_id: current_user.id, room_id: directroom.id)
+        cookies.permanent[:lastRoom] = directroom.id
       end
     end
   end
