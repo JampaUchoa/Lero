@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $border-color: #DEE1E5;
-$primary-color: #00cc00;
+$primary-color: #00CC00;
 $anchor-color: #565656;
 
 @mixin user-select {
@@ -58,6 +58,7 @@ letter-spacing: -0.003em;
 
 .chat{
   height: calc(100vh - 50px);
+  padding-right: 5px;
 }
 
 #chat-container{
@@ -69,17 +70,20 @@ letter-spacing: -0.003em;
 .chat-head{
 
   border-bottom: 1px solid $border-color;
+}
 
+.chat-actions{
+  float: right;
+  margin-right: 15px;
   img{
-    float: right;
     width: 27px;
     height: 27px;
 //    background-color: #00cc00;
     margin: 10px 0;
     cursor: pointer;
   }
-
 }
+
 
 .chat-title{
   margin: 0;
@@ -135,14 +139,14 @@ letter-spacing: -0.003em;
 
 }
 
-.chat::-webkit-scrollbar-track {
-    background: rgba(255,255,255,.2);
+*::-webkit-scrollbar-track {
+    background: #fff;
 }
-.chat::-webkit-scrollbar {
-    width: 6px!important;
+*::-webkit-scrollbar {
+    width: 8px!important;
 }
-.chat::-webkit-scrollbar-thumb {
-    background-color: rgba(0,0,0,.5);
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.4);
 }
 
 .message{
@@ -203,8 +207,14 @@ letter-spacing: -0.003em;
   cursor: pointer;
   font-size: 16px;
   padding: 3px 10px;
+  margin: 3px 0;
   @include user-select;
+  border-radius: 5px;
+  transition: all 0.15s ease-in-out;
+}
 
+.room-tab:hover{
+  background-color: #f5f5f5;
 }
 
 .room-pick{
@@ -216,8 +226,9 @@ letter-spacing: -0.003em;
 
 
 .room-tab-active{
-  background-color: #00cc00;
+  background-color: $primary-color !important;
   color: #fff;
+  font-weight: bold;
 }
 
 .room-tab-new{
