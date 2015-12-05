@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
   def join_via_hotilink
     if params[:join].present?
-      directroom = Room.find_by(id: params[:join].to_s)
+      directroom = Room.find_by(slug: params[:join].to_s)
       if !directroom.nil? && Room.where(user_id: current_user.id, room_id: directroom.id).nil?
         Tenant.create(user_id: current_user.id, room_id: directroom.id)
       end
