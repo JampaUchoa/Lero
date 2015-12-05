@@ -18,19 +18,30 @@ class UsersController < ApplicationController
     @user = current_user
     if @user && !@user.username_set
       @user.username_set = true
-      if @user.update_attributes(user_params)
+      if @user.update_attributes(username_params)
+        #
+      end
+    else
+      return
+    end
+  end
+
+  def set_password
+    @user = current_user
+    if @user && @user.password.nil?
+      if @user.update_attributes(password_params)
         #
       end
     end
   end
 
-
-
-
-
   private
-  def user_params
-    params.require(:user).permit(:username, :password)
+  def username_params
+    params.require(:user).permit(:username)
+  end
+
+  def password_params
+    params.require(:user).permit(:password)
   end
 
 end

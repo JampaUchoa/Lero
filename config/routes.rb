@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get '/message/receive/:id' => 'chats#receive'
   post '/message/send' => 'chats#sendmsg'
 
-  patch '/user/set-name' => 'users#set_name', as: 'name_set'
+  patch '/user/set-name' => 'users#set_name', as: 'user_name_set'
+  patch '/user/set-pass' => 'users#set_password', as: 'user_password_set'
 
   resources :users
   # You can have the root of your site routed with "root"

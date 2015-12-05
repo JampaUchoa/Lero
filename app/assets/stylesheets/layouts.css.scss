@@ -2,6 +2,17 @@ $border-color: #DEE1E5;
 $primary-color: #00cc00;
 $anchor-color: #565656;
 
+.alert-card{
+  margin: 0 -15px;
+  padding: 10px 15px 10px;
+//  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+
+  h3{
+    margin: 0 0 10px;
+  }
+
+}
 
 .form-button{
   background-color: #00cc00;
