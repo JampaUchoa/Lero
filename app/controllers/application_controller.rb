@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     if params[:join].present?
       directroom = Room.find_by(slug: params[:join].to_s)
       if !directroom.nil?
-        Tenant.first_or_create(user_id: current_user.id, room_id: directroom.id)
+        Tenant.find_or_create_by(user_id: current_user.id, room_id: directroom.id)
         cookies.permanent[:lastRoom] = directroom.id
       end
     end

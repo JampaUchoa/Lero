@@ -77,7 +77,7 @@ $(".room-hotlink").click(function() {
 			url: "/room/share/" + roomId,
 			type: "GET",
 			success: function(data, textStatus) {
-				console.log("http://localhost:3000/?join=" + data.shareurl);
+				window.prompt("Ctrl+C, Enter", "http://localhost:3000/?join=" + data.shareurl);
 			}
 		});
 
