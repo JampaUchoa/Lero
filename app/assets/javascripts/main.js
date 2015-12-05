@@ -79,7 +79,7 @@ function roomTabbing(roomId) {
 		}
 		else {
 			$(".chat-title").html("Chat"); // resets the name to Chat
-			$(".room-leave").addClass("hidden");
+			$(".room-actions").addClass("hidden");
 			return;
 		}
 	}
@@ -96,7 +96,7 @@ function roomTabbing(roomId) {
 	name = $(".room-tab[data-id="+ roomId +"]").text();
 	$(".chat-title").html(name) // change the header
 
-	$(".room-leave").removeClass("hidden");
+	$(".room-actions").removeClass("hidden");
 
 	chatbottom(); // scroll to bottom
 	setCookie("lastRoom", roomId); // saves preference
