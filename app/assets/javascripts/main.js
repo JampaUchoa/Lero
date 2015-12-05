@@ -77,8 +77,7 @@ function roomTabbing(roomId) {
 	if (!roomId){ // Room not set
 
 		if ($(".room-tab").length > 0) { // if another room exists...
-			nextId = $(".room-tab").last().attr("data-id");
-			roomTabbing(nextId); // go there!
+			roomId = $(".room-tab").last().attr("data-id");
 		}
 		else {
 			$(".chat-title").html("Chat"); // resets the name to Chat
@@ -98,6 +97,8 @@ function roomTabbing(roomId) {
 
 	name = $(".room-tab[data-id="+ roomId +"]").text();
 	$(".chat-title").html(name) // change the header
+
+	$(".room-leave").removeClass("hidden");
 
 	chatbottom(); // scroll to bottom
 	setCookie("lastRoom", roomId); // saves preference
