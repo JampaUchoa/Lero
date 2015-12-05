@@ -9,6 +9,12 @@
 
 <div class="containerd">
   <aside class="control col-md-3 col-lg-2 col-sm-4 hidden-xs">
+    <div class="side-head">
+      <h2 class="side-title"> Salas </h2>
+      <div class="side-actions">
+        <%= image_tag("room-new.png", class: "room-new") %>
+      </div>
+    </div>
 
     <% if current_user.password_digest.nil? %>
     <div class="alert-card" id="pass-set">
@@ -29,7 +35,6 @@
 
     <% end %>
 
-    <h3> Rooms </h3>
     <ul class="room-tabs">
       <% if joined.any? %>
         <% joined.each do |t| %>
@@ -38,20 +43,24 @@
       <% end %>
     </ul>
 
-    <h3> Suggest </h3>
+    <% if not_joined.any? %>
+    <h3> Sugeridos </h3>
     <ul class="room-list">
       <% not_joined.each do |t| %>
         <li class="room-pick" data-id="<%= t.id %>"> <%= t.name %> </li>
       <% end %>
     </ul>
-
-    <div class="room-error"></div>
-    <%= form_for Room.new, remote: true do |f| %>
-      <%= f.text_field :name, minlength: "3", maxlength: "10", placeholder: "Room name", class: "form-input", required: true %>
-      <%= f.submit "Create", class: "form-submit" %>
     <% end %>
 
-    <span class="toggle-console"> Toggle console </span>
+    <div class="room-new hidden">
+      <div class="room-error"></div>
+      <%= form_for Room.new, remote: true do |f| %>
+        <%= f.text_field :name, minlength: "3", maxlength: "10", placeholder: "Room name", class: "form-input", required: true %>
+        <%= f.submit "Create", class: "form-submit" %>
+      <% end %>
+    </div>
+
+    <span class="toggle-console hidden"> Toggle console </span>
 
   </aside>
 
@@ -62,7 +71,7 @@
     <div class="chat-head">
       <h2 class="chat-title"> Chat </h2>
       <div class="room-actions">
-      <%= image_tag("room-leave.png", class: "room-hotlink") %>
+      <%= image_tag("room-link.png", class: "room-hotlink") %>
       <%= image_tag("room-leave.png", class: "room-leave") %>
       </div>
     </div>

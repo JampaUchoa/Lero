@@ -4,5 +4,5 @@
 localStorage.lastRoom = <%= @room.id %>;
 location.reload();
 <% else %>
-  $('#error-div').html('<%= j(render 'layouts/error', :object => @room) %>');
+  $('.room-error').html('<%= j(render 'layouts/error', :object => @room) %>');
 <% end %>
