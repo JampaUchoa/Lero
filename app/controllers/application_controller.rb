@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :set_locale
+  before_filter :join_via_hotilink
 
   include SessionsHelper
 
@@ -20,6 +21,15 @@ class ApplicationController < ActionController::Base
       log_in @user
       Tenant.create(user_id: current_user.id, room_id: 1)
       remember(@user)
+    end
+  end
+
+  def join_via_hotilink
+    if params[:join].present?
+      directroom = Room.find_by(id: params[:join].to_s)
+      if !directroom.nil? && Room.where(user_id: current_user.id, room_id: directroom.id).nil?
+        Tenant.create(user_id: current_user.id, room_id: directroom.id)
+      end
     end
   end
 
