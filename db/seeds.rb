@@ -6,9 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Chat.delete_all
-Room.delete_all
-Tenant.delete_all
-User.delete_all
-
 Room.create(name: "Lero")

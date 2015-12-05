@@ -60,11 +60,18 @@
       <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1" class="hidden"></textarea>
 
       <div class="form-username">
+      <h2> Bem vindo ao Lero! </h2>
       <h3> Seu nome: </h3>
         <%= form_for current_user, url: user_path(current_user), method: :patch, remote: true do |f| %>
           <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: "Nome",value: nil ,rows: 1, required: true %>
         <% end %>
       <% end %>
+
+      <h3> ou </h3>
+      <div class="form-button login-button">
+        Login
+      </div>
+
       </div>
     </div>
 

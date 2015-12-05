@@ -2,6 +2,23 @@ $border-color: #DEE1E5;
 $primary-color: #00cc00;
 $anchor-color: #565656;
 
+
+.form-button{
+  background-color: #00cc00;
+  color: #fff;
+  display: inline-block;
+  margin-bottom: 0;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 3px 8px;
+  font-weight: bolder;
+  border: 1px solid transparent;
+  text-align: center;
+  white-space: nowrap;
+}
+
+
+
 .form-input{
   border: none;
   border-bottom: 1px solid $border-color;
