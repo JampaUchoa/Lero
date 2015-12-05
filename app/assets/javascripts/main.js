@@ -2,9 +2,7 @@
 $(document).on('page:change', function () {
 
 if (localStorage.lastRoom && ($(".room-tab[data-id="+ localStorage.lastRoom +"]").length > 0)) {// if a room preference exists  && it exists in the DOM
-
-		roomTabbing(localStorage.lastRoom); // show it
-
+	roomTabbing(localStorage.lastRoom); // show it
 	}
 
 else {
@@ -38,7 +36,7 @@ $(".room-pick").click(function() {
 
 $('html').on('click', ".room-tab", function(){
 
-roomTabbing($(this).attr('data-id'));
+	roomTabbing($(this).attr('data-id'));
 
 });
 
@@ -210,7 +208,7 @@ $('#chat-container').bind('mousewheel', function(e){
 //Send on enter press
 
 $("#compose").keypress(function (e) {
-    if (e.which == 13) {
+    if (e.which == 13 && !e.shiftKey) {
 
 			if ($(this).val() == ""){
 				return false;
