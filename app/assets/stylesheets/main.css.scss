@@ -58,21 +58,22 @@ letter-spacing: -0.003em;
 
 .landing{
   width: 100%;
-  background-color: #016F01;
   text-align: center;
   padding: 15px 0;
   min-height: 100%;
-  color: #fff;
+
+//  background-color: #016F01;
+//  color: #fff;
 
   img{
     width: 175px;
     height: 175px;
-    background-color: #fff;
+//    background-color: #fff;
     border-radius: 50%;
   }
 
   h1{
-    margin: 10px 0 0;
+    margin: 10px 0 5px;
     font-size: 50px;
     font-weight: 200;
   }
@@ -83,7 +84,7 @@ letter-spacing: -0.003em;
   }
 
   h3{
-    margin: 25px 0 0;
+    margin: 30px 0 10px;
     font-weight: bold;
     font-size: 25px;
   }
@@ -126,7 +127,7 @@ letter-spacing: -0.003em;
 
 .room-card:hover{
 
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.1);
 
 }
 
