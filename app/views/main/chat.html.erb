@@ -12,7 +12,7 @@
 </div>
 
 <div class="containerd">
-  <aside class="control col-md-3 col-lg-2 col-sm-4 hidden-xs">
+  <aside class="control row-bs">
     <div class="side-head">
       <div class="side-back hidden">
         <%= image_tag("side-back.png", class: "side-back") %>
@@ -58,7 +58,7 @@
       <% end %>
     </div>
 
-    <div class="window window-profile hidden" data-name="Nova sala">
+    <div class="window window-profile-edit hidden" data-name="Editar perfil">
       <div class="profile-error"></div>
       <%= form_for current_user,url: user_profile_set_path, method: :patch, remote: true do |f| %>
 
@@ -69,13 +69,11 @@
       <% end %>
     </div>
 
-
-
     <%= render 'main/alerts' %>
 
   </aside>
 
-  <div class="chat col-md-9 col-lg-10 col-sm-8">
+  <div class="chat row-bs">
     <div class="chat-head">
       <h2 class="chat-title"> Lero </h2>
       <div class="room-actions">

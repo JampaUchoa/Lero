@@ -148,6 +148,7 @@ letter-spacing: -0.003em;
   overflow: auto;
   padding-bottom: 15px;
   border-right: 1px solid $border-color;
+  width: 320px;
 }
 
 .containerd{
@@ -157,6 +158,7 @@ letter-spacing: -0.003em;
 .chat{
   height: calc(100vh - 50px);
   padding-right: 5px;
+  width: calc(100% - 320px);
 }
 
 #chat-container{

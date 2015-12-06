@@ -15,6 +15,14 @@ $anchor-color: #565656;
 
 }
 
+.row-bs{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  float: left;
+}
+
 .form-button{
   background-color: #00cc00;
   color: #fff !important;
@@ -46,7 +54,7 @@ $anchor-color: #565656;
 .form-input:focus{
 
   border-bottom: 1px solid $primary-color;
-  
+
 }
 
 

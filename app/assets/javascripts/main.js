@@ -25,6 +25,12 @@ $(".side-back").click(function() {
 
 });
 
+$(".profile-edit").click(function() {
+
+	windowTabbing("profile-edit");
+
+});
+
 
 function windowTabbing(name){
 
