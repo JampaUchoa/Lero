@@ -54,6 +54,19 @@ function windowTabbing(name){
 }
 // ============================[ Room logic] =============
 
+// Show landing
+
+$(".explore").click(function() {
+
+	$(".chat-title").html("Lero"); // resets the name to Lero
+	$(".room-actions").addClass("hidden");
+	$(".landing").removeClass("hidden");
+	$("#compose").addClass("hidden");
+	$(".room").removeClass("room-active");
+
+	$(".landing-intro").addClass("hidden");
+});
+
 //Join a room
 
 $(".room-pick").click(function() {
