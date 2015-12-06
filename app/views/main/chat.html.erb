@@ -78,7 +78,6 @@
         <h3> Salas populares no momento </h3>
 
         <div class="room-popular clearfix">
-
           <% popular_rooms.each do |r| %>
             <div class="room-card" data-id="<%= r.id %>">
               <%= image_tag "lero5.png" %>
@@ -88,11 +87,8 @@
               </div>
             </div>
           <% end %>
-
         </div>
-
       </div>
-
     </div>
 
     <div class="chat-insert">
