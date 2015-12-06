@@ -54,6 +54,77 @@ letter-spacing: -0.003em;
     margin: 5px;
     border: 1px solid $border-color;
 }
+//===================
+
+.landing{
+  width: 100%;
+  background-color: #016F01;
+  text-align: center;
+  padding: 20px 0;
+  min-height: 100%;
+  color: #fff;
+
+  img{
+    width: 200px;
+    height: 200px;
+    background-color: #343234;
+    border-radius: 50%;
+  }
+
+  h1{
+    margin: 10px 0 0;
+    font-size: 50px;
+    font-weight: 200;
+  }
+
+  p{
+    font-size: 22px;
+    margin: 0;
+  }
+
+  h3{
+    margin: 25px 0;
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+}
+
+.room-popular{
+  padding: 0 10%;
+}
+
+
+.room-card{
+  width: 350px;
+  text-align: left;
+
+  img{
+    width: 50px;
+    height: 50px;
+  }
+
+  h6{
+    margin: 0 0 5px;
+    vertical-align: top;
+    font-size: 20px;
+
+  }
+
+  p{
+    font-size: 16px;
+    line-height: 1.2
+  }
+
+}
+
+.room-card-description{
+  display: inline-block;
+  vertical-align: top;
+  width: calc(100% - 55px);
+}
+
+
 //=========
 .control{
 //  background-color: #4CDB4C;

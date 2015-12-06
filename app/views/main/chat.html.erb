@@ -56,9 +56,6 @@
 
   </aside>
 
-
-
-
   <div class="chat col-md-9 col-lg-10 col-sm-8">
     <div class="chat-head">
       <h2 class="chat-title"> Chat </h2>
@@ -68,11 +65,29 @@
       </div>
     </div>
     <div id="chat-container">
-
       <% joined.each do |t| %>
-        <div class="room" data-id="<%= t.room.id %>">
-        </div>
+        <div class="room" data-id="<%= t.room.id %>"> </div>
       <% end %>
+
+      <div class="landing">
+        <img/>
+        <h1> Lero </h1>
+        <p> Um novo lugar para conversar em grupos! </p>
+        <h3> Salas populares no momento </h3>
+
+        <div class="room-popular">
+
+          <div class="room-card">
+            <img/>
+            <div class="room-card-description">
+              <h6> Sultões do Balanço </h6>
+              <p> Sala aonde se concentra a maior quantidade de fuleragem por m2 </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
 
     </div>
 
@@ -82,18 +97,14 @@
       <% else %>
         <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1" class="hidden"></textarea>
         <div class="form-username">
-          <div id="error-div">
-          </div>
-
-            <h2> Bem vindo ao Lero! </h2>
+          <div id="error-div"> </div>
+          <h2> Bem vindo ao Lero! </h2>
           <div class="form-new-user">
             <h3> Seu nome: </h3>
             <%= form_for current_user, url: user_name_set_path, method: :patch, remote: true do |f| %>
               <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: "Nome",value: nil ,rows: 1, required: true %>
             <% end %>
-
             <h3> ou </h3>
-
             <div class="form-button login-button">
               Login
             </div>
