@@ -48,6 +48,7 @@
       <div class="room-error"></div>
       <%= form_for Room.new, remote: true do |f| %>
         <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: "Room name", class: "form-input", required: true %>
+        <%= f.text_area :description, minlength: "2", maxlength: "60", placeholder: "Room Description", class: "form-textarea-sm", rows: 3 %>
         <%= f.submit "Create", class: "form-submit" %>
       <% end %>
     </div>
