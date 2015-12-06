@@ -63,7 +63,7 @@ $(".explore").click(function() {
 	$(".landing").removeClass("hidden");
 	$("#compose").addClass("hidden");
 	$(".room").removeClass("room-active");
-
+	$(".room-tab").removeClass("room-tab-active");
 	$(".landing-intro").addClass("hidden");
 });
 

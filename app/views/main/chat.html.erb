@@ -1,6 +1,6 @@
 <% joined = current_user.tenancies %>
 <% not_joined = Room.where.not(id: joined.pluck(:room_id)) %>
-<% popular_rooms = Room.all.last(12) %>
+<% popular_rooms = Room.all.order("tenants_count DESC").limit(12) %>
 <% console %>
 
 <div class="top-bar">
@@ -8,7 +8,6 @@
   <%#= image_tag "lero6.png", class: "logo" %>
   <span class="toggle-console"> Toggle console </span>
   <span class="profile-edit"> Edit profile </span>
-  <span class="explore"> Explore </span>
 </div>
 
 <div class="containerd">
@@ -21,6 +20,8 @@
       <h2 class="side-title"> Salas </h2>
 
       <div class="side-actions">
+        <%= image_tag("home.png", class: "explore") %>
+        <%= image_tag("profile-edit.png", class: "profile-edit") %>
         <%= image_tag("room-new.png", class: "room-new") %>
       </div>
     </div>
@@ -77,7 +78,7 @@
     <div class="chat-head">
       <h2 class="chat-title"> Lero </h2>
       <div class="room-actions">
-      <%= image_tag("room-link.png", class: "room-hotlink") %>
+      <%= image_tag("room-share.png", class: "room-hotlink") %>
       <%= image_tag("room-leave.png", class: "room-leave") %>
       </div>
     </div>
