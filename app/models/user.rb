@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   attr_accessor :remember_token
+  mount_uploader :photo, UserPhotoUploader
 
   has_many :rooms
   has_many :chats

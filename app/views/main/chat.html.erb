@@ -47,8 +47,10 @@
     <div class="window window-room-new hidden" data-name="Nova sala">
       <div class="room-error"></div>
       <%= form_for Room.new, remote: true do |f| %>
+
+        <%= f.file_field :photo %>
         <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: "Room name", class: "form-input", required: true %>
-        <%= f.text_area :description, minlength: "2", maxlength: "60", placeholder: "Room Description", class: "form-textarea-sm", rows: 3 %>
+        <%= f.text_area :description, minlength: "2", maxlength: "30", placeholder: "Room Description", class: "form-textarea-sm", rows: 3 %>
         <%= f.submit "Create", class: "form-submit" %>
       <% end %>
     </div>
@@ -60,7 +62,7 @@
 
   <div class="chat col-md-9 col-lg-10 col-sm-8">
     <div class="chat-head">
-      <h2 class="chat-title"> Chat </h2>
+      <h2 class="chat-title"> Lero </h2>
       <div class="room-actions">
       <%= image_tag("room-link.png", class: "room-hotlink") %>
       <%= image_tag("room-leave.png", class: "room-leave") %>
@@ -80,7 +82,7 @@
         <div class="room-popular clearfix">
           <% popular_rooms.each do |r| %>
             <div class="room-card" data-id="<%= r.id %>">
-              <%= image_tag "lero5.png" %>
+              <%= image_tag r.photo? ? r.photo.url.to_s : "lero5.png"  %>
               <div class="room-card-description">
                 <h6> <%= r.name %> </h6>
                 <p> <%= r.description %> </p>
