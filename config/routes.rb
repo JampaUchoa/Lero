@@ -10,10 +10,11 @@ Rails.application.routes.draw do
 
   patch '/user/set-name' => 'users#set_name', as: 'user_name_set'
   patch '/user/set-pass' => 'users#set_password', as: 'user_password_set'
+  patch '/user/set-profile' => 'users#set_profile', as: 'user_profile_set'
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
-  
+
   resources :users
   # You can have the root of your site routed with "root"
   root 'main#chat'

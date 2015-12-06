@@ -1,5 +1,10 @@
 class User < ActiveRecord::Base
 
+before_save{
+  self.username = username.downcase
+#  self.email = email.downcase
+}
+
   attr_accessor :remember_token
   mount_uploader :photo, UserPhotoUploader
 

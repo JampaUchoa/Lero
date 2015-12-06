@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206054549) do
+ActiveRecord::Schema.define(version: 20151206174639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 20151206054549) do
     t.float    "longitude"
     t.boolean  "username_set",    default: false, null: false
     t.text     "photo"
+    t.text     "name"
+    t.text     "bio"
   end
 
   add_index "users", ["guest"], name: "index_users_on_guest", using: :btree

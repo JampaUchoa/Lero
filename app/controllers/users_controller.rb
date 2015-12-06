@@ -1,23 +1,10 @@
 class UsersController < ApplicationController
 
-  def update
-    @user = User.find(params[:id])
-    if @user == current_user && !@user.username_set
-      @user.username_set = true
-      if @user.update_attributes(user_params)
-        #
-      else
-        #
-      end
-    else
-      # Invalid
-    end
-  end
-
   def set_name
     @user = current_user
     if @user && !@user.username_set
       @user.username_set = true
+      @user.name = @user.username
       if @user.update_attributes(username_params)
         #
       end
@@ -35,6 +22,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def set_profile
+    @user = current_user
+    if @user
+      if @user.update_attributes(profile_params)
+        #
+      end
+    end
+  end
+
   private
   def username_params
     params.require(:user).permit(:username)
@@ -45,7 +41,7 @@ class UsersController < ApplicationController
   end
 
   def profile_params
-    params.require(:user).permit(:password, :photo)
+    params.require(:user).permit(:password, :photo, :name, :bio)
   end
 
 end

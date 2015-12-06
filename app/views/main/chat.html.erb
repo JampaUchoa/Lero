@@ -6,6 +6,9 @@
 <div class="top-bar">
   <%#= image_tag "lero5.png", class: "logo" %>
   <%#= image_tag "lero6.png", class: "logo" %>
+  <span class="toggle-console"> Toggle console </span>
+  <span class="profile-edit"> Edit profile </span>
+
 </div>
 
 <div class="containerd">
@@ -55,7 +58,19 @@
       <% end %>
     </div>
 
-    <span class="toggle-console hidden"> Toggle console </span>
+    <div class="window window-profile hidden" data-name="Nova sala">
+      <div class="profile-error"></div>
+      <%= form_for current_user,url: user_profile_set_path, method: :patch, remote: true do |f| %>
+
+        <%= f.file_field :photo %>
+        <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: "Display name", class: "form-input", required: true %>
+        <%= f.text_area :bio, minlength: "2", maxlength: "50", placeholder: "Bio", class: "form-textarea-sm", rows: 3 %>
+        <%= f.submit "Save", class: "form-submit" %>
+      <% end %>
+    </div>
+
+
+
     <%= render 'main/alerts' %>
 
   </aside>
