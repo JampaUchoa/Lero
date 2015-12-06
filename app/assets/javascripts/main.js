@@ -272,6 +272,16 @@ $("#compose").keypress(function (e) {
       }
   });
 
+// ======== Session logic =======
+
+$(".login-button").click(function(){
+
+	$(".form-login").removeClass("hidden");
+	$(".form-new-user").addClass("hidden");
+
+
+});
+
  //=====
 
 $("#show-mobile-chat").click(function(){

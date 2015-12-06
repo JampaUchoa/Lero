@@ -77,26 +77,36 @@
     </div>
 
     <div class="chat-insert">
+      <% if current_user.username_set %>
+        <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1"></textarea>
+      <% else %>
+        <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1" class="hidden"></textarea>
+        <div class="form-username">
+          <div id="error-div">
+          </div>
 
-    <% if current_user.username_set %>
-      <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1"></textarea>
-    <% else %>
-      <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1" class="hidden"></textarea>
+            <h2> Bem vindo ao Lero! </h2>
+          <div class="form-new-user">
+            <h3> Seu nome: </h3>
+            <%= form_for current_user, url: user_name_set_path, method: :patch, remote: true do |f| %>
+              <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: "Nome",value: nil ,rows: 1, required: true %>
+            <% end %>
 
-      <div class="form-username">
-        <div id="error-div">
+            <h3> ou </h3>
+
+            <div class="form-button login-button">
+              Login
+            </div>
+          </div>
+
+          <div class="form-login hidden">
+            <%= form_for(:session, url: login_path, remote: true) do |f| %>
+              <h3> Usuario: </h3> <%= f.text_field :username, :autocapitalize => "off", :required => true, :minlength => "2", size: 40, class: "form-control-dark fumee"  %>
+              <h3> Senha: </h3> <%= f.password_field :password, :required => true, :minlength => "6", size: 40, class: "form-control-dark fumee"  %>
+              <%= f.submit "Ir", class: "form-button" %>
+            <% end %>
+          </div>
         </div>
-        <h2> Bem vindo ao Lero! </h2>
-        <h3> Seu nome: </h3>
-        <%= form_for current_user, url: user_name_set_path, method: :patch, remote: true do |f| %>
-          <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: "Nome",value: nil ,rows: 1, required: true %>
-        <% end %>
-
-        <h3> ou </h3>
-        <div class="form-button login-button">
-          Login
-        </div>
-      </div>
       <% end %>
     </div>
 

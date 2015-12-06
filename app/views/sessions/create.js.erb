@@ -1,0 +1,5 @@
+<% if @autenticated %>
+  location.reload();
+<% else %>
+  $('#error-div').html("Login invalido!");
+<% end %>
