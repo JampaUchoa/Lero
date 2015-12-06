@@ -3,10 +3,11 @@ $primary-color: #00cc00;
 $anchor-color: #565656;
 
 .alert-card{
-  margin: 0 -15px;
+  margin: 0 0 0 -15px;
   padding: 10px 15px 10px;
-//  border-top: 1px solid $border-color;
-  border-bottom: 1px solid $border-color;
+  border-top: 1px solid #DEE1E5;
+  position: absolute;
+  bottom: 0;
 
   h3{
     margin: 0 0 10px;
@@ -39,6 +40,7 @@ $anchor-color: #565656;
   min-height: 24px;
   margin: 4px 0;
   font-size: 17px;
+  background-color: transparent;
 }
 
 .form-input:focus{

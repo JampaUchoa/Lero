@@ -1,0 +1,18 @@
+<% if current_user.password_digest.nil? %>
+<div class="alert-card <%= "hidden" if !current_user.username_set %>" id="pass-set">
+  <h3> Fique Seguro! </h3>
+  <p> Defina uma senha para conseguir conversar com o Lero em outros lugares! </p>
+
+  <%= form_for current_user, url: user_password_set_path, method: :patch, remote: true do |f| %>
+    <%= f.password_field :password, minlength: "4", maxlength: "80", placeholder: "Senha",class: "form-input" ,rows: 1, required: true %>
+  <% end %>
+</div>
+
+<% elsif false && current_user.photo.nil? %>
+
+<div class="alert-card">
+  <h3> Defina seu perfil </h3>
+  <p> Adicione uma foto para as pessoas lhe reconhecer! </p>
+</div>
+
+<% end %>
