@@ -163,12 +163,6 @@ letter-spacing: -0.003em;
   width: 100%;
 }
 
-.full-tab{
-
-  height: calc(100vh - 98px) !important;
-
-}
-
 .chat-head{
 
   border-bottom: 1px solid $border-color;
@@ -220,8 +214,7 @@ letter-spacing: -0.003em;
 
   background-color: #009C00;
   color: #fff;
-  padding: 5px 30px 10px;
-  margin: -7px -10px -7px;
+  padding: 10px 30px 11px;
   h2{
     margin: 5px 0 10px;
   }

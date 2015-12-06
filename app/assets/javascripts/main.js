@@ -144,16 +144,12 @@ function roomTabbing(roomId) {
 			$(".room-actions").addClass("hidden");
 			$(".landing").removeClass("hidden");
 			$("#compose").addClass("hidden");
-			$("#chat-container").addClass("full-tab");
-
 			return;
 		}
 	}
 
 	$(".landing").addClass("hidden");
 	$("#compose").removeClass("hidden");
-	$("#chat-container").removeClass("full-tab");
-
 
 	$('#compose').attr('data-room-id', roomId); // change the input target
 	$(".room").removeClass("room-active"); // all rooms hide
