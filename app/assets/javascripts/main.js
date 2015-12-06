@@ -94,17 +94,21 @@ $(".room-card").click(function() {
 	roomId = $(this).attr('data-id');
 	roomName = $("h6",this).text();
 
-	$.ajax({
-			url: "/room/join/" + roomId,
-			type: "POST",
-			complete: function(data) {
+	if ($(".room-tab[data-id="+ roomId +"]").length > 0) {
+		roomTabbing(roomId);
+	}
+	else {
+		$.ajax({
+				url: "/room/join/" + roomId,
+				type: "POST",
+				complete: function(data) {
+					$(".room-tabs").append("<li data-id="+ roomId +" class='room-tab'> "+ roomName + " </li>");
+					$("#chat-container").append("<div class='room room-active' data-id="+ roomId +"> </div>");
+					roomTabbing(roomId);
+				}
+		});
+	}
 
-				$(".room-tabs").append("<li data-id="+ roomId +" class='room-tab'> "+ roomName + " </li>");
-				$("#chat-container").append("<div class='room room-active' data-id="+ roomId +"> </div>");
-				roomTabbing(roomId);
-
-			}
-	});
 });
 
 
