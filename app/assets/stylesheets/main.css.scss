@@ -60,14 +60,14 @@ letter-spacing: -0.003em;
   width: 100%;
   background-color: #016F01;
   text-align: center;
-  padding: 20px 0;
+  padding: 15px 0;
   min-height: 100%;
   color: #fff;
 
   img{
-    width: 200px;
-    height: 200px;
-    background-color: #343234;
+    width: 175px;
+    height: 175px;
+    background-color: #fff;
     border-radius: 50%;
   }
 
@@ -97,10 +97,14 @@ letter-spacing: -0.003em;
 
 
 .room-card{
-  width: 350px;
+  width: 340px;
   text-align: left;
   float: left;
-  margin: 25px 0 0;
+  margin: 10px 10px 0;
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: background-color 0.05s linear;
+
   img{
     width: 50px;
     height: 50px;
@@ -120,10 +124,17 @@ letter-spacing: -0.003em;
 
 }
 
+.room-card:hover{
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+}
+
 .room-card-description{
   display: inline-block;
   vertical-align: top;
   width: calc(100% - 55px);
+  padding-left: 10px;
 }
 
 

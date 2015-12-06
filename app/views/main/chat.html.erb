@@ -71,7 +71,7 @@
       <% end %>
 
       <div class="landing">
-        <img/>
+        <%= image_tag "lero5.png" %>
         <h1> Lero </h1>
         <p> Um novo lugar para conversar em grupos! </p>
         <h3> Salas populares no momento </h3>
@@ -79,11 +79,11 @@
         <div class="room-popular clearfix">
 
           <% popular_rooms.each do |r| %>
-            <div class="room-card">
-              <img/>
+            <div class="room-card" data-id="<%= r.id %>">
+              <%= image_tag "lero5.png" %>
               <div class="room-card-description">
-                <h6> Sultões do Balanço </h6>
-                <p> Sala aonde se concentra a maior quantidade de fuleragem por m2 </p>
+                <h6> <%= r.name %> </h6>
+                <p> <%= r.description %> </p>
               </div>
             </div>
           <% end %>

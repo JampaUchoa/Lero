@@ -69,6 +69,26 @@ $(".room-pick").click(function() {
 	});
 });
 
+
+$(".room-card").click(function() {
+
+	roomId = $(this).attr('data-id');
+	roomName = $("h6",this).text();
+
+	$.ajax({
+			url: "/room/join/" + roomId,
+			type: "POST",
+			complete: function(data) {
+
+				$(".room-tabs").append("<li data-id="+ roomId +" class='room-tab'> "+ roomName + " </li>");
+				$("#chat-container").append("<div class='room room-active' data-id="+ roomId +"> </div>");
+				roomTabbing(roomId);
+
+			}
+	});
+});
+
+
 // Select a room
 
 $('html').on('click', ".room-tab", function(){
@@ -122,9 +142,12 @@ function roomTabbing(roomId) {
 		else {
 			$(".chat-title").html("Chat"); // resets the name to Chat
 			$(".room-actions").addClass("hidden");
+			$(".landing").removeClass("hidden");
 			return;
 		}
 	}
+
+	$(".landing").addClass("hidden");
 
 	$('#compose').attr('data-room-id', roomId); // change the input target
 	$(".room").removeClass("room-active"); // all rooms hide
