@@ -1,5 +1,6 @@
 <% joined = current_user.tenancies %>
 <% not_joined = Room.where.not(id: joined.pluck(:room_id)) %>
+<% popular_rooms = Room.all.last(12) %>
 <% console %>
 
 <div class="top-bar">
@@ -75,15 +76,17 @@
         <p> Um novo lugar para conversar em grupos! </p>
         <h3> Salas populares no momento </h3>
 
-        <div class="room-popular">
+        <div class="room-popular clearfix">
 
-          <div class="room-card">
-            <img/>
-            <div class="room-card-description">
-              <h6> Sultões do Balanço </h6>
-              <p> Sala aonde se concentra a maior quantidade de fuleragem por m2 </p>
+          <% popular_rooms.each do |r| %>
+            <div class="room-card">
+              <img/>
+              <div class="room-card-description">
+                <h6> Sultões do Balanço </h6>
+                <p> Sala aonde se concentra a maior quantidade de fuleragem por m2 </p>
+              </div>
             </div>
-          </div>
+          <% end %>
 
         </div>
 
