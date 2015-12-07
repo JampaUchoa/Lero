@@ -62,7 +62,7 @@ function windowTabbing(name){
 
 $(".explore").click(function() {
 
-	$(".chat-title").html("Lero"); // resets the name to Lero
+	$(".chat-title").html("Popular"); // resets the name to Lero
 	$(".room-actions").addClass("hidden");
 	$(".landing").removeClass("hidden");
 	$("#compose").addClass("hidden");

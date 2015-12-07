@@ -1,3 +1,5 @@
+$border-color: #DEE1E5;
+
 @media (max-width:991px){/* MOBILE */
 
   .hidden-mobile{
@@ -31,8 +33,19 @@
 }
 
   .room-card{
-    margin: 4px 0 0;
+    margin: 4px 0 0 0px;
+    padding: 10px 0px 5px;
     width: 100%;
+    border-top: 1px solid $border-color;
+    p {
+      font-size: 16px;
+      line-height: 1.24;
+      height: 19px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-wrap: normal;
+    }
+
   }
 
   .room-tab{
@@ -49,7 +62,6 @@
 
   .room-popular{
     padding: 0;
-    margin: 0 0 10px;
   }
 
   .form-new-user{
@@ -93,9 +105,15 @@
 
   .side-actions, .room-actions{
     img{
-      padding: 5px 0;
+      padding: 5px 3px;
+      margin: 0;
+      cursor: pointer;
     }
   }
+
+.room-actions{
+  margin-right: 15px;
+}
 
 }
 @media (min-width:991px){/* MOBILE */
