@@ -176,12 +176,11 @@ letter-spacing: -0.003em;
   img{
     height: 50px;
 //    background-color: #00cc00;
-    padding: 10px 0;
+    padding: 7px 0;
     margin: 0 10px;
     cursor: pointer;
   }
 }
-
 
 .chat-title{
   margin: 0;
@@ -303,6 +302,10 @@ letter-spacing: -0.003em;
 .message-info-content{
   width: calc(100% - 55px);
   display: inline-block;
+  max-height: 350px;
+  overflow: auto;
+  max-width: 700px;
+
 }
 
 .message-user-name{
@@ -319,7 +322,6 @@ letter-spacing: -0.003em;
 
   p{
     margin: 0;
-    max-width: 700px;
   }
 }
 
@@ -356,7 +358,7 @@ margin-left: 3px;
   img{
     height: 50px;
 //    background-color: #00cc00;
-    padding: 10px 0;
+    padding: 7px 0;
     cursor: pointer;
   }
 }
