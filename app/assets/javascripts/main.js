@@ -154,7 +154,15 @@ $(".room-hotlink").click(function() {
 			url: "/room/share/" + roomId,
 			type: "GET",
 			success: function(data, textStatus) {
-				window.prompt("Ctrl+C, Enter", "http://localhost:3000/?join=" + data.shareurl);
+				$(".hotlink-area").html("http://localhost:3000/?join=" + data.shareurl);
+
+				document.addEventListener('copy', function(e){
+				    e.clipboardData.setData('text/plain', "http://localhost:3000/?join=" + data.shareurl);
+						$(".hotlink-area").html("");
+				    e.preventDefault();
+						document.removeEventListener('copy');
+				});
+
 			}
 		});
 

@@ -84,7 +84,7 @@
 
   <div class="chat row-bs">
     <div class="chat-head">
-      <div class="room-back hidd">
+      <div class="room-back hidden-desktop">
         <%= image_tag("side-back.png", class: "room-back") %>
       </div>
       <h2 class="chat-title"> Lero </h2>
@@ -94,6 +94,7 @@
       </div>
     </div>
     <div id="chat-container">
+      <div class="hotlink-area">  </div>
       <% joined.each do |t| %>
         <div class="room" data-id="<%= t.room.id %>"> </div>
       <% end %>

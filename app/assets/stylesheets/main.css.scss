@@ -190,6 +190,17 @@ letter-spacing: -0.003em;
   display: inline-block;
 }
 
+.hotlink-area{
+  position: absolute;
+  font-size: 18px;
+  color: #555;
+  text-align: center;
+  left: 0;
+  right: 0;
+  background-color: #eee;
+}
+
+
 .chat-insert{
 
   position: absolute;
