@@ -31,8 +31,6 @@
 
     <div class="window window-main" data-name="Salas">
 
-      <%= render 'main/alerts' %>
-
       <ul class="room-tabs">
         <% if joined.any? %>
           <% joined.each do |t| %>
@@ -40,7 +38,10 @@
           <% end %>
         <% end %>
       </ul>
-      <span class="explore"> Ver mais salas </span>
+      <span class="explore"> <%= image_tag "room-share.png" %> Ver mais salas </span>
+
+      <%= render 'main/alerts' %>
+      
     </div>
 
     <div class="window window-room-new hidden" data-name="Nova sala">

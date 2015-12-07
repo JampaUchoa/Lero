@@ -143,7 +143,6 @@ letter-spacing: -0.003em;
 //  background-color: #4CDB4C;
   height: calc(100vh - 50px);
   overflow: auto;
-  padding-bottom: 15px;
   border-right: 1px solid $border-color;
   width: 320px;
 }
@@ -152,10 +151,16 @@ span.explore {
     font-size: 20px;
     text-align: center;
     display: block;
-    color: #444;
     cursor: pointer;
     margin: 10px 0px;
+    background-color: #FAFAFA;
+    img {
+    height: 50px;
+    padding: 7px 0;
+    cursor: pointer;
+    }
 }
+
 
 .containerd{
   margin-top: 50px;

@@ -1,28 +1,33 @@
 <% if !current_user.username_set %>
-<div class="alert-card" id="pass-set">
-  <h3> Como é mesmo o nome? </h3>
-  <p> Apos o sinal diga o seu nome... <s> e a cidade de onde esta falando</s> BEEP </p>
+  <div class="alert-push"></div>
 
-  <%= form_for current_user, url: user_name_set_path, method: :patch, remote: true do |f| %>
-    <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: "Seu Nome", class: "form-input", value: nil ,rows: 1, required: true %>
-  <% end %>
-</div>
+  <div class="alert-card" id="pass-set">
+    <h3> Como é mesmo o nome? </h3>
+    <p> Apos o sinal diga o seu nome... <s> e a cidade de onde esta falando</s> BEEP </p>
+
+    <%= form_for current_user, url: user_name_set_path, method: :patch, remote: true do |f| %>
+      <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: "Seu Nome", class: "form-input", value: nil ,rows: 1, required: true %>
+    <% end %>
+  </div>
 
 <% elsif current_user.password_digest.nil? %>
-<div class="alert-card" id="pass-set">
-  <h3> Fique Seguro! </h3>
-  <p> Defina uma senha para conseguir conversar com o Lero em outros lugares! </p>
+  <div class="alert-push"></div>
 
-  <%= form_for current_user, url: user_password_set_path, method: :patch, remote: true do |f| %>
-    <%= f.password_field :password, minlength: "4", maxlength: "80", placeholder: "Senha", class: "form-input" ,rows: 1, required: true %>
-  <% end %>
-</div>
+  <div class="alert-card" id="pass-set">
+    <h3> Fique Seguro! </h3>
+    <p> Defina uma senha para conseguir conversar com o Lero em outros lugares! </p>
+
+    <%= form_for current_user, url: user_password_set_path, method: :patch, remote: true do |f| %>
+      <%= f.password_field :password, minlength: "4", maxlength: "80", placeholder: "Senha", class: "form-input" ,rows: 1, required: true %>
+    <% end %>
+  </div>
 
 <% elsif current_user.photo.url.nil? %>
+  <div class="alert-push"></div>
 
-<div class="alert-card profile-edit" style="cursor:pointer">
-  <h3> Defina seu perfil </h3>
-  <p> Adicione uma foto para as pessoas lhe conhecer melhor! </p>
-</div>
+  <div class="alert-card profile-edit" style="cursor:pointer">
+    <h3> Defina seu perfil </h3>
+    <p> Adicione uma foto para as pessoas lhe conhecer melhor! </p>
+  </div>
 
 <% end %>

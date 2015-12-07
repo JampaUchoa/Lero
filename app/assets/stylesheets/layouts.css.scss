@@ -3,18 +3,27 @@ $primary-color: #00cc00;
 $anchor-color: #565656;
 
 .alert-card{
-  margin: 0 0 0 -15px;
+  /* margin-left: -15px; */
   padding: 10px 15px 10px;
   border-top: 1px solid #DEE1E5;
-  position: absolute;
+  border-bottom: 1px solid #DEE1E5;
+  position: fixed;
   bottom: 0;
-  width: 100%;
-  background-color: #fff;
+  left: 0;
+  right: 0;
+  width: 319px;
+  height: 150px;
+  background-color: #FAFAFA;
+
 
   h3{
     margin: 0 0 10px;
   }
 
+}
+
+.alert-push{
+    margin-top: 165px;
 }
 
 .row-bs{
