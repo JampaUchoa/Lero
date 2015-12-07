@@ -82,6 +82,9 @@
         <%= image_tag("side-back.png", class: "room-back") %>
       </div>
       <h2 class="chat-title"> Popular </h2>
+      <% if !current_user.username_set %>
+      <div class="login-button"> Login </div>
+      <% end %>
       <div class="room-actions hidden">
       <%= image_tag("room-share.png", class: "room-hotlink") %>
       <%= image_tag("room-leave.png", class: "room-leave") %>
