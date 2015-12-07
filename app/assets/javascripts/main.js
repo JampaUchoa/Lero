@@ -1,7 +1,7 @@
 
 $(document).on('page:change', function () {
 
-lastRoom = getCookie("lastRoom")
+lastRoom = getCookie("lastRoom"); // The last room visited
 
 if (lastRoom && ($(".room-tab[data-id="+ lastRoom +"]").length > 0)) {// if a room preference exists  && it exists in the DOM
 	roomTabbing(lastRoom); // show it
@@ -157,7 +157,10 @@ $(".room-hotlink").click(function() {
 			type: "GET",
 			success: function(data, textStatus) {
 
-				$(".room[data-id="+ roomId +"]").append("<div class='message'> <div class='message-user-photo'> <img src='"+ "d" +"'/></div><div class='message-info-content'><span class='message-user-name'> Leroy </span> <div class='message-content' data-user-id='"+ -1 +"'> Compartilhe o link da sala: http://localhost:3000/?join=" + data.shareurl + "</div></div></div>");
+				createdAt = new Date();
+				message = "Link para compartilhar: http://localhost:3000/?join=" + data.shareurl
+
+				leroyPrint(message, roomId);
 				chatbottom();
 
 			}
@@ -265,21 +268,13 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 
 				$(jQuery.parseJSON(response)).each(function() {
 
-					lastRoomUser = $(".message-content",".room[data-id="+ this.room +"]").last().attr('data-user-id') || 0
+					createdAt = new Date(this.created_at) //convert to JS time format
 
-					createdAt = new Date(this.created_at)
-					timeAgo = (jQuery.timeago(createdAt));
-
-					if (this.userid != lastRoomUser) {
-					$(".room[data-id="+ this.room +"]").append("<div class='message'> <div class='message-user-photo'> <img src='"+ this.photo +"'/></div><div class='message-info-content'><span class='message-user-name'> "+ this.username +" </span> <span class='message-time'> "+ timeAgo +"</span> 	<div class='message-content' data-id='"+ this.id +"' data-user-id='"+ this.userid +"'>" + this.message + "</div></div></div>");
-					}
-					else {
-					$(".message-info-content",".room[data-id="+ this.room +"]").last().append("<div class='message-content' data-id='"+ this.id +"' data-user-id='"+ this.userid +"'>" + this.message + "</div>");
-					$(".message-time",".room[data-id="+ this.room +"]").last().text(timeAgo);
-					}
+					chatPrint(this.id, this.message, this.room, createdAt, this.userid, this.username, this.photo);
 
 					lastRoom = this.room;
 					lastId = this.id;					// for pinging more messages
+
 					if ($(".room-tab-active").length > 0){
 						chatbottom();
 					}
@@ -386,6 +381,28 @@ $(".toggle-console").click(function(){
 
 });
 
+function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto) {
+
+	timeAgo = (jQuery.timeago(createdAt));
+
+	lastRoomUser = $(".message-content",".room[data-id="+ roomId +"]").last().attr('data-user-id') || 0
+
+	if (userId != lastRoomUser) {
+	$(".room[data-id="+ roomId +"]").append("<div class='message'> <div class='message-user-photo'> <img src='"+ userPhoto +"'/></div><div class='message-info-content'><span class='message-user-name'> "+ userName +" </span> <span class='message-time'> "+ timeAgo +"</span> 	<div class='message-content' data-id='"+ id +"' data-user-id='"+ userId +"'>" + message + "</div></div></div>");
+	}
+	else {
+	$(".message-info-content",".room[data-id="+ roomId +"]").last().append("<div class='message-content' data-id='"+ id +"' data-user-id='"+ userId +"'>" + message + "</div>");
+	$(".message-time",".room[data-id="+ roomId +"]").last().text(timeAgo);
+	}
+
+}
+
+function leroyPrint (message, roomId){ // Print a client-side message as leroy
+
+	createdAt = new Date();
+	chatPrint("", message, roomId, createdAt, -1, "Leroy", "");
+
+}
 
 function setCookie(cname, cvalue) {
     var d = new Date();
