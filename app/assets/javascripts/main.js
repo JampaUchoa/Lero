@@ -171,6 +171,8 @@ function roomTabbing(roomId) {
 		}
 	}
 
+	document.getElementById("compose").focus();
+
 	$(".landing").addClass("hidden");
 	$("#compose").removeClass("hidden");
 
