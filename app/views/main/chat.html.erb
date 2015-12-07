@@ -26,7 +26,7 @@
       <div class="side-actions">
         <%= image_tag("home.png", class: "explore") %>
         <%= image_tag("toggle-console.png", class: "toggle-console") %>
-        <%= image_tag("profile-edit.png", class: "profile-edit") %>
+        <%= image_tag("profile-edit.png", class: "profile-edit") if current_user.username_set %>
         <%= image_tag("room-new.png", class: "room-new") %>
       </div>
     </div>
@@ -87,8 +87,8 @@
       <div class="room-back hidden-desktop">
         <%= image_tag("side-back.png", class: "room-back") %>
       </div>
-      <h2 class="chat-title"> Lero </h2>
-      <div class="room-actions">
+      <h2 class="chat-title"> Popular </h2>
+      <div class="room-actions hidden">
       <%= image_tag("room-share.png", class: "room-hotlink") %>
       <%= image_tag("room-leave.png", class: "room-leave") %>
       </div>

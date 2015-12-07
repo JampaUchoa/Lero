@@ -4,10 +4,31 @@
     display: none !important;
   }
 
+  .top-bar{
+    display: none;
+  }
+
+  .containerd{
+    margin: 0
+  }
+
   .chat{
     width: 100%;
     padding-right: 0;
+    height: 100vh;
   }
+
+  #chat-container{
+    height: calc(100vh - 106px);
+  }
+
+  .control{
+    height: 100vh;
+  }
+
+  .side-back img, .room-back img {
+    padding: 5px 0;
+}
 
   .room-card{
     margin: 4px 0 0;
@@ -54,6 +75,10 @@
 
   }
 
+  .form-username{
+    padding: 5px 30px 0;
+  }
+
   .login-button{
     float: right;
     color: #fff;
@@ -64,6 +89,13 @@
   *::-webkit-scrollbar {
     width: 5px !important;
 }
+
+
+  .side-actions, .room-actions{
+    img{
+      padding: 5px 0;
+    }
+  }
 
 }
 @media (min-width:991px){/* MOBILE */
