@@ -158,7 +158,7 @@ $(".room-hotlink").click(function() {
 			success: function(data, textStatus) {
 
 				createdAt = new Date();
-				message = "Link para compartilhar: http://localhost:3000/?join=" + data.shareurl
+				message = "Link para compartilhar:" + document.location.hostname + "/?join=" + data.shareurl
 
 				leroyPrint(message, roomId);
 				chatbottom();
@@ -371,8 +371,28 @@ function displayChat(){
 	$(".chat").removeClass("hidden-mobile");
 	$(".control").addClass("hidden-mobile");
 
+	history.pushState({section: "chat"}, "Chat", "");
+	console.log("push");
+
 }
 
+history.pushState({section: "main"}, "Main", "");
+
+
+window.addEventListener("popstate", function(e) {
+
+	// return to last state
+	if (e.state.section == "chat") {
+
+		roomTabOut();
+		$(".chat").addClass("hidden-mobile");
+		$(".control").removeClass("hidden-mobile");
+
+		console.log("pushed");
+
+	}
+
+});
 
 
 $(".toggle-console").click(function(){
