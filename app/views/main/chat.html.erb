@@ -1,5 +1,4 @@
 <% joined = current_user.tenancies %>
-<% not_joined = Room.where.not(id: joined.pluck(:room_id)) %>
 <% popular_rooms = Room.all.order("tenants_count DESC").limit(12) %>
 <% console %>
 
@@ -20,7 +19,6 @@
       <h2 class="side-title"> Salas </h2>
 
       <div class="side-actions">
-        <%= image_tag("home.png", class: "explore") %>
         <%#= image_tag("toggle-console.png", class: "toggle-console") %>
         <% if current_user.username_set %>
         <%= image_tag("profile-edit.png", class: "profile-edit") %>
@@ -42,17 +40,7 @@
           <% end %>
         <% end %>
       </ul>
-    </div>
-
-    <div class="window window-room-discover hidden" data-name="Explorar">
-      <% if not_joined.any? %>
-      <h3> Sugeridos </h3>
-      <ul class="room-list">
-        <% not_joined.each do |t| %>
-          <li class="room-pick" data-id="<%= t.id %>"> <%= t.name %> </li>
-        <% end %>
-      </ul>
-      <% end %>
+      <span class="explore"> Ver mais salas </span>
     </div>
 
     <div class="window window-room-new hidden" data-name="Nova sala">
