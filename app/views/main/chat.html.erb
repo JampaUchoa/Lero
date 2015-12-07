@@ -11,7 +11,7 @@
 </div>
 
 <div class="containerd">
-  <aside class="control row-bs hidden-mobile">
+  <aside class="control row-bs <%= 'hidden-mobile' if !joined.any? %>">
     <div class="side-head">
       <div class="side-back hidden">
         <%= image_tag("side-back.png", class: "side-back") %>
@@ -88,7 +88,7 @@
 
   </aside>
 
-  <div class="chat row-bs">
+  <div class="chat row-bs <%= 'hidden-mobile' if joined.any? %>">
     <div class="chat-head">
       <div class="room-back hidden-desktop">
         <%= image_tag("side-back.png", class: "room-back") %>
