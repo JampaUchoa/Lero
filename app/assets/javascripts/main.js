@@ -7,6 +7,25 @@ if (lastRoom && ($(".room-tab[data-id="+ lastRoom +"]").length > 0)) {// if a ro
 	roomTabbing(lastRoom); // show it
 	}
 
+
+	history.pushState({section: "main"}, "Main", "");
+
+
+	window.addEventListener("popstate", function(e) {
+
+		// return to last state
+		if (e.state.section == "chat") {
+
+			roomTabOut();
+			$(".chat").addClass("hidden-mobile");
+			$(".control").removeClass("hidden-mobile");
+
+			console.log("pushed");
+
+		}
+
+	});
+	
 // ============================[ Window logic] =================
 
 $(".room-new").click(function() {
@@ -375,25 +394,6 @@ function displayChat(){
 	console.log("push");
 
 }
-
-history.pushState({section: "main"}, "Main", "");
-
-
-window.addEventListener("popstate", function(e) {
-
-	// return to last state
-	if (e.state.section == "chat") {
-
-		roomTabOut();
-		$(".chat").addClass("hidden-mobile");
-		$(".control").removeClass("hidden-mobile");
-
-		console.log("pushed");
-
-	}
-
-});
-
 
 $(".toggle-console").click(function(){
 
