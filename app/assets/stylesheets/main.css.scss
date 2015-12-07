@@ -82,7 +82,7 @@ letter-spacing: -0.003em;
 
   h3{
     margin: 30px 0 10px;
-    font-weight: bold;
+    font-weight: 300;
     font-size: 25px;
   }
 
@@ -171,6 +171,10 @@ span.explore {
   overflow-y: scroll;
   height: calc(100vh - 155px);
   width: 100%;
+}
+
+#chat-container.full-height{
+  height: calc(100vh - 105px);
 }
 
 .chat-head{

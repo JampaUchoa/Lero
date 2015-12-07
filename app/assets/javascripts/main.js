@@ -69,6 +69,8 @@ $(".explore").click(function() {
 	$(".room").removeClass("room-active");
 	$(".room-tab").removeClass("room-tab-active");
 	$(".landing-intro").addClass("hidden");
+	$("#chat-container").addClass("full-height");
+	$(".form-username").addClass("hidden");
 
 	displayChat();
 });
@@ -197,6 +199,9 @@ function roomTabbing(roomId) {
 
 	displayChat();
 //	document.getElementById("compose").focus();
+	$(".form-username").removeClass("hidden");
+	$("#chat-container").removeClass("full-height");
+
 
 	$(".landing").addClass("hidden");
 	$("#compose").removeClass("hidden");

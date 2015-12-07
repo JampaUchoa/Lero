@@ -20,8 +20,16 @@ $border-color: #DEE1E5;
     height: 100vh;
   }
 
+  .landing-intro{
+    padding-right: 15px;
+  }
+
   #chat-container{
     height: calc(100vh - 106px);
+  }
+
+  #chat-container.full-height{
+    height: calc(100vh - 50px);
   }
 
   .control{
@@ -34,7 +42,7 @@ $border-color: #DEE1E5;
 
   .room-card{
     margin: 4px 0 0 0px;
-    padding: 10px 0px 5px;
+    padding: 10px 15px 5px 0;
     width: 100%;
     border-top: 1px solid $border-color;
     p {

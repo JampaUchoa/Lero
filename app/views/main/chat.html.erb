@@ -87,7 +87,7 @@
       <%= image_tag("room-leave.png", class: "room-leave") %>
       </div>
     </div>
-    <div id="chat-container">
+    <div id="chat-container" class="full-height">
       <div class="hotlink-area">  </div>
       <% joined.each do |t| %>
         <div class="room" data-id="<%= t.room.id %>"> </div>
@@ -99,7 +99,7 @@
           <%= image_tag "lero5.png" %>
           <h1> Lero </h1>
           <p> Um novo lugar para conversar em grupos! </p>
-          <h3> Salas populares no momento </h3>
+          <h3> Popular no momento: </h3>
         </div>
 
         <div class="room-popular clearfix">
@@ -118,9 +118,9 @@
 
     <div class="chat-insert">
       <% if current_user.username_set %>
-        <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1"></textarea>
+        <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1" class="hidden"></textarea>
       <% else %>
-        <div class="form-username">
+        <div class="form-username hidden">
           <div id="error-div"> </div>
           <div class="form-new-user">
             <%= form_for current_user, url: user_name_set_path, method: :patch, remote: true do |f| %>
