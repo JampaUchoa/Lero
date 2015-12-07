@@ -41,10 +41,9 @@ $border-color: #DEE1E5;
 }
 
   .room-card{
-    margin: 4px 0 0 0px;
-    padding: 10px 15px 5px 0;
+    padding: 0;
+    margin: 0;
     width: 100%;
-    border-top: 1px solid $border-color;
     p {
       font-size: 16px;
       line-height: 1.24;
@@ -54,7 +53,16 @@ $border-color: #DEE1E5;
       word-wrap: normal;
     }
 
+    img{
+      margin-top: 15px;
+    }
+
   }
+
+  .room-card-description {
+    border-top: 1px solid $border-color;
+    padding: 15px 0 15px 10px;
+}
 
   .room-tab{
     cursor: pointer;
