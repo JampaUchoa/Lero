@@ -214,6 +214,17 @@ letter-spacing: -0.003em;
   }
 }
 
+.form-photo{
+  img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 10px;
+  }
+}
+
+
 .form-username{
 
   background-color: #009C00;

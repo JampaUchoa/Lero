@@ -62,7 +62,10 @@
       <div class="profile-error"></div>
       <%= form_for current_user,url: user_profile_set_path, method: :patch, remote: true do |f| %>
 
-        <%= f.file_field :photo %>
+        <div class="form-photo">
+          <%= image_tag current_user.photo.url.to_s %>
+          <%= f.file_field :photo %>
+        </div>
         <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: "Display name", class: "form-input", required: true %>
         <%= f.text_area :bio, minlength: "2", maxlength: "50", placeholder: "Bio", class: "form-textarea-sm", rows: 3 %>
         <%= f.submit "Save", class: "form-submit" %>

@@ -1,0 +1,5 @@
+<% if @user.save %>
+  location.reload();
+<% else %>
+  $('#error-div').html('<%= j(render 'layouts/error', :object => @user) %>');
+<% end %>

@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
       @user.username = rand(1000..999999999999999)
       @user.save!
       log_in @user
-      Tenant.create(user_id: current_user.id, room_id: 1)
       remember(@user)
     end
   end
