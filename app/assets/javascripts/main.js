@@ -62,7 +62,7 @@ function windowTabbing(name){
 
 $(".explore").click(function() {
 
-	$(".chat-title").html("Popular"); // resets the name to Lero
+	$(".chat-title").text("Popular"); // resets the name to Lero
 	$(".room-actions").addClass("hidden");
 	$(".landing").removeClass("hidden");
 	$("#compose").addClass("hidden");
@@ -187,7 +187,7 @@ function roomTabbing(roomId) {
 			roomId = $(".room-tab").last().attr("data-id");
 		}
 		else {
-			$(".chat-title").html("Lero"); // resets the name to Lero
+			$(".chat-title").text("Lero"); // resets the name to Lero
 			$(".room-actions").addClass("hidden");
 			$(".landing").removeClass("hidden");
 			$("#compose").addClass("hidden");
@@ -214,7 +214,7 @@ function roomTabbing(roomId) {
 	$(".room[data-id="+ roomId +"]").addClass("room-active"); // then show the target room
 
 	name = $(".room-tab[data-id="+ roomId +"]").text();
-	$(".chat-title").html(name) // change the header
+	$(".chat-title").text(name) // change the header
 
 	$(".room-actions").removeClass("hidden");
 
