@@ -14,7 +14,11 @@ class ChatsController < ApplicationController
         lastmsg = (params[:id]).to_i
         usertenancy = current_user.tenancies.pluck(:room_id)
         if usertenancy.any?
-          @newchats = Chat.where('id > ?', lastmsg).where(room_id: usertenancy).order("id ASC").last(30)
+          if lastmsg > 0
+            @newchats = Chat.where('id > ?', lastmsg).where(room_id: usertenancy).where.not(user_id: current_user.id).order("id ASC").last(30)
+          else
+            @newchats = Chat.where('id > ?', lastmsg).where(room_id: usertenancy).order("id ASC").last(50)
+          end
           @chatmsgs = Array.new
           @newchats.each do |m|
             @chatmsgs << {

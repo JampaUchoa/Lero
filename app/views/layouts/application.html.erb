@@ -39,10 +39,13 @@
   <meta name="msapplication-TileColor" content="#00a300">
   <meta name="msapplication-TileImage" content="/mstile-144x144.png">
   <meta name="theme-color" content="#108210">
-  
+
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#00CC00">
 
+<script>
+userPhoto = "<%= current_user.photo.url.to_s %>";
+</script>
 
 </head>
   <body>

@@ -20,12 +20,10 @@ if (lastRoom && ($(".room-tab[data-id="+ lastRoom +"]").length > 0)) {// if a ro
 			$(".chat").addClass("hidden-mobile");
 			$(".control").removeClass("hidden-mobile");
 
-			console.log("pushed");
-
 		}
 
 	});
-	
+
 // ============================[ Window logic] =================
 
 $(".room-new").click(function() {
@@ -177,7 +175,7 @@ $(".room-hotlink").click(function() {
 			success: function(data, textStatus) {
 
 				createdAt = new Date();
-				message = "Link para compartilhar:" + document.location.hostname + "/?join=" + data.shareurl
+				message = "Link para compartilhar: " + document.location.hostname + "/?join=" + data.shareurl
 
 				leroyPrint(message, roomId);
 				chatbottom();
@@ -346,14 +344,22 @@ $("#compose").keypress(function (e) {
 				return false;
 			}
 
+			sendMessage = $(this).val();
+			sendRoom = $(this).attr("data-room-id");
+
+			createdAt = new Date();
+			chatPrint("", sendMessage, sendRoom, createdAt, "self", "Você", userPhoto)
+			chatbottom();
+
 			$.ajax({
 					url: "/message/send",
 					type: "POST",
 					data: {
-						roomId: $(this).attr("data-room-id"),
-						message: $(this).val(),
+						roomId: sendRoom,
+						message: sendMessage,
 					},
 					success: function() {
+
 					}
 				});
 
@@ -391,7 +397,6 @@ function displayChat(){
 	$(".control").addClass("hidden-mobile");
 
 	history.pushState({section: "chat"}, "Chat", "");
-	console.log("push");
 
 }
 
