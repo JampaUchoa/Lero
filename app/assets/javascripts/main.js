@@ -156,14 +156,9 @@ $(".room-hotlink").click(function() {
 			url: "/room/share/" + roomId,
 			type: "GET",
 			success: function(data, textStatus) {
-				$(".hotlink-area").html("http://localhost:3000/?join=" + data.shareurl);
 
-				document.addEventListener('copy', function(e){
-				    e.clipboardData.setData('text/plain', "http://localhost:3000/?join=" + data.shareurl);
-						$(".hotlink-area").html("");
-				    e.preventDefault();
-						document.removeEventListener('copy');
-				});
+				$(".room[data-id="+ roomId +"]").append("<div class='message'> <div class='message-user-photo'> <img src='"+ "d" +"'/></div><div class='message-info-content'><span class='message-user-name'> Leroy </span> <div class='message-content' data-user-id='"+ -1 +"'> Compartilhe o link da sala: http://localhost:3000/?join=" + data.shareurl + "</div></div></div>");
+				chatbottom();
 
 			}
 		});
