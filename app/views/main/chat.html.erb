@@ -7,11 +7,7 @@
 
   <%#= image_tag "lero5.png", class: "logo" %>
   <%= image_tag "lero.png", class: "logo m-toggle-room hidden-desktop" %>
-
   <%#= image_tag "home.png", class: "logo " %>
-  <% if !current_user.username_set %>
-    <div class="login-button hidden-desktop"> Login </div>
-  <% end %>
 </div>
 
 <div class="containerd">
@@ -25,9 +21,13 @@
 
       <div class="side-actions">
         <%= image_tag("home.png", class: "explore") %>
-        <%= image_tag("toggle-console.png", class: "toggle-console") %>
-        <%= image_tag("profile-edit.png", class: "profile-edit") if current_user.username_set %>
+        <%#= image_tag("toggle-console.png", class: "toggle-console") %>
+        <% if current_user.username_set %>
+        <%= image_tag("profile-edit.png", class: "profile-edit") %>
         <%= image_tag("room-new.png", class: "room-new") %>
+        <% else %>
+        <div class="login-button hidden-desktop"> Login </div>
+        <% end %>
       </div>
     </div>
 
@@ -59,7 +59,8 @@
       <div class="room-error"></div>
       <%= form_for Room.new, remote: true do |f| %>
 
-        <%= f.file_field :photo %>
+        <%= image_tag "lero6.png" %>
+        <%= f.file_field :photo, accept: "image/png, image/gif, image/jpeg" %>
         <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: "Room name", class: "form-input", required: true %>
         <%= f.text_area :description, minlength: "2", maxlength: "30", placeholder: "Room Description", class: "form-textarea-sm", rows: 3 %>
         <%= f.submit "Create", class: "form-submit" %>
@@ -71,8 +72,13 @@
       <%= form_for current_user,url: user_profile_set_path, method: :patch, remote: true do |f| %>
 
         <div class="form-photo">
+          <% if current_user.photo? %>
           <%= image_tag current_user.photo.url.to_s %>
-          <%= f.file_field :photo %>
+          <% else %>
+          <%= image_tag "user-default.png" %>
+          <% end %>
+
+          <%= f.file_field :photo, accept: "image/png, image/gif, image/jpeg" %>
         </div>
         <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: "Display name", class: "form-input", required: true %>
         <%= f.text_area :bio, minlength: "2", maxlength: "50", placeholder: "Bio", class: "form-textarea-sm", rows: 3 %>

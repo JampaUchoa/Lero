@@ -355,6 +355,7 @@ $(".login-button").click(function() {
 	$(".form-login").removeClass("hidden");
 	$(".form-new-user").addClass("hidden");
 
+	displayChat();
 
 });
 
