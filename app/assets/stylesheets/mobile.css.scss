@@ -1,0 +1,67 @@
+@media (max-width:991px){/* MOBILE */
+
+  .hidden-mobile{
+    display: none !important;
+  }
+
+  .chat{
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .room-card{
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  .control{
+    width: 100%
+  }
+
+  .room-popular{
+    padding: 0;
+    margin: 0 0 10px;
+  }
+
+  .form-new-user{
+
+    form{
+      width: 100%;
+      margin-bottom: 7px;
+    }
+
+    input{
+      width: 100%;
+    }
+
+  }
+
+  .form-login{
+
+    text-align: right;
+
+    input{
+      margin-bottom: 10px;
+    }
+
+  }
+
+  .login-button{
+    float: right;
+    color: #fff;
+    font-size: 20px;
+    padding: 11px;
+  }
+
+  *::-webkit-scrollbar {
+    width: 5px !important;
+}
+
+}
+@media (min-width:991px){/* MOBILE */
+
+  .hidden-desktop{
+    display: none;
+  }
+
+}

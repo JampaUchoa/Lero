@@ -8,6 +8,7 @@ $anchor-color: #565656;
   border-top: 1px solid #DEE1E5;
   position: absolute;
   bottom: 0;
+  background-color: #fff;
 
   h3{
     margin: 0 0 10px;
@@ -28,9 +29,9 @@ $anchor-color: #565656;
   color: #fff !important;
   display: inline-block;
   margin-bottom: 0;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
-  padding: 3px 8px;
+  padding: 3px 10px;
   font-weight: bolder;
   border: 1px solid transparent;
   text-align: center;

@@ -65,6 +65,8 @@ $(".explore").click(function() {
 	$(".room").removeClass("room-active");
 	$(".room-tab").removeClass("room-tab-active");
 	$(".landing-intro").addClass("hidden");
+	toggleView();
+
 });
 
 //Join a room
@@ -98,6 +100,8 @@ $(".room-card").click(function() {
 		roomTabbing(roomId);
 	}
 	else {
+		toggleView();
+
 		$.ajax({
 				url: "/room/join/" + roomId,
 				type: "POST",
@@ -171,7 +175,8 @@ function roomTabbing(roomId) {
 		}
 	}
 
-	document.getElementById("compose").focus();
+	toggleView();
+//	document.getElementById("compose").focus();
 
 	$(".landing").addClass("hidden");
 	$("#compose").removeClass("hidden");
@@ -324,7 +329,7 @@ $("#compose").keypress(function (e) {
 
 // ======== Session logic =======
 
-$(".login-button").click(function(){
+$(".login-button").click(function() {
 
 	$(".form-login").removeClass("hidden");
 	$(".form-new-user").addClass("hidden");
@@ -334,12 +339,16 @@ $(".login-button").click(function(){
 
  //=====
 
-$("#show-mobile-chat").click(function(){
+$(".m-toggle-room").click(function(){
 
-	mainPage = !mainPage;
-	$(".containerd, .footer-margin, .chat").toggleClass("hidden-mobile");
-	$(this).toggleClass("tab-active");
+	toggleView();
+
 });
+
+function toggleView() {
+	$(".chat, .control").toggleClass("hidden-mobile");
+
+}
 
 $(".toggle-console").click(function(){
 

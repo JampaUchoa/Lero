@@ -4,12 +4,18 @@
 <% console %>
 
 <div class="top-bar">
+
   <%#= image_tag "lero5.png", class: "logo" %>
-  <%#= image_tag "lero6.png", class: "logo" %>
+  <%= image_tag "lero.png", class: "logo m-toggle-room hidden-desktop" %>
+
+  <%#= image_tag "home.png", class: "logo " %>
+  <% if !current_user.username_set %>
+    <div class="login-button hidden-desktop"> Login </div>
+  <% end %>
 </div>
 
 <div class="containerd">
-  <aside class="control row-bs">
+  <aside class="control row-bs hidden-mobile">
     <div class="side-head">
       <div class="side-back hidden">
         <%= image_tag("side-back.png", class: "side-back") %>
@@ -26,6 +32,8 @@
     </div>
 
     <div class="window window-main" data-name="Salas">
+
+      <%= render 'main/alerts' %>
 
       <ul class="room-tabs">
         <% if joined.any? %>
@@ -72,8 +80,6 @@
       <% end %>
     </div>
 
-    <%= render 'main/alerts' %>
-
   </aside>
 
   <div class="chat row-bs">
@@ -117,18 +123,17 @@
       <% if current_user.username_set %>
         <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1"></textarea>
       <% else %>
-        <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1" class="hidden"></textarea>
         <div class="form-username">
           <div id="error-div"> </div>
           <div class="form-new-user">
-            <h3> Seu nome: </h3>
             <%= form_for current_user, url: user_name_set_path, method: :patch, remote: true do |f| %>
-              <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: "Nome",value: nil ,rows: 1, required: true %>
+            <h3 class="hidden-mobile"> Seu nome: </h3>
+              <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: "Seu Nome",value: nil ,rows: 1, required: true %>
             <% end %>
-            <h3> ou </h3>
-            <div class="form-button login-button">
-              Login
+            <div class="form-button login-button hidden-mobile">
+              ou login
             </div>
+
           </div>
 
           <div class="form-login hidden">

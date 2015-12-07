@@ -1,8 +1,9 @@
 <% if @user.save %>
-  $("textarea",".chat-insert").removeClass("hidden");
-  $(".form-username").remove();
-  $('#error-div').remove();
-  $("#pass-set").removeClass("hidden");
+//  $("textarea",".chat-insert").removeClass("hidden");
+//  $(".form-username").remove();
+//  $('#error-div').remove();
+//  $("#pass-set").removeClass("hidden");
+location.reload();
 <% else %>
   $('#error-div').html('<%= j(render 'layouts/error', :object => @user) %>');
 <% end %>

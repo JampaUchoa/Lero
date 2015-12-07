@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     @user = current_user
     if @user && !@user.username_set
       @user.username_set = true
-      @user.name = @user.username
+      @user.name = (params[:user][:username])
       if @user.update_attributes(username_params)
         #
       end
