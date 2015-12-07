@@ -8,9 +8,6 @@ if (lastRoom && ($(".room-tab[data-id="+ lastRoom +"]").length > 0)) {// if a ro
 	}
 
 
-	history.pushState({section: "main"}, "Main", "");
-
-
 	window.addEventListener("popstate", function(e) {
 
 		// return to last state
