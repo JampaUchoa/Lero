@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
         @user.latitude = g.latitude
         @user.longitude = g.longitude
       end
-      @user.username = rand(1000..999999999999999)
+      @user.name = @user.username = rand(1000..999999999999999)
       @user.save!
       log_in @user
       remember(@user)

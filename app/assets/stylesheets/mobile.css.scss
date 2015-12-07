@@ -10,8 +10,16 @@
   }
 
   .room-card{
-    margin: 10px 0;
+    margin: 4px 0 0;
     width: 100%;
+  }
+
+  .room-tab{
+    cursor: pointer;
+    font-size: 19px;
+    padding: 5px 10px;
+    margin: 0;
+    transition: all 0.1s ease-in-out;
   }
 
   .control{

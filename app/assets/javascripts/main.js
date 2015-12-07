@@ -7,10 +7,6 @@ if (lastRoom && ($(".room-tab[data-id="+ lastRoom +"]").length > 0)) {// if a ro
 	roomTabbing(lastRoom); // show it
 	}
 
-else {
-	roomTabbing(); // take me to first one or not
-	}
-
 // ============================[ Window logic] =================
 
 $(".room-new").click(function() {
@@ -22,6 +18,14 @@ $(".room-new").click(function() {
 $(".side-back").click(function() {
 
 	windowTabbing("main");
+
+});
+
+$(".room-back").click(function() {
+
+	roomTabOut();
+	$(".chat").addClass("hidden-mobile");
+	$(".control").removeClass("hidden-mobile");
 
 });
 
@@ -65,8 +69,8 @@ $(".explore").click(function() {
 	$(".room").removeClass("room-active");
 	$(".room-tab").removeClass("room-tab-active");
 	$(".landing-intro").addClass("hidden");
-	toggleView();
 
+	displayChat();
 });
 
 //Join a room
@@ -100,7 +104,6 @@ $(".room-card").click(function() {
 		roomTabbing(roomId);
 	}
 	else {
-		toggleView();
 
 		$.ajax({
 				url: "/room/join/" + roomId,
@@ -159,6 +162,15 @@ $(".room-hotlink").click(function() {
 
 // Switches room
 
+function roomTabOut() {
+
+		$(".room").removeClass("room-active"); // all rooms hide
+		$(".room-tab").removeClass("room-tab-active"); // Remove all rooms as active
+		$(".room-actions").removeClass("hidden");
+		setCookie("lastRoom", ""); // saves preference
+
+}
+
 function roomTabbing(roomId) {
 
 	if (!roomId){ // Room not set
@@ -175,7 +187,7 @@ function roomTabbing(roomId) {
 		}
 	}
 
-	toggleView();
+	displayChat();
 //	document.getElementById("compose").focus();
 
 	$(".landing").addClass("hidden");
@@ -209,7 +221,6 @@ function roomTabbing(roomId) {
 	var lastRoom;
 	lastId = 0;
 	notSeen = 0;
-	chatbottom();
 	window_focus = true;
 	firstPoll = true;
 	poll();
@@ -261,7 +272,9 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 
 					lastRoom = this.room;
 					lastId = this.id;					// for pinging more messages
-					chatbottom();
+					if ($(".room-tab-active").length > 0){
+						chatbottom();
+					}
 
 					if (localStorage.lastSaw < lastId && activeTab != this.room) {
 						$(".room-tab[data-id="+ this.room +"]").addClass("room-tab-new"); // Alert tabs
@@ -339,16 +352,21 @@ $(".login-button").click(function() {
 
  //=====
 
-$(".m-toggle-room").click(function(){
+function displayMenu(){
 
-	toggleView();
-
-});
-
-function toggleView() {
-	$(".chat, .control").toggleClass("hidden-mobile");
+	$(".chat").addClass("hidden-mobile");
+	$(".control").removeClass("hidden-mobile");
 
 }
+
+function displayChat(){
+
+	$(".chat").removeClass("hidden-mobile");
+	$(".control").addClass("hidden-mobile");
+
+}
+
+
 
 $(".toggle-console").click(function(){
 
