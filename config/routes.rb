@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/room/share/:id/' => 'rooms#share'
   get '/message/receive/:id' => 'chats#receive'
   post '/message/send' => 'chats#sendmsg'
+  post '/room/ban' => 'rooms#ban', as: 'room_user_ban'
 
   patch '/user/set-name' => 'users#set_name', as: 'user_name_set'
   patch '/user/set-pass' => 'users#set_password', as: 'user_password_set'

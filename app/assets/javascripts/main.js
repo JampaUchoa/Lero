@@ -1,4 +1,3 @@
-
 $(document).on('page:change', function () {
 
 lastRoom = getCookie("lastRoom"); // The last room visited
@@ -182,6 +181,65 @@ $(".room-hotlink").click(function() {
 
 });
 
+var userBanMode;
+
+$(".room-ban").click(function() {
+
+	roomId = $(".room-active").attr('data-id');
+	if (roomModerator && !userBanMode){
+
+		userBanMode = true;
+		$(".room-active").addClass("ban-mode");
+		leroyPrint("Selecione a mensagem do usuario para banir", roomId);
+
+	}
+	else {
+		removeBanMode();
+	}
+
+});
+
+$('#chat-container').on('click', ".message-content", function(){
+
+	if (userBanMode){
+		targetUser = $(this).attr("data-user-id");
+		roomId = $(".room-active").attr('data-id');
+
+		if (targetUser == -1){
+			leroyPrint("EU NÃO!", roomId);
+			chatbottom;
+			removeBanMode();
+			return;
+		}
+
+		$.ajax({
+				url: "/room/ban",
+				type: "POST",
+				data: {
+					roomId: roomId,
+					userId: targetUser,
+				},
+				success: function(data) {
+					removeBanMode();
+					if (data.status == "success"){
+						leroyPrint("Usuario banido", roomId);
+					}
+					else{
+						leroyPrint("Usuario não pode ser banido!", roomId);
+					}
+				}
+			});
+		}
+
+});
+
+function removeBanMode() {
+
+	userBanMode = false;
+	$(".room-active").removeClass("ban-mode");
+
+}
+
 // Switches room
 
 function roomTabOut() {
@@ -194,6 +252,9 @@ function roomTabOut() {
 }
 
 function roomTabbing(roomId) {
+
+	targetRoom = $(".room-tab[data-id="+ roomId +"]")[0];
+	roomModerator = eval($(targetRoom).attr("data-moderator"))
 
 	if (!roomId){ // Room not set
 
@@ -210,10 +271,16 @@ function roomTabbing(roomId) {
 	}
 
 	displayChat();
-//	document.getElementById("compose").focus();
+
+	if (roomModerator){
+		$(".mod-actions").removeClass("hidden");
+	}
+	else{
+		$(".mod-actions").addClass("hidden");
+	}
+
 	$(".form-username").removeClass("hidden");
 	$("#chat-container").removeClass("full-height");
-
 
 	$(".landing").addClass("hidden");
 	$("#compose").removeClass("hidden");

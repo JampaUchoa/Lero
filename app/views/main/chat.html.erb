@@ -32,7 +32,7 @@
       <ul class="room-tabs">
         <% if @joined.any? %>
           <% @joined.each do |t| %>
-            <li class="room-tab" data-id="<%= t.room.id %>"> <%= t.room.name %> </li>
+            <li class="room-tab" data-id="<%= t.room.id %>" data-moderator="<%= t.moderator %>"> <%= t.room.name %> </li>
           <% end %>
         <% end %>
       </ul>
@@ -85,9 +85,9 @@
       <div class="login-button"> Login </div>
       <% end %>
       <div class="room-actions hidden">
+      <%= image_tag("room-ban.png", class: "room-ban mod-actions") %>
       <%= image_tag("room-share.png", class: "room-hotlink") %>
       <%= image_tag("room-leave.png", class: "room-leave") %>
-      </div>
     </div>
     <div id="chat-container" class="full-height">
       <div class="hotlink-area">  </div>

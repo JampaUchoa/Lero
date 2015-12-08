@@ -182,6 +182,21 @@ span.explore {
   height: calc(100vh - 105px);
 }
 
+.ban-mode{
+
+-webkit-box-shadow: inset 0px 1px 82px 1px rgba(240,0,0,1);
+-moz-box-shadow: inset 0px 1px 82px 1px rgba(240,0,0,1);
+box-shadow: inset 0px 1px 82px 1px rgba(240,0,0,1);
+
+}
+
+.ban-mode .message-content:hover{
+
+  cursor: pointer;
+  background-color: rgba(0,0,0,0.1);
+
+}
+
 .chat-head{
 
   border-bottom: 1px solid $border-color;
@@ -328,8 +343,8 @@ form{
 .message-info-content{
   width: calc(100% - 55px);
   display: inline-block;
-  max-height: 350px;
-  overflow: auto;
+  max-height: 400px;
+  overflow: hidden;
   max-width: 700px;
 
 }

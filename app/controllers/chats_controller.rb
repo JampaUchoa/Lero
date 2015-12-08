@@ -26,7 +26,7 @@ class ChatsController < ApplicationController
               message: markdown(m.message),
               room: m.room_id,
               created_at: m.created_at.utc.to_i*1000,
-              userid: h(m.user.username),
+              userid: m.user.id,
               username: h(m.user.name),
               photo:
               if m.user.photo?

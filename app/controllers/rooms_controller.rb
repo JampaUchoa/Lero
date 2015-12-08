@@ -36,6 +36,40 @@ class RoomsController < ApplicationController
     render json: {}
   end
 
+  def ban
+    @room_id = (params[:roomId])
+    @user_id = (params[:userId])
+    if current_user
+      mod_check = Tenant.find_by(user_id: current_user.id, room_id: @room_id, moderator: true)
+      if !mod_check.nil?
+        to_ban = Tenant.find_by(user_id: @user_id, room_id: @room_id, moderator: false)
+        if to_ban
+          to_ban.update_attribute(:banned, true)
+          render json: {status: "success"}
+        else
+          render json: {status: "notFound"}
+        end
+      else
+        render json: {status: "forbidden"}
+      end
+    end
+  end
+
+  def makemod
+    @room_id = (params[:roomId])
+    @user_id = (params[:userId])
+    if current_user
+      mod_check = Tenant.find_by(user_id: current_user.id, room_id: @room_id, moderator: true)
+      if !mod_check.nil?
+        to_mod = Tenant.find_by(user_id: @user_id, room_id: @room_id, moderator: false)
+        if to_mod
+          to_mod.update_attribute(:moderator, true)
+        end
+      end
+    end
+    render json: {}
+  end
+
   def share
     @room = (params[:id])
     if current_user
