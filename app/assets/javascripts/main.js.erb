@@ -391,7 +391,10 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 					chatPrint(this.id, this.message, this.room, createdAt, this.userid, this.username, this.photo);
 
 					lastRoom = this.room;
-					lastId = this.id;					// for pinging more messages
+
+					if (lastId < this.id){
+						lastId = this.id;					// for pinging more messages
+					}
 
 					if ($(".room-tab-active").length > 0){
 						chatbottom();
