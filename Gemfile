@@ -39,8 +39,10 @@ gem 'mini_magick'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
-gem 'rails_12factor', group: :production
+group :production do
+  gem 'rails_12factor'
+  gem 'newrelic_rpm'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
