@@ -31,8 +31,6 @@ class ChatsController < ApplicationController
               photo:
               if m.user.photo?
                 m.user.photo.url.to_s
-              else
-                ActionController::Base.helpers.asset_path('user-default.png')
               end
             }
           end

@@ -472,6 +472,10 @@ $(".toggle-console").click(function(){
 
 function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto) {
 
+	if (!userPhoto){
+			userPhoto = "<%= asset_path 'user-default.png' %>"
+	}
+
 	timeAgo = (jQuery.timeago(createdAt));
 
 	lastRoomUser = $(".message-content",".room[data-id="+ roomId +"]").last().attr('data-user-id') || 0

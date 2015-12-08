@@ -3,11 +3,6 @@ class RoomsController < ApplicationController
     if logged_in
       @room = Room.new(room_params)
       @room.user_id = current_user.id
-
-    # onwership = Subscription.where(user_id: current_user.id, community_id: @room.community_id, moderador: true).first
-    # Deny unless !onwership.nil?
-    # Cover community nil cases
-
       if @room.save
         Tenant.create(user_id: current_user.id, room_id: @room.id, moderator: true)
       end
