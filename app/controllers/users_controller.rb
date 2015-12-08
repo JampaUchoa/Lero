@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     current_user.update_attribute(:last_call, Time.now)
     current_user.decrement!(:sessions_count)
 
-    if current_user.sessions_count >= 0
+    if current_user.sessions_count <= 0
       current_user.update_attribute(:online, false)
     end
 
