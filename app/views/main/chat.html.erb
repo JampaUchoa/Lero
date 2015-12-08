@@ -86,11 +86,11 @@
       </div>
       <h2 class="chat-title"> Popular </h2>
       <% if !current_user.username_set %>
-      <div class="login-button"> Login </div>
+      <div class="login-button hidden-mobile"> Login </div>
       <% end %>
       <div class="room-actions hidden">
-      <%= image_tag("room-edit.png", class: "room-edit mod-actions") %>
-      <%= image_tag("room-ban.png", class: "room-ban mod-actions") %>
+      <%= image_tag("room-edit.png", class: "room-edit mod-actions hidden") %>
+      <%= image_tag("room-ban.png", class: "room-ban mod-actions hidden") %>
       <%= image_tag("room-share.png", class: "room-hotlink") %>
       <%= image_tag("room-leave.png", class: "room-leave") %>
     </div>

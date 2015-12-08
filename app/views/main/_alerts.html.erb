@@ -2,8 +2,8 @@
   <div class="alert-push"></div>
 
   <div class="alert-card" id="pass-set">
-    <h3> Psiiu! </h3>
-    <p> Diga o seu nome, para podermos conversar </p>
+    <h3> Fulano! </h3>
+    <p> Escreva o seu nome em baixo, para você poder conversar! </p>
 
     <%= form_for current_user, url: user_name_set_path, method: :patch, remote: true do |f| %>
       <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: "Seu Nome", class: "form-input", value: nil ,rows: 1, required: true %>
