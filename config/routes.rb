@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   patch '/user/set-pass' => 'users#set_password', as: 'user_password_set'
   patch '/user/set-profile' => 'users#set_profile', as: 'user_profile_set'
 
+  post '/user/hello' => 'users#hello'
+  post '/user/goodbye' => 'users#goodbye'
+
+
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
 

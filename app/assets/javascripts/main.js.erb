@@ -446,7 +446,29 @@ $(".login-button").click(function() {
 
 });
 
- //=====
+//======== Hello and goodbye ===========
+
+$.ajax({
+		url: "/user/hello",
+		type: "POST",
+		data: {
+		},
+		success: function() {
+		}
+	});
+
+	window.onbeforeunload = function(e) {
+		$.ajax({
+				url: "/user/goodbye",
+				type: "POST",
+				data: {
+				},
+				success: function() {
+				}
+			});
+	};
+
+ //==================================
 
 function displayMenu(){
 

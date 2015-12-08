@@ -31,6 +31,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def hello
+    current_user.update_attribute(:online, true)
+    current_user.update_attribute(:last_call, Time.now)
+    render json: {}
+  end
+
+  def goodbye
+    current_user.update_attribute(:online, false)
+    current_user.update_attribute(:last_call, Time.now)
+    render json: {}
+  end
+
+
   private
   def username_params
     params.require(:user).permit(:username)
