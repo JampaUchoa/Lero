@@ -1,0 +1,14 @@
+<%= form_for @room,url: room_path,method: :patch, remote: true do |f| %>
+  <div class="form-photo">
+    <% if @room.photo? %>
+      <%= image_tag current_user.photo.url.to_s %>
+    <% else %>
+      <%= image_tag "lero6.png" %>
+    <% end %>
+      <%= f.file_field :photo, accept: "image/png, image/gif, image/jpeg" %>
+  </div>
+
+  <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: "Display name", class: "form-input", disabled: true %>
+  <%= f.text_area :description, maxlength: "50", placeholder: "Bio", class: "form-textarea-sm", rows: 3 %>
+  <%= f.submit "Salvar", class: "form-submit" %>
+<% end %>

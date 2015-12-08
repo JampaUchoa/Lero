@@ -73,9 +73,32 @@ class RoomsController < ApplicationController
     render json: {shareurl: to_share.room.slug}
   end
 
+  def edit
+    room_id = (params[:id]).to_s
+
+    @room = Room.find_by(id: room_id)
+    if current_user
+      @mod_check = Tenant.find_by(user_id: current_user.id, room_id: room_id, moderator: true)
+    end
+  end
+
+  def update
+    @room = Room.find_by(id: params[:id])
+    if @room
+      if @room.update_attributes(room_edit_params)
+        #
+      end
+    end
+    render js: "location.reload();"
+  end
+
   private
 
   def room_params
     params.require(:room).permit(:name, :description, :photo)
+  end
+
+  def room_edit_params
+    params.require(:room).permit(:description, :photo, :details)
   end
 end

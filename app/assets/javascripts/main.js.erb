@@ -1,11 +1,25 @@
 $(document).on('page:change', function () {
 
+/*
+Beta
+
+currentUser = {};
+currentUser.notificationSupport = !!("Notification" in window);
+currentUser.notificationPermit = currentUser.notificationSupport && (Notification.permission === "granted");
+currentUser.name = userName;
+currentUser.photo = userPhoto;
+currentUser.currentRoom = getCookie("lastRoom");
+currentUser.currentRoomModerator = false;
+currentUser.alertRooms = [];
+
+console.log(currentUser);
+*/
+
 lastRoom = getCookie("lastRoom"); // The last room visited
 
 if (lastRoom && ($(".room-tab[data-id="+ lastRoom +"]").length > 0)) {// if a room preference exists  && it exists in the DOM
-	roomTabbing(lastRoom); // show it
+		roomTabbing(lastRoom); // show it
 	}
-
 
 	window.addEventListener("popstate", function(e) {
 
@@ -15,6 +29,7 @@ if (lastRoom && ($(".room-tab[data-id="+ lastRoom +"]").length > 0)) {// if a ro
 			roomTabOut();
 			$(".chat").addClass("hidden-mobile");
 			$(".control").removeClass("hidden-mobile");
+			windowTabbing("main");
 
 		}
 
@@ -45,6 +60,28 @@ $(".room-back").click(function() {
 $(".profile-edit").click(function() {
 
 	windowTabbing("profile-edit");
+
+});
+
+$(".room-edit").click(function() {
+
+	roomId = $(".room-active").attr('data-id');
+
+	history.pushState({section: "chat"}, "Editando", "");
+
+	windowTabbing("ajax-content");
+	//add a spinner
+
+	$.ajax({
+			url: "/room/edit/" + roomId,
+			type: "GET",
+			success: function(data, textStatus) {
+
+				$('.side-title').append(' - Editando');
+
+
+			}
+		});
 
 });
 
@@ -515,7 +552,7 @@ function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto) 
 function leroyPrint (message, roomId){ // Print a client-side message as leroy
 
 	createdAt = new Date();
-	chatPrint("", message, roomId, createdAt, -1, "Leroy -> You", "<%= asset_path 'leroy.png' %>");
+	chatPrint("", message, roomId, createdAt, -1, "Leroy -> Você", "<%= asset_path 'leroy.png' %>");
 
 }
 

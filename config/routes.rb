@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   post '/room/join/:id/' => 'rooms#join'
   post '/room/leave/:id/' => 'rooms#leave'
   get '/room/share/:id/' => 'rooms#share'
+  get '/room/edit/:id/' => 'rooms#edit'
+
   get '/message/receive/:id' => 'chats#receive'
   post '/message/send' => 'chats#sendmsg'
   post '/room/ban' => 'rooms#ban', as: 'room_user_ban'
@@ -12,6 +14,9 @@ Rails.application.routes.draw do
   patch '/user/set-name' => 'users#set_name', as: 'user_name_set'
   patch '/user/set-pass' => 'users#set_password', as: 'user_password_set'
   patch '/user/set-profile' => 'users#set_profile', as: 'user_profile_set'
+
+  patch '/room/' => 'rooms#update'
+
 
   post '/user/hello' => 'users#hello'
   post '/user/goodbye' => 'users#goodbye'

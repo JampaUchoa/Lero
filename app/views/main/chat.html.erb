@@ -69,8 +69,12 @@
         </div>
         <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: "Display name", class: "form-input", required: true %>
         <%= f.text_area :bio, minlength: "2", maxlength: "50", placeholder: "Bio", class: "form-textarea-sm", rows: 3 %>
-        <%= f.submit "Save", class: "form-submit" %>
+        <%= f.submit "Salvar", class: "form-submit" %>
       <% end %>
+    </div>
+
+    <div class="window window-ajax-content hidden" data-name="Carregando...">
+
     </div>
 
   </aside>
@@ -85,6 +89,7 @@
       <div class="login-button"> Login </div>
       <% end %>
       <div class="room-actions hidden">
+      <%= image_tag("toggle-console.png", class: "room-edit mod-actions") %>
       <%= image_tag("room-ban.png", class: "room-ban mod-actions") %>
       <%= image_tag("room-share.png", class: "room-hotlink") %>
       <%= image_tag("room-leave.png", class: "room-leave") %>
