@@ -15,6 +15,6 @@ class Room < ActiveRecord::Base
 
   validates :slug, uniqueness: { case_sensitive: false }
 
-  validates :description, length: { maximum: 30 }
+  validates :description, length: { maximum: 40 }
 
 end

@@ -47,7 +47,7 @@
         <%= image_tag "lero6.png" %>
         <%= f.file_field :photo, accept: "image/png, image/gif, image/jpeg" %>
         <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: "Room name", class: "form-input", required: true %>
-        <%= f.text_area :description, minlength: "2", maxlength: "30", placeholder: "Room Description", class: "form-textarea-sm", rows: 3 %>
+        <%= f.text_area :description, minlength: "2", maxlength: "40", placeholder: "Room Description", class: "form-textarea-sm", rows: 3 %>
         <%= f.submit "Create", class: "form-submit" %>
       <% end %>
     </div>
