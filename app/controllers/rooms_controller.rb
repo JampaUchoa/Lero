@@ -9,24 +9,29 @@ class RoomsController < ApplicationController
     # Cover community nil cases
 
       if @room.save
-        Tenant.create(user_id: current_user.id, room_id: @room.id)
+        Tenant.create(user_id: current_user.id, room_id: @room.id, moderator: true)
       end
     end
   end
 
   def join
-    @room = (params[:id])
+    @room_id = (params[:id])
     if current_user
-      Tenant.create(user_id: current_user.id, room_id: @room)
+      subscribed = Tenant.find_by(user_id: current_user.id, room_id: @room_id)
+      if subscribed
+        subscribed.update_attribute(:active, true)
+      else
+        Tenant.create(user_id: current_user.id, room_id: @room_id)
+      end
     end
     render json: {}
   end
 
   def leave
-    @room = (params[:id])
+    @room_id = (params[:id])
     if current_user
-      to_destroy = Tenant.find_by(user_id: current_user, room_id: @room)
-      to_destroy.destroy if !to_destroy.nil?
+      to_destroy = Tenant.find_by(user_id: current_user.id, room_id: @room_id)
+      to_destroy.update_attribute(:active, false)
     end
     render json: {}
   end

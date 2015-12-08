@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206190822) do
+ActiveRecord::Schema.define(version: 20151208000304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,11 +48,17 @@ ActiveRecord::Schema.define(version: 20151206190822) do
     t.integer  "user_id"
     t.integer  "room_id"
     t.integer  "last_chat"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "active",     default: true,  null: false
+    t.boolean  "banned",     default: false, null: false
+    t.boolean  "moderator",  default: false, null: false
   end
 
+  add_index "tenants", ["active"], name: "index_tenants_on_active", using: :btree
+  add_index "tenants", ["banned"], name: "index_tenants_on_banned", using: :btree
   add_index "tenants", ["last_chat"], name: "index_tenants_on_last_chat", using: :btree
+  add_index "tenants", ["moderator"], name: "index_tenants_on_moderator", using: :btree
   add_index "tenants", ["room_id"], name: "index_tenants_on_room_id", using: :btree
   add_index "tenants", ["user_id", "room_id"], name: "index_tenants_on_user_id_and_room_id", unique: true, using: :btree
   add_index "tenants", ["user_id"], name: "index_tenants_on_user_id", using: :btree

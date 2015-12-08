@@ -12,7 +12,7 @@ class ChatsController < ApplicationController
     def receive
       if logged_in
         lastmsg = (params[:id]).to_i
-        usertenancy = current_user.tenancies.pluck(:room_id)
+        usertenancy = current_user.tenancies.where(active: true).pluck(:room_id)
         if usertenancy.any?
           if lastmsg > 0
             @newchats = Chat.where('id > ?', lastmsg).where(room_id: usertenancy).where.not(user_id: current_user.id).order("id ASC").last(30)
