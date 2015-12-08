@@ -34,12 +34,19 @@ class UsersController < ApplicationController
   def hello
     current_user.update_attribute(:online, true)
     current_user.update_attribute(:last_call, Time.now)
+    current_user.increment!(:sessions_count)
+
     render json: {}
   end
 
   def goodbye
-    current_user.update_attribute(:online, false)
     current_user.update_attribute(:last_call, Time.now)
+    current_user.decrement!(:sessions_count)
+
+    if current_user.sessions_count >= 0
+      current_user.update_attribute(:online, false)
+    end
+
     render json: {}
   end
 

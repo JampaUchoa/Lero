@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208065955) do
+ActiveRecord::Schema.define(version: 20151208164706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20151208065955) do
     t.boolean  "online",          default: false, null: false
     t.datetime "last_call"
     t.text     "referral"
+    t.integer  "sessions_count",  default: 0,     null: false
   end
 
   add_index "users", ["guest"], name: "index_users_on_guest", using: :btree
