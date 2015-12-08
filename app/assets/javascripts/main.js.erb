@@ -489,7 +489,7 @@ function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto) 
 function leroyPrint (message, roomId){ // Print a client-side message as leroy
 
 	createdAt = new Date();
-	chatPrint("", message, roomId, createdAt, -1, "Leroy", "");
+	chatPrint("", message, roomId, createdAt, -1, "Leroy -> You", "<%= asset_path 'leroy.png' %>");
 
 }
 
