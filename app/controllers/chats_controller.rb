@@ -4,8 +4,17 @@ class ChatsController < ApplicationController
     if logged_in && !current_user.username.nil?
       room_id = (params[:roomId])
       @message = (params[:message])
-      Chat.create(user_id: current_user.id, message: @message, room_id: room_id)
-      render json: {}
+      tenancy = Tenant.find_by(user_id: current_user.id, room_id: room_id)
+      if tenancy
+        if !tenancy.banned
+          Chat.create(user_id: current_user.id, message: @message, room_id: room_id)
+          render json: {status: "success"}
+        else
+          render json: {status: "forbidden"}
+        end
+      else
+        render json: {status: "notFound"}
+      end
     end
   end
 
