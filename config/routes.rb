@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post '/room/leave/:id/' => 'rooms#leave'
   get '/room/share/:id/' => 'rooms#share'
   get '/room/edit/:id/' => 'rooms#edit'
+  get '/join/:id' => 'rooms#directjoin'
 
   get '/message/receive/:id' => 'chats#receive'
   post '/message/send' => 'chats#sendmsg'

@@ -207,8 +207,8 @@ $(".room-hotlink").click(function() {
 			type: "GET",
 			success: function(data, textStatus) {
 
-				createdAt = new Date();
-				message = "Link para compartilhar: " + document.location.hostname + "/?join=" + data.shareurl
+				link = "/join/" + data.shareurl
+				message = "Link para compartilhar: <a href= "+ link + ">" + document.location.hostname  + link + "</a>"
 
 				leroyPrint(message, roomId);
 				chatbottom();

@@ -9,6 +9,24 @@ class RoomsController < ApplicationController
     end
   end
 
+  def directjoin
+    directroom = Room.find_by(slug: params[:id].to_s)
+    if !directroom.nil?
+      subscribed = Tenant.find_by(user_id: current_user.id, room_id: directroom.id)
+      if subscribed
+        subscribed.update_attribute(:active, true)
+      else
+        Tenant.create(user_id: current_user.id, room_id: directroom.id)
+      end
+
+      if !current_user.username_set
+        current_user.update_attribute(:referral, "Direct Join: #{directroom.name}")
+      end
+      cookies.permanent[:lastRoom] = directroom.id
+    end
+    redirect_to root_url
+  end
+
   def join
     @room_id = (params[:id])
     if current_user
