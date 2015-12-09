@@ -14,7 +14,15 @@ class ApplicationController < ActionController::Base
       if !g.nil?
         @user.latitude = g.latitude
         @user.longitude = g.longitude
+        if g.country_code2.downcase == ("br" || "pt")
+          cookies.permanent[:locale] = "pt-BR"
+        else
+          cookies.permanent[:locale] = "en"
+        end
+      else
+        cookies.permanent[:locale] = "en"
       end
+      @user.language = I18n.locale = cookies.permanent[:locale] || "en"
       @user.name = @user.username = rand(1000..999999999999999)
       @user.save!
       log_in @user

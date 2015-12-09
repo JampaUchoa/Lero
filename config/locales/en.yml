@@ -18,6 +18,7 @@ en:
   password: "Pass:"
   go: Go
   messagebox: "Your message here..."
+  save: "Save"
 #js
   leroypm: Leroy -> You
   chat: Chat
