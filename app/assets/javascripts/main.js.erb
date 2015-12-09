@@ -445,6 +445,8 @@ $("#compose").keypress(function (e) {
 			}
 
 			sendMessage = $(this).val();
+			sendLink = $('#link').val();
+
 			sendRoom = $(this).attr("data-room-id");
 
 			createdAt = new Date();
@@ -457,12 +459,14 @@ $("#compose").keypress(function (e) {
 					data: {
 						roomId: sendRoom,
 						message: sendMessage,
+						link: sendLink,
 					},
 					success: function() {
 
 					}
 				});
 
+			$('#link').val("");
 			$(this).val("");
       e.preventDefault();
       }
@@ -503,6 +507,23 @@ $.ajax({
 				}
 			});
 	};
+//=============================
+
+$('#compose').on('paste', function () {
+
+	textbefore = $(this).val().length; // get the lenght of the text before pasting
+
+  var element = this;
+  setTimeout(function () {
+    textAfter = $(element).val(); // text after
+		link = textAfter.substring(textbefore); // text after - text before
+
+		if (isUrl(link)){
+			$('#link').val(link);
+		}
+
+  }, 100);
+});
 
  //==================================
 
@@ -553,6 +574,16 @@ function leroyPrint (message, roomId){ // Print a client-side message as leroy
 	createdAt = new Date();
 	chatPrint("", message, roomId, createdAt, -1, I18n.t('leroypm'), "<%= asset_path 'leroy.png' %>");
 
+}
+
+function isUrl(str) { //Stackoverflow
+  var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
+  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+  '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+  '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  return pattern.test(str);
 }
 
 function setCookie(cname, cvalue) {

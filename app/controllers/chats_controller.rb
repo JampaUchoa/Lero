@@ -4,10 +4,23 @@ class ChatsController < ApplicationController
     if logged_in && !current_user.username.nil?
       room_id = (params[:roomId])
       @message = (params[:message])
+      link = (params[:link])
+
       tenancy = Tenant.find_by(user_id: current_user.id, room_id: room_id)
       if tenancy
         if !tenancy.banned
-          Chat.create(user_id: current_user.id, message: @message, room_id: room_id)
+          @chat = Chat.new(user_id: current_user.id, message: @message, room_id: room_id)
+
+            a = Mechanize.new
+            a.user_agent_alias = "Windows Chrome"
+            a.get(link)
+            case a.page.response['content-type'].to_s
+            when "image/gif", "image/jpg", "image/png", "image/jpeg"
+              @chat.media_type = 1
+              @chat.remote_image_content_url = link
+            end
+
+          @chat.save
           render json: {status: "success"}
         else
           render json: {status: "forbidden"}
@@ -26,7 +39,7 @@ class ChatsController < ApplicationController
         if lastmsg == 0
           @newchats = []
           current_user.tenancies.where(active: true).each do |j|
-            j.room.chats.order("id ASC").limit(150).each do |c|
+            j.room.chats.order("id ASC").last(150).each do |c|
               @newchats << c
             end
           end

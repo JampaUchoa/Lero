@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209020648) do
+ActiveRecord::Schema.define(version: 20151209034526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,11 +21,15 @@ ActiveRecord::Schema.define(version: 20151209020648) do
     t.integer  "user_id"
     t.integer  "room_id"
     t.datetime "deleted_at"
-    t.datetime "created_at", null: false
+    t.datetime "created_at",    null: false
+    t.integer  "media_type"
+    t.text     "image_content"
+    t.text     "video_content"
   end
 
   add_index "chats", ["created_at"], name: "index_chats_on_created_at", using: :btree
   add_index "chats", ["deleted_at"], name: "index_chats_on_deleted_at", using: :btree
+  add_index "chats", ["media_type"], name: "index_chats_on_media_type", using: :btree
   add_index "chats", ["room_id"], name: "index_chats_on_room_id", using: :btree
   add_index "chats", ["user_id"], name: "index_chats_on_user_id", using: :btree
 

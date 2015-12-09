@@ -3,6 +3,7 @@
   <%#= image_tag "lero5.png", class: "logo" %>
   <%#= image_tag "lero.png", class: "logo m-toggle-room hidden-desktop" %>
   <%#= image_tag "home.png", class: "logo " %>
+  <!-- Build a notifications counter -->
 </div>
 
 <div class="containerd">
@@ -89,8 +90,9 @@
         <%= image_tag("room-share.png", class: "room-hotlink") %>
         <%= image_tag("room-leave.png", class: "room-leave") %>
       </div>
+
     <div id="chat-container" class="full-height">
-      <div class="hotlink-area">  </div>
+
       <% @joined.each do |t| %>
         <div class="room" data-id="<%= t.room.id %>"> </div>
       <% end %>
@@ -119,11 +121,55 @@
           <% end %>
         </div>
       </div>
+
+      <!--  image-->
+        <div class="media-content limiter">
+          <%#= image_tag p.mediacontent_url.to_s, alt: p.title %>
+        </div>
+      <!--  youtoba --
+          <div class="videoWrapper">
+              <%#= raw(youtube_embed(p.linkcontent)) %>
+          </div>
+    <!--  !- gifv -
+          <div class="webm">
+            <video muted="muted" poster="<%#= p.mediacontent_url.to_s %>" loop="loop" preload="preload" controls="controls">
+              <%# if p.linkcontent.ends_with?('webm') %>
+                <source src="<%#= p.linkcontent %>" type="video/webm" />
+                <%# p.linkcontent.gsub!(/\bwebm\b/, "mp4") %>
+                <source src="<%#= p.linkcontent %>" type="video/mp4" />
+              <%# elsif p.linkcontent.ends_with?('mp4') %>
+                <source src="<%#= p.linkcontent %>" type="video/mp4" />
+              <%# end %>
+              <%# if p.linkcontent.ends_with?('mp4') %>
+                <source src="<%#= p.linkcontent %>" type="video/mp4" />
+              <%# end %>
+              <%#= t('post.show.nowebm') %>
+            </video>
+          </div>
+      <!-- site --
+          <%#= link_to p.linkcontent, :rel => 'nofollow', :target => "_blank" do %>
+          <div class="card2 opgobject" data-cat="<%#= p.category %>">
+              <%# if !p.opgimageurl.nil? %>
+                <div class="opgimage" style="background-image:url(<%#= image_path(p.opgimageurl, alt: p.opgtitle) %>);">
+
+                </div>
+              <%# end %>
+              <div class="opg-info">
+                <h3 class="opgtitle"> <%#= p.opgtitle %> </h2>
+                <div class="opgdescription">
+                  <span class="opgtext"> <%#= p.opgdescription if !p.opgdescription.nil? %> </span>
+                </div>
+              </div>
+          </div>
+-->
+
+
     </div>
 
     <div class="chat-insert">
       <% if current_user.username_set %>
         <textarea placeholder="<%= t('messagebox') %>" id="compose" rows="1" data-room-id="1" class="hidden"></textarea>
+        <input id="link" class="hidden"></input>
       <% else %>
         <div class="form-username hidden">
           <div id="error-div"> </div>
