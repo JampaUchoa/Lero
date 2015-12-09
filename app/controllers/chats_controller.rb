@@ -21,7 +21,7 @@ class ChatsController < ApplicationController
                 @chat.remote_image_content_url = link
               end
             rescue => e
-              
+
             end
           @chat.save
           render json: {status: "success"}
@@ -41,8 +41,8 @@ class ChatsController < ApplicationController
       if usertenancy.any?
         if lastmsg == 0
           @newchats = []
-          current_user.tenancies.where(active: true).each do |j|
-            j.room.chats.order("id ASC").last(150).each do |c|
+          current_user.tenancies.where(active: true).includes(:room).each do |j|
+            j.room.chats.includes(:user).order("id ASC").last(150).each do |c|
               @newchats << c
             end
           end
