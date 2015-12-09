@@ -14,6 +14,7 @@ currentUser.alertRooms = [];
 
 console.log(currentUser);
 */
+var notificationSound = new Audio('<%= asset_path "notification.mp3" %>');
 
 lastRoom = getCookie("lastRoom"); // The last room visited
 
@@ -344,7 +345,6 @@ function roomTabbing(roomId) {
 	var intervalID = window.setInterval(poll, 1500);
 	originalTitle = $(document).find("title").text();
 //	window_focus = true;
-	var lastRoom;
 	lastId = 0;
 	notSeen = 0;
 	window_focus = true;
@@ -387,8 +387,6 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 
 					chatPrint(this.id, this.message, this.room, createdAt, this.userid, this.username, this.photo);
 
-					lastRoom = this.room;
-
 					if (lastId < this.id){
 						lastId = this.id;					// for pinging more messages
 					}
@@ -401,8 +399,9 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 						$(".room-tab[data-id="+ this.room +"]").addClass("room-tab-new"); // Alert tabs
 					}
 
-					if (!window_focus){
+					if (!firstPoll && !window_focus){
 					notSeen += 1;
+					notificationSound.play();
 					}
 
 				});
