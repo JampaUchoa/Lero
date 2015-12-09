@@ -67,7 +67,7 @@ $(".room-edit").click(function() {
 
 	roomId = $(".room-active").attr('data-id');
 
-	history.pushState({section: "chat"}, "Editando", "");
+	history.pushState({section: "chat"}, "Editing", "");
 
 	windowTabbing("ajax-content");
 	//add a spinner
@@ -76,9 +76,6 @@ $(".room-edit").click(function() {
 			url: "/room/edit/" + roomId,
 			type: "GET",
 			success: function(data, textStatus) {
-
-				$('.side-title').append(' - Editando');
-
 
 			}
 		});
@@ -208,7 +205,7 @@ $(".room-hotlink").click(function() {
 			success: function(data, textStatus) {
 
 				link = "/join/" + data.shareurl
-				message = "Link para compartilhar: <a href= "+ link + ">" + document.location.hostname  + link + "</a>"
+				message = I18n.t("sharelink") + "<a href= "+ link + ">" + document.location.hostname  + link + "</a>"
 
 				leroyPrint(message, roomId);
 				chatbottom();
@@ -227,7 +224,7 @@ $(".room-ban").click(function() {
 
 		userBanMode = true;
 		$(".room-active").addClass("ban-mode");
-		leroyPrint("Selecione a mensagem do usuario para banir", roomId);
+		leroyPrint(I18n.t("selectmessage"), roomId);
 
 	}
 	else {
@@ -243,7 +240,7 @@ $('#chat-container').on('click', ".message-content", function(){
 		roomId = $(".room-active").attr('data-id');
 
 		if (targetUser == -1){
-			leroyPrint("EU NÃO!", roomId);
+			leroyPrint(I18n.t("notme"), roomId);
 			chatbottom;
 			removeBanMode();
 			return;
@@ -259,10 +256,10 @@ $('#chat-container').on('click', ".message-content", function(){
 				success: function(data) {
 					removeBanMode();
 					if (data.status == "success"){
-						leroyPrint("Usuario banido", roomId);
+						leroyPrint(I18n.t("userbanned"), roomId);
 					}
 					else{
-						leroyPrint("Usuario não pode ser banido!", roomId);
+						leroyPrint(I18n.t("usercantbanned"), roomId);
 					}
 				}
 			});
@@ -522,7 +519,7 @@ function displayChat(){
 	$(".chat").removeClass("hidden-mobile");
 	$(".control").addClass("hidden-mobile");
 
-	history.pushState({section: "chat"}, "Chat", "");
+	history.pushState({section: "chat"}, I18n.t('chat'), "");
 
 }
 
@@ -555,7 +552,7 @@ function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto) 
 function leroyPrint (message, roomId){ // Print a client-side message as leroy
 
 	createdAt = new Date();
-	chatPrint("", message, roomId, createdAt, -1, "Leroy -> Você", "<%= asset_path 'leroy.png' %>");
+	chatPrint("", message, roomId, createdAt, -1, I18n.t('leroypm'), "<%= asset_path 'leroy.png' %>");
 
 }
 

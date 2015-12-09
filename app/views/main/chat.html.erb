@@ -3,6 +3,7 @@
   <%#= image_tag "lero5.png", class: "logo" %>
   <%#= image_tag "lero.png", class: "logo m-toggle-room hidden-desktop" %>
   <%#= image_tag "home.png", class: "logo " %>
+  <%= I18n.locale.to_s %>
 </div>
 
 <div class="containerd">
@@ -12,7 +13,7 @@
         <%= image_tag("side-back.png", class: "side-back") %>
       </div>
 
-      <h2 class="side-title"> Salas </h2>
+      <h2 class="side-title"> <%= t('rooms') %> </h2>
 
       <div class="side-actions">
         <%#= image_tag("toggle-console.png", class: "toggle-console") %>
@@ -20,12 +21,12 @@
         <%= image_tag("profile-edit.png", class: "profile-edit") %>
         <%= image_tag("room-new.png", class: "room-new") %>
         <% else %>
-        <div class="login-button hidden-desktop"> Login </div>
+        <div class="login-button hidden-desktop"> <%= t('login') %> </div>
         <% end %>
       </div>
     </div>
 
-    <div class="window window-main" data-name="Salas">
+    <div class="window window-main" data-name="<%= t('rooms') %>">
 
       <ul class="room-tabs">
         <% if @joined.any? %>
@@ -34,7 +35,7 @@
           <% end %>
         <% end %>
       </ul>
-      <span class="explore"> <%= image_tag "room-share.png" %> Ver mais salas </span>
+      <span class="explore"> <%= image_tag "room-share.png" %> <%= t('morerooms') %> </span>
 
       <%= render 'main/alerts' %>
 
@@ -46,13 +47,13 @@
 
         <%= image_tag "lero6.png" %>
         <%= f.file_field :photo, accept: "image/png, image/gif, image/jpeg" %>
-        <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: "Room name", class: "form-input", required: true %>
-        <%= f.text_area :description, minlength: "2", maxlength: "40", placeholder: "Room Description", class: "form-textarea-sm", rows: 3 %>
-        <%= f.submit "Create", class: "form-submit" %>
+        <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: t('roomname'), class: "form-input", required: true %>
+        <%= f.text_area :description, minlength: "2", maxlength: "40", placeholder: t('roomdescription'), class: "form-textarea-sm", rows: 3 %>
+        <%= f.submit t('formsubmit'), class: "form-submit" %>
       <% end %>
     </div>
 
-    <div class="window window-profile-edit hidden" data-name="Editar perfil">
+    <div class="window window-profile-edit hidden" data-name="<%= t('profileedit') %>">
       <div class="profile-error"></div>
       <%= form_for current_user,url: user_profile_set_path, method: :patch, remote: true do |f| %>
 
@@ -65,13 +66,13 @@
 
           <%= f.file_field :photo, accept: "image/png, image/gif, image/jpeg" %>
         </div>
-        <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: "Display name", class: "form-input", required: true %>
-        <%= f.text_area :bio, minlength: "2", maxlength: "50", placeholder: "Bio", class: "form-textarea-sm", rows: 3 %>
-        <%= f.submit "Salvar", class: "form-submit" %>
+        <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: t('profilename'), class: "form-input", required: true %>
+        <%= f.text_area :bio, minlength: "2", maxlength: "50", placeholder: t('profilebio'), class: "form-textarea-sm", rows: 3 %>
+        <%= f.submit t('save'), class: "form-submit" %>
       <% end %>
     </div>
 
-    <div class="window window-ajax-content hidden" data-name="Carregando...">
+    <div class="window window-ajax-content hidden" data-name="<%= t('loading') %>">
 
     </div>
 
@@ -82,9 +83,9 @@
       <div class="room-back hidden-desktop">
         <%= image_tag("side-back.png", class: "room-back") %>
       </div>
-      <h2 class="chat-title"> Popular </h2>
+      <h2 class="chat-title"> <%= t('popular') %>  </h2>
       <% if !current_user.username_set %>
-      <div class="login-button hidden-mobile"> Login </div>
+      <div class="login-button hidden-mobile"> <%= t('login') %> </div>
       <% end %>
       <div class="room-actions hidden">
       <%= image_tag("room-edit.png", class: "room-edit mod-actions hidden") %>
@@ -103,11 +104,11 @@
         <%= image_tag "lero5.png" %>
 
         <div class="landing-intro">
-          <h1> Lero </h1>
-          <p> Um novo lugar para conversar em grupos! </p>
+          <h1> <%= t('lero') %> </h1>
+          <p> <%= t('aboutlero') %> </p>
         </div>
 
-        <h3 class="hidden-mobile"> Popular no momento: </h3>
+        <h3 class="hidden-mobile"> <%= t('popularnow') %> </h3>
 
 
         <div class="room-popular clearfix">
@@ -126,22 +127,22 @@
 
     <div class="chat-insert">
       <% if current_user.username_set %>
-        <textarea placeholder="Sua mensagem aqui..." id="compose" rows="1" data-room-id="1" class="hidden"></textarea>
+        <textarea placeholder="<%= t('messagebox') %>" id="compose" rows="1" data-room-id="1" class="hidden"></textarea>
       <% else %>
         <div class="form-username hidden">
           <div id="error-div"> </div>
           <div class="form-new-user">
             <%= form_for current_user, url: user_name_set_path, method: :patch, remote: true do |f| %>
-            <h3 class="hidden-mobile"> Seu nome: </h3>
-              <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: "Seu Nome",value: nil ,rows: 1, required: true %>
+            <h3 class="hidden-mobile"> <%= t('introname') %> </h3>
+              <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: t('profilename'),value: nil ,rows: 1, required: true %>
             <% end %>
           </div>
 
           <div class="form-login hidden">
             <%= form_for(:session, url: login_path, remote: true) do |f| %>
-              <h3> Usuario: </h3> <%= f.text_field :username, :autocapitalize => "off", :required => true, :minlength => "2", size: 40, class: "form-control-dark fumee"  %>
-              <h3> Senha: </h3> <%= f.password_field :password, :required => true, :minlength => "6", size: 40, class: "form-control-dark fumee"  %>
-              <%= f.submit "Ir", class: "form-button" %>
+              <h3> <%= t('username') %> </h3> <%= f.text_field :username, :autocapitalize => "off", :required => true, :minlength => "2", size: 40, class: "form-control-dark fumee"  %>
+              <h3> <%= t('password') %> </h3> <%= f.password_field :password, :required => true, :minlength => "6", size: 40, class: "form-control-dark fumee"  %>
+              <%= f.submit t('go'), class: "form-button" %>
             <% end %>
           </div>
         </div>

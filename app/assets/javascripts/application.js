@@ -15,3 +15,4 @@
 //= require jquery.remotipart
 //= require turbolinks
 //= require_tree .
+//= require i18n/translations

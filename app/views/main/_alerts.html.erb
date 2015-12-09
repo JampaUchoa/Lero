@@ -1,3 +1,5 @@
+<% if I18n.locale.to_s == "pt-BR" %>
+
 <% if !current_user.username_set %>
   <div class="alert-push"></div>
 
@@ -29,5 +31,7 @@
     <h3> Defina seu perfil </h3>
     <p> Adicione uma foto para as pessoas lhe conhecer melhor! </p>
   </div>
+
+<% end %>
 
 <% end %>

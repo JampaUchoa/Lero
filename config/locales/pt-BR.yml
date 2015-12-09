@@ -1,0 +1,28 @@
+pt-BR:
+  rooms: Salas
+  login: Login
+  morerooms: Ver mais salas
+  roomname: Nome da Sala...
+  roomdescription: Descrição da sala...
+  formsubmit: Criar
+  profileedit: Perfil
+  profilename: Seu Nome...
+  profilebio: Conte-nos sobre voce...
+  loading: "Carregando..."
+  popular: Popular
+  lero: Lero
+  aboutlero: "Um novo lugar para conversar em grupos!"
+  popularnow: "Popular no momento:"
+  introname: "Seu Nome:"
+  user: "Usuario:"
+  password: "Senha:"
+  go: Ir
+  messagebox: "Sua mensagem aqui..."
+#JS
+  leroypm: Leroy -> Voce
+  chat: Chat
+  userbanned:
+  usercantbanned: "Usuario não pode ser banido!"
+  notme: "EU NÃO!"
+  selectmessage: "Selecione a mensagem do usuario para banir"
+  sharelink: "Link para compartilhar:"

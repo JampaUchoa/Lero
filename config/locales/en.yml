@@ -1,23 +1,28 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  rooms: Rooms
+  login: Login
+  morerooms: Explore more rooms
+  roomname: Room name...
+  roomdescription: Room description...
+  formsubmit: Create
+  profileedit: Profile
+  profilename: Your name...
+  profilebio: About you...
+  loading: Carregando...
+  popular: Popular
+  lero: Lero
+  aboutlero: Open group chat!
+  popularnow: "Popular right now"
+  introname: "Your name:"
+  user: "User:"
+  password: "Pass:"
+  go: Go
+  messagebox: "Your message here..."
+#js
+  leroypm: Leroy -> You
+  chat: Chat
+  userbanned:
+  usercantbanned: "User can't be banned (moderator)"
+  notme: "Not me!"
+  selectmessage: "Select the message to ban"
+  sharelink: "Room link: "
