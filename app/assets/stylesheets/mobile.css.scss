@@ -35,6 +35,7 @@ $border-color: #DEE1E5;
 
   #chat-container{
     height: calc(100vh - 106px);
+    padding-right: 8px;
   }
 
   #chat-container.full-height{
@@ -62,15 +63,20 @@ $border-color: #DEE1E5;
       word-wrap: normal;
     }
 
+    h6{
+      margin: 0 0 7px;
+      font-size: 16px;
+    }
+
     img{
-      margin-top: 15px;
+      margin-top: 10px;
     }
 
   }
 
   .room-card-description {
-    border-top: 1px solid $border-color;
-    padding: 15px 0 15px 10px;
+    border-top: 1px solid #F3F4F5;
+    padding: 13px 0px 13px 10px;
 }
 
   .room-tab{
