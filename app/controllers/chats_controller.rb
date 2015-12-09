@@ -11,15 +11,18 @@ class ChatsController < ApplicationController
         if !tenancy.banned
           @chat = Chat.new(user_id: current_user.id, message: @message, room_id: room_id)
 
-            a = Mechanize.new
-            a.user_agent_alias = "Windows Chrome"
-            a.get(link)
-            case a.page.response['content-type'].to_s
-            when "image/gif", "image/jpg", "image/png", "image/jpeg"
-              @chat.media_type = 1
-              @chat.remote_image_content_url = link
+            begin
+                a = Mechanize.new
+                a.user_agent_alias = "Windows Chrome"
+                a.get(link)
+              case a.page.response['content-type'].to_s
+              when "image/gif", "image/jpg", "image/png", "image/jpeg"
+                @chat.media_type = 1
+                @chat.remote_image_content_url = link
+              end
+            rescue => e
+              
             end
-
           @chat.save
           render json: {status: "success"}
         else
