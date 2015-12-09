@@ -3,7 +3,6 @@
   <%#= image_tag "lero5.png", class: "logo" %>
   <%#= image_tag "lero.png", class: "logo m-toggle-room hidden-desktop" %>
   <%#= image_tag "home.png", class: "logo " %>
-  <%= I18n.locale.to_s %>
 </div>
 
 <div class="containerd">
@@ -21,7 +20,7 @@
         <%= image_tag("profile-edit.png", class: "profile-edit") %>
         <%= image_tag("room-new.png", class: "room-new") %>
         <% else %>
-        <div class="login-button hidden-desktop"> <%= t('login') %> </div>
+        <div class="login-button"> <%= t('login') %> </div>
         <% end %>
       </div>
     </div>
@@ -84,15 +83,12 @@
         <%= image_tag("side-back.png", class: "room-back") %>
       </div>
       <h2 class="chat-title"> <%= t('popular') %>  </h2>
-      <% if !current_user.username_set %>
-      <div class="login-button hidden-mobile"> <%= t('login') %> </div>
-      <% end %>
       <div class="room-actions hidden">
-      <%= image_tag("room-edit.png", class: "room-edit mod-actions hidden") %>
-      <%= image_tag("room-ban.png", class: "room-ban mod-actions hidden") %>
-      <%= image_tag("room-share.png", class: "room-hotlink") %>
-      <%= image_tag("room-leave.png", class: "room-leave") %>
-    </div>
+        <%= image_tag("room-edit.png", class: "room-edit mod-actions hidden") %>
+        <%= image_tag("room-ban.png", class: "room-ban mod-actions hidden") %>
+        <%= image_tag("room-share.png", class: "room-hotlink") %>
+        <%= image_tag("room-leave.png", class: "room-leave") %>
+      </div>
     <div id="chat-container" class="full-height">
       <div class="hotlink-area">  </div>
       <% @joined.each do |t| %>
