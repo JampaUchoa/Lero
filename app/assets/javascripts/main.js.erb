@@ -83,6 +83,10 @@ $(".room-edit").click(function() {
 
 });
 
+$("img, .message-content").click(function() {
+	$(this).toggleClass("expanded");
+});
+
 
 function windowTabbing(name){
 
@@ -119,7 +123,7 @@ $(".explore").click(function() {
 	$(".landing-intro").addClass("hidden");
 	$("#chat-container").addClass("full-height");
 	$(".form-username").addClass("hidden");
-
+	windowTabbing("main");
 	displayChat();
 });
 

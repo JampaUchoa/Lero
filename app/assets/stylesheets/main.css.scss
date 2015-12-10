@@ -45,11 +45,42 @@ letter-spacing: -0.003em;
   z-index: 100;
 }
 
+.top-side{
+  width: 320px;
+}
+
 .logo {
-    width: 40px;
-    height: 40px;
-    padding: 3px;
-    margin: 5px;
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+//    background-color: rgba(0,0,0,0.16);
+    vertical-align: top;
+    display: inline-block;
+    margin: 0;
+    cursor: pointer;
+}
+
+.profile-card{
+  background-color: rgba(0,0,0,0.16);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  float: right;
+  padding: 0 10px;
+  margin: 0;
+  display: inline-block;
+  transition: background-color 0.1s linear;
+
+  img{
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    border-radius: 50%;
+  }
+}
+
+.profile-card:hover{
+  background-color: rgba(0,0,0,0.36);
 }
 //===================
 
@@ -370,6 +401,12 @@ form{
     max-height: 30vh;
     max-width: 100%;
     border-radius: 3px;
+    transition: all 0.1s linear;
+    cursor: pointer;
+  }
+
+  img.expanded{
+    max-height: calc(100vh - 160px);
   }
 
 }

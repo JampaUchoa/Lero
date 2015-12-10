@@ -1,9 +1,24 @@
 <div class="top-bar">
-
   <%#= image_tag "lero5.png", class: "logo" %>
-  <%#= image_tag "lero.png", class: "logo m-toggle-room hidden-desktop" %>
   <%#= image_tag "home.png", class: "logo " %>
   <!-- Build a notifications counter -->
+
+<div class="top-side">
+<%= image_tag "lero.png", class: "logo explore" %>
+  <div class="profile-card profile-edit">
+  <% if current_user.photo.blank? %>
+  <%= image_tag "user-default.png" %>
+  <% else %>
+  <%= image_tag current_user.photo.url.to_s %>
+  <% end %>
+
+  <% if current_user.username_set %>
+    <%= current_user.name %>
+  <% else %>
+    <%= t("guest") %>
+  <% end %>
+  </div>
+</div>
 </div>
 
 <div class="containerd">
@@ -99,7 +114,7 @@
 
       <div class="landing">
 
-        <%= image_tag "lero5.png" %>
+        <%= image_tag "lero.png" %>
 
         <div class="landing-intro">
           <h1> <%= t('lero') %> </h1>
