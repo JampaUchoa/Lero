@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/room/share/:id/' => 'rooms#share'
   get '/room/edit/:id/' => 'rooms#edit'
   get '/join/:id' => 'rooms#directjoin'
+  get '/embed/:id' => 'main#embed'
 
   get '/message/receive/:id' => 'chats#receive'
   post '/message/send' => 'chats#sendmsg'
