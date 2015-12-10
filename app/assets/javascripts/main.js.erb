@@ -450,7 +450,7 @@ $("#compose").keypress(function (e) {
 			sendRoom = $(this).attr("data-room-id");
 
 			createdAt = new Date();
-			chatPrint("", sendMessage, sendRoom, createdAt, cUser.id, cUser.name, cUser.photo)
+			chatPrint(-1, sendMessage, sendRoom, createdAt, cUser.id, cUser.name, cUser.photo); // send a user message with -1 id to be removed
 			chatbottom();
 
 			$.ajax({
@@ -462,7 +462,6 @@ $("#compose").keypress(function (e) {
 						link: sendLink,
 					},
 					success: function() {
-
 					}
 				});
 
@@ -567,6 +566,10 @@ function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto, 
 		$(".message-time",".room[data-id="+ roomId +"]").last().text(timeAgo);
 	}
 
+	if (id > 0 && userId == cUser.id){// if this is not a local user message...
+		$(".message-content[data-id='-1']").remove();// remove the user message
+	}
+
 	if (mediaContent){
 		$(".message-content",".room[data-id="+ roomId +"]").last().append("<img src="+ mediaContent +" />");
 	}
@@ -576,7 +579,7 @@ function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto, 
 function leroyPrint (message, roomId){ // Print a client-side message as leroy
 
 	createdAt = new Date();
-	chatPrint("", message, roomId, createdAt, -1, I18n.t('leroypm'), "<%= asset_path 'leroy.png' %>");
+	chatPrint("", message, roomId, createdAt, 1, I18n.t('leroypm'), "<%= asset_path 'leroy.png' %>");
 
 }
 
