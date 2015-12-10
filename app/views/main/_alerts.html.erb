@@ -1,4 +1,4 @@
-<% if I18n.locale.to_s == "pt-BR" %>
+<% if true || I18n.locale.to_s == "pt-BR" %>
 
 <% if !current_user.username_set %>
   <div class="alert-push"></div>
@@ -32,6 +32,14 @@
     <p> Adicione uma foto para as pessoas lhe conhecer melhor! </p>
   </div>
 
+<% else %>
+  <div class="alert-push enable-notifications hidden"></div>
+
+  <div class="alert-card enable-notifications hidden" style="cursor:pointer">
+    <h3> Fique ligado! </h3>
+    <p> Ative notificações para não perder nenhuma mensagem </p>
+    <p> Clique aqui para ativar! </p>
+  </div>
 <% end %>
 
 <% end %>

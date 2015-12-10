@@ -1,5 +1,13 @@
 $(document).on('page:change', function () {
 
+	originalTitle = $(document).find("title").text();
+//	window_focus = true;
+	lastId = 0;
+	notSeen = 0;
+	window_focus = true;
+	firstPoll = true;
+	poll();
+
 //================================ [Current User] ====================
 
 cUser = {};
@@ -7,6 +15,7 @@ cUser.id = userId;
 cUser.name = userName;
 cUser.photo = userPhoto;
 cUser.notificationSupport = !!("Notification" in window);
+cUser.notificationPending = cUser.notificationSupport && (Notification.permission === "default");
 cUser.notificationPermit = cUser.notificationSupport && (Notification.permission === "granted");
 cUser.cRoomId = getCookie("lastRoom");
 cUser.cRoomModerator = false;
@@ -35,6 +44,27 @@ if (lastRoom && ($(".room-tab[data-id="+ lastRoom +"]").length > 0)) {// if a ro
 		}
 
 	});
+
+//======================================
+
+if(cUser.notificationSupport && !cUser.notificationPermit){
+
+	$(".enable-notifications").removeClass("hidden");
+
+	$(".enable-notifications").click(function() {
+
+		Notification.requestPermission(function(result) {
+  if (result === 'granted') {
+		cUser.notificationPermit = true
+  }
+	$(".enable-notifications").remove();
+
+});
+
+	});
+
+
+}
 
 // ============================[ Window logic] =================
 
@@ -355,7 +385,6 @@ function roomTabbing(roomId) {
 	notSeen = 0;
 	window_focus = true;
 	firstPoll = true;
-	poll();
 
 // Attach a notification number to web page title
 	$(window).focus(function() {
@@ -404,7 +433,9 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 						$(".room-tab[data-id="+ this.room +"]").addClass("room-tab-new"); // Alert tabs
 					}
 
-					if (!firstPoll && !window_focus){
+					if (!firstPoll && !window_focus && this.userid != cUser.id){
+					roomName = $(".room-tab[data-id="+ this.room +"]").text();
+					notify(roomName + " @"+ this.username, jQuery(this.message).text(), "<%= asset_path 'lero.png' %>")
 					notSeen += 1;
 					notificationSound.play();
 					}
@@ -526,6 +557,14 @@ $('#compose').on('paste', function () {
 });
 
  //==================================
+
+ function notify(title, body, icon) {
+   var options = {
+       body: body,
+       icon: icon
+   }
+   var note = new Notification(title,options);
+ }
 
 function displayMenu(){
 
