@@ -81,7 +81,11 @@
 
           <%= f.file_field :photo, accept: "image/png, image/gif, image/jpeg" %>
         </div>
+        <% if !current_user.username_set %>
+        <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: t('profilename'), class: "form-input", value: "", required: true %>
+        <% else %>
         <%= f.text_field :name, minlength: "2", maxlength: "15", placeholder: t('profilename'), class: "form-input", required: true %>
+        <% end %>
         <%= f.text_area :bio, minlength: "2", maxlength: "50", placeholder: t('profilebio'), class: "form-textarea-sm", rows: 3 %>
         <%= f.submit t('save'), class: "form-submit" %>
       <% end %>

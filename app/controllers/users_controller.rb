@@ -25,6 +25,8 @@ class UsersController < ApplicationController
   def set_profile
     @user = current_user
     if @user
+      @user.username_set = true
+      @user.name = (params[:user][:username])
       if @user.update_attributes(profile_params)
         #
       end
@@ -59,9 +61,12 @@ class UsersController < ApplicationController
   def password_params
     params.require(:user).permit(:password)
   end
-
   def profile_params
-    params.require(:user).permit(:password, :photo, :name, :bio)
+    if !current_user.username_set
+      params.require(:user).permit(:password, :photo, :name, :bio, :username)
+    else
+      params.require(:user).permit(:password, :photo, :name, :bio)
+    end
   end
 
 end
