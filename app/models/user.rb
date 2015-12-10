@@ -36,6 +36,15 @@ before_save{
      BCrypt::Password.create(string, cost: cost)
    end
 
+   def ban
+     update_attribute(:banned_at, Time.now)
+   end
+
+   def unban
+     update_attribute(:banned_at, nil)
+   end
+
+
   def User.new_token
     SecureRandom.urlsafe_base64
   end
