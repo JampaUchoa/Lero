@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
       end
       @user.language = I18n.locale = cookies.permanent[:locale] || "en"
       @user.name = @user.username = rand(1000..999999999999999)
+      @user.ip_address = request.remote_ip
       @user.save!
       log_in @user
       remember(@user)

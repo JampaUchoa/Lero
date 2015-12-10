@@ -68,7 +68,7 @@
       <% end %>
     </div>
 
-    <div class="window window-profile-edit hidden" data-name="<%= t('profileedit') %>">
+    <div class="window window-profile-edit hidden" data-name="<%= current_user.username_set ? "@#{current_user.username}" : t('profileedit') %>">
       <div class="profile-error"></div>
       <%= form_for current_user,url: user_profile_set_path, method: :patch, remote: true do |f| %>
 

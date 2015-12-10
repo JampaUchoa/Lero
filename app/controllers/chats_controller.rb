@@ -51,7 +51,7 @@ class ChatsController < ApplicationController
             end
           end
         else
-          @newchats = Chat.where('id > ?', lastmsg).where(room_id: usertenancy).order("id ASC").last(50)
+          @newchats = Chat.where('id > ?', lastmsg).where(room_id: usertenancy).order("id ASC").last(50).includes(:user)
         end
         @chatmsgs = Array.new
         @newchats.each do |m|

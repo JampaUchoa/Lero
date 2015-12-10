@@ -25,48 +25,54 @@ class UsersController < ApplicationController
   def set_profile
     @user = current_user
     if @user
-      @user.username_set = true
-      @user.name = (params[:user][:username])
-      if @user.update_attributes(profile_params)
-        #
+      if !@user.username_set
+        @user.username_set = true
+        @user.name = (params[:user][:username])
+        @user.update_attributes(username_params)
+        if @user.update_attributes(username_params)
+          #
+        end
+      else
+        if @user.update_attributes(profile_params)
+          #
+        end
       end
     end
   end
 
   def hello
-    current_user.update_attribute(:online, true)
-    current_user.update_attribute(:last_call, Time.now)
-    current_user.increment!(:sessions_count)
-
+    @user = current_user
+    @user.online = true
+    @user.last_call = Time.now
+    @user.sessions_count += 1
+    @user.save
     render json: {}
   end
 
   def goodbye
-    current_user.update_attribute(:last_call, Time.now)
-    current_user.decrement!(:sessions_count)
+    @user = current_user
+    @user.last_call = Time.now
+    @user.sessions_count -= 1
 
     if current_user.sessions_count <= 0
-      current_user.update_attribute(:online, false)
+      @user.online = false
     end
 
+    @user.save
     render json: {}
   end
 
 
   private
   def username_params
-    params.require(:user).permit(:username)
+    params.require(:user).permit(:username, :photo, :name, :bio)
   end
 
   def password_params
     params.require(:user).permit(:password)
   end
   def profile_params
-    if !current_user.username_set
-      params.require(:user).permit(:password, :photo, :name, :bio, :username)
-    else
-      params.require(:user).permit(:password, :photo, :name, :bio)
-    end
+    params.require(:user).permit(:photo, :name, :bio)
   end
 
 end
