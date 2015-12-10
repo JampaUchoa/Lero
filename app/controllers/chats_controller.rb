@@ -8,7 +8,7 @@ class ChatsController < ApplicationController
 
       tenancy = Tenant.find_by(user_id: current_user.id, room_id: room_id)
       if tenancy
-        if !tenancy.banned && current_user.banned.nil?
+        if !tenancy.banned && current_user.banned_at.nil?
           @chat = Chat.new(user_id: current_user.id, message: @message, room_id: room_id)
 
           if link.present?
