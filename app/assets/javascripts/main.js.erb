@@ -1,19 +1,19 @@
 $(document).on('page:change', function () {
 
-/*
-Beta
+//================================ [Current User] ====================
 
-currentUser = {};
-currentUser.notificationSupport = !!("Notification" in window);
-currentUser.notificationPermit = currentUser.notificationSupport && (Notification.permission === "granted");
-currentUser.name = userName;
-currentUser.photo = userPhoto;
-currentUser.currentRoom = getCookie("lastRoom");
-currentUser.currentRoomModerator = false;
-currentUser.alertRooms = [];
+cUser = {};
+cUser.id = userId;
+cUser.name = userName;
+cUser.photo = userPhoto;
+cUser.notificationSupport = !!("Notification" in window);
+cUser.notificationPermit = cUser.notificationSupport && (Notification.permission === "granted");
+cUser.cRoomId = getCookie("lastRoom");
+cUser.cRoomModerator = false;
+//currentUser.alertRooms = [];
 
-console.log(currentUser);
-*/
+//=================================================================
+
 var notificationSound = new Audio('<%= asset_path "notification.mp3" %>');
 
 lastRoom = getCookie("lastRoom"); // The last room visited
@@ -25,7 +25,7 @@ if (lastRoom && ($(".room-tab[data-id="+ lastRoom +"]").length > 0)) {// if a ro
 	window.addEventListener("popstate", function(e) {
 
 		// return to last state
-		if (e.state.section == "chat") {
+		if (e.state && e.state.section == "chat") {
 
 			roomTabOut();
 			$(".chat").addClass("hidden-mobile");
@@ -189,8 +189,7 @@ $(".room-leave").click(function() {
 			complete: function(data) {
 				$(".room-tab[data-id="+ roomId +"]").remove(); //remove the tab from DOM
 				$(".room-active").remove();// remove this room
-					setCookie("lastRoom", ""); // clear cookie
-					roomTabbing();
+				roomTabbing(); // leave room
 			}
 		});
 
@@ -221,7 +220,7 @@ var userBanMode;
 $(".room-ban").click(function() {
 
 	roomId = $(".room-active").attr('data-id');
-	if (roomModerator && !userBanMode){
+	if (cUser.cRoomModerator && !userBanMode){
 
 		userBanMode = true;
 		$(".room-active").addClass("ban-mode");
@@ -283,13 +282,14 @@ function roomTabOut() {
 		$(".room-tab").removeClass("room-tab-active"); // Remove all rooms as active
 		$(".room-actions").removeClass("hidden");
 		setCookie("lastRoom", ""); // saves preference
+		cUser.cRoomId = "";
 
 }
 
 function roomTabbing(roomId) {
 
 	targetRoom = $(".room-tab[data-id="+ roomId +"]")[0];
-	roomModerator = eval($(targetRoom).attr("data-moderator"))
+	cUser.cRoomModerator = eval($(targetRoom).attr("data-moderator"));
 
 	if (!roomId){ // Room not set
 
@@ -301,13 +301,15 @@ function roomTabbing(roomId) {
 			$(".room-actions").addClass("hidden");
 			$(".landing").removeClass("hidden");
 			$("#compose").addClass("hidden");
+			setCookie("lastRoom", ""); // saves preference
+			cUser.cRoomId = ""; // saves on the object
 			return;
 		}
 	}
 
 	displayChat();
 
-	if (roomModerator){
+	if (cUser.cRoomModerator){
 		$(".mod-actions").removeClass("hidden");
 	}
 	else{
@@ -325,18 +327,18 @@ function roomTabbing(roomId) {
 
 	$(".room-tab").removeClass("room-tab-active"); // Remove all rooms as active
 	$(".room-tab[data-id="+ roomId +"]").addClass("room-tab-active"); // this room mark as active
-	$(".room-tab[data-id="+ roomId +"]").removeClass("room-tab-new"); // Remove room notifications
+	$(".room-tab[data-id="+ roomId +"]").removeClass("room-tab-new"); // Remove new room notifications
 
 	$(".room[data-id="+ roomId +"]").addClass("room-active"); // then show the target room
 
 	name = $(".room-tab[data-id="+ roomId +"]").text();
 	$(".chat-title").text(name) // change the header
 
-	$(".room-actions").removeClass("hidden");
+	$(".room-actions").removeClass("hidden"); // show actions
 
 	chatbottom(); // scroll to bottom
 	setCookie("lastRoom", roomId); // saves preference
-//	localStorage.lastRoom = roomId;
+	cUser.cRoomId = roomId; // saves on the object
 
 }
 
@@ -397,6 +399,9 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 
 					if (localStorage.lastSaw < lastId && activeTab != this.room) {
 						$(".room-tab[data-id="+ this.room +"]").addClass("room-tab-new"); // Alert tabs
+						console.log("Made a new alert");
+						console.log("localStorage" + localStorage.lastSaw);
+						console.log("Last id" + lastId);
 					}
 
 					if (!firstPoll && !window_focus){
@@ -444,7 +449,7 @@ $("#compose").keypress(function (e) {
 			sendRoom = $(this).attr("data-room-id");
 
 			createdAt = new Date();
-			chatPrint("", sendMessage, sendRoom, createdAt, "self", "Você", userPhoto)
+			chatPrint("", sendMessage, sendRoom, createdAt, cUser.id, cUser.name, cUser.photo)
 			chatbottom();
 
 			$.ajax({
