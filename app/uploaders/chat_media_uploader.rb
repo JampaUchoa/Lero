@@ -36,7 +36,7 @@ class ChatMediaUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process :resize_to_fit => [50, 50]
   # end
-  process :resize_to_fit => [2000, 2000]
+  process :resize_to_limit => [2000, 2000]
 
 
   # Add a white list of extensions which are allowed to be uploaded.

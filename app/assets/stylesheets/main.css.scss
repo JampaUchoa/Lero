@@ -343,8 +343,8 @@ form{
 .message-info-content{
   width: calc(100% - 55px);
   display: inline-block;
-  max-height: 400px;
-  overflow: hidden;
+//  max-height: 400px;
+//  overflow: hidden;
   max-width: 700px;
   font-size: 15px;
 
@@ -365,6 +365,12 @@ form{
   p{
     margin: 0;
   }
+
+  img{
+    max-height: 30vh;
+    border-radius: 3px;
+  }
+
 }
 
 .message-content + .message-content {
