@@ -204,9 +204,9 @@ $(".room-hotlink").click(function() {
 			type: "GET",
 			success: function(data, textStatus) {
 
-				link = "/join/" + data.shareurl
-				message = I18n.t("sharelink") + "<a href= "+ link + ">" + document.location.hostname  + link + "</a>"
-
+				link = data.shareurl
+				message = I18n.t("sharelink") + "<a href= "+ link + ">" + "http://lerochat.com/join/"  + link + "</a> <br/>"
+				message = message + I18n.t("websiteshare") + "&lt;iframe width='300' height='500' src='http://lerochat.com/join/" + link + "&quot;'&gt; &lt;/iframe&gt;"
 				leroyPrint(message, roomId);
 				chatbottom();
 
@@ -579,7 +579,7 @@ function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto, 
 function leroyPrint (message, roomId){ // Print a client-side message as leroy
 
 	createdAt = new Date();
-	chatPrint("", message, roomId, createdAt, 1, I18n.t('leroypm'), "<%= asset_path 'leroy.png' %>");
+	chatPrint("", message, roomId, createdAt, -1, I18n.t('leroypm'), "<%= asset_path 'leroy.png' %>");
 
 }
 
