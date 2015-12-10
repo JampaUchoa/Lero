@@ -400,11 +400,8 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 						chatbottom();
 					}
 
-					if (localStorage.lastSaw < lastId && activeTab != this.room) {
+					if (!firstPoll && localStorage.lastSaw < lastId && activeTab != this.room) {
 						$(".room-tab[data-id="+ this.room +"]").addClass("room-tab-new"); // Alert tabs
-						console.log("Made a new alert");
-						console.log("localStorage" + localStorage.lastSaw);
-						console.log("Last id" + lastId);
 					}
 
 					if (!firstPoll && !window_focus){
