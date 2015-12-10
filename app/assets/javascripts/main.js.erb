@@ -428,12 +428,6 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
    autoline(this);
  });
 */
-// Prevent scrolling page
-
-$('#chat-container').bind('mousewheel', function(e){
-	$(this).scrollTop($(this).scrollTop()-e.originalEvent.wheelDeltaY);
-  return false;
-});
 
 //Send on enter press
 
