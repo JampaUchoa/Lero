@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $border-color: #DEE1E5;
-$primary-color: #00CC00;
+$primary-color: #02B902;
 $anchor-color: #565656;
 
 @mixin user-select {
@@ -61,9 +61,8 @@ letter-spacing: -0.003em;
 }
 
 .profile-card{
-  background-color: rgba(0,0,0,0.16);
   color: #fff;
-  font-size: 22px;
+  font-size: 20px;
   cursor: pointer;
   float: right;
   padding: 0 10px;
@@ -74,7 +73,7 @@ letter-spacing: -0.003em;
   img{
     width: 50px;
     height: 50px;
-    padding: 5px;
+    padding: 7px;
     border-radius: 50%;
   }
 }

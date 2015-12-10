@@ -33,7 +33,7 @@
       <div class="side-actions">
         <%#= image_tag("toggle-console.png", class: "toggle-console") %>
         <% if current_user.username_set %>
-        <%= image_tag("profile-edit.png", class: "profile-edit") %>
+        <%= image_tag("profile-edit.png", class: "profile-edit hidden-desktop") %>
         <%= image_tag("room-new.png", class: "room-new") %>
         <% else %>
         <div class="login-button"> <%= t('login') %> </div>
