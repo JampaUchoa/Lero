@@ -344,7 +344,7 @@ function roomTabbing(roomId) {
 
 //==============================[ CHAT BOX ]==============
 
-	var intervalID = window.setInterval(poll, 1500);
+//	var intervalID = window.setInterval(poll, 1500);
 	originalTitle = $(document).find("title").text();
 //	window_focus = true;
 	lastId = 0;
@@ -378,7 +378,6 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 
 	$.ajax({
 	    url: "/message/receive/" + lastId,
-			timeout: 1000,
 	    type: "GET",
 	    complete: function(data) {
 				response = data.responseText;
@@ -413,6 +412,8 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 
 				localStorage.lastSaw = (lastId - notSeen);
 				firstPoll = false;
+				setTimeout(poll, 1300);
+
 			}
 	});
 

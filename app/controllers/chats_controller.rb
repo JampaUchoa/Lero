@@ -46,7 +46,7 @@ class ChatsController < ApplicationController
         if lastmsg == 0
           @newchats = []
           current_user.tenancies.where(active: true).includes(:room).each do |j|
-            j.room.chats.includes(:user).order("id ASC").last(150).each do |c|
+            j.room.chats.includes(:user).order("id ASC").last(100).each do |c|
               @newchats << c
             end
           end
