@@ -113,7 +113,7 @@ $(".room-edit").click(function() {
 
 });
 
-$("img, .message-content").click(function() {
+$('#chat-container').on('click', "img, .message-content", function(){
 	$(this).toggleClass("expanded");
 });
 
@@ -615,7 +615,7 @@ function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto, 
 				<source src="+ videoContent +" type='video/webm' /> \
 				<source src="+ videoContent +" type='video/mp4' /> \
 				Video file not supported by your browser \
-				</video>")
+				</video>");
 				break;
 		}
 	}
