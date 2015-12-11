@@ -4,7 +4,7 @@ module ApplicationHelper
     relation.each do |m|
       messages << {
         id: m.id,
-        message: markdown(m.message),
+        message: emojify(m.message) || "",
         room: m.room_id,
         created_at: m.created_at.utc.to_i*1000,
         userid: m.user.id,
@@ -36,4 +36,15 @@ module ApplicationHelper
     markdown = Redcarpet::Markdown.new(renderer, extensions)
     markdown.render(text).html_safe
   end
+
+  def emojify(content)
+    h(content).to_str.gsub(/:([\w+-]+):/) do |match|
+      if emoji = Emoji.find_by_alias($1)
+        %(<img alt="#$1" src="#{ActionController::Base.helpers.asset_path("emoji/#{emoji.image_filename}")}" style="vertical-align:middle" width="20" height="20" />)
+      else
+        match
+      end
+    end.html_safe if content.present?
+  end
+
 end

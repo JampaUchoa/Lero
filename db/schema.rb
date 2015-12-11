@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151211022210) do
+ActiveRecord::Schema.define(version: 20151211050642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,8 +92,10 @@ ActiveRecord::Schema.define(version: 20151211022210) do
     t.text     "language"
     t.datetime "banned_at"
     t.text     "ip_address"
+    t.boolean  "allow_nsfw",      default: false, null: false
   end
 
+  add_index "users", ["allow_nsfw"], name: "index_users_on_allow_nsfw", using: :btree
   add_index "users", ["guest"], name: "index_users_on_guest", using: :btree
   add_index "users", ["language"], name: "index_users_on_language", using: :btree
   add_index "users", ["online"], name: "index_users_on_online", using: :btree

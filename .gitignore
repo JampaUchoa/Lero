@@ -16,4 +16,5 @@
 !/log/.keep
 /tmp
 /public/uploads
+/public/emoji
 /config/initializers/carrierwave_dev.rb

@@ -17,6 +17,8 @@ cUser.photo = userPhoto;
 cUser.notificationSupport = !!("Notification" in window);
 cUser.notificationPending = cUser.notificationSupport && (Notification.permission === "default");
 cUser.notificationPermit = cUser.notificationSupport && (Notification.permission === "granted");
+cUser.admin = false;
+cUser.allowNSFW = false;
 cUser.cRoomId = getCookie("lastRoom");
 cUser.cRoomModerator = false;
 //currentUser.alertRooms = [];
