@@ -609,7 +609,7 @@ function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto, 
 			case 1:
 				$(".message-content",".room[data-id="+ roomId +"]").last().append("<img src="+ imageContent +" />");
 				break;
-			case 2:
+			case 2://todo add poster
 				$(".message-content",".room[data-id="+ roomId +"]").last().append("\
 				<video loop='loop' preload='preload' controls='controls'> \
 				<source src="+ videoContent +" type='video/webm' /> \

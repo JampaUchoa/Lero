@@ -22,11 +22,17 @@ class ChatsController < ApplicationController
                 @chat.remote_image_content_url = link
                 @chat.message = @message.gsub(link, "")
               when "video/mp4", "video/webm"
+                if link.starts_with?('http://i.imgur.com/', 'https://i.imgur.com/', 'i.imgur.com/', 'http://imgur.com/')
+                  @chat.remote_image_content_url = link.gsub(/\b.webm\b/, "h.jpg").gsub(/\b.mp4\b/, "h.jpg")
+                end
+                if link["gfycat.com/"]
+                  @chat.remote_image_content_url = link.gsub(/\bgiant.\b/, "thumbs.").gsub(/\bfat.\b/, "thumbs.").gsub(/\bzippy.\b/, "thumbs.").gsub(/\b.webm\b/, "-poster.jpg").gsub(/\b.mp4\b/, "-poster.jpg")
+                end
                 @chat.media_type = 2
                 @chat.video_content = link
                 @chat.message = @message.gsub(link, "")
               end
-            rescue => e
+  #          rescue => e
               #
             end
           end
