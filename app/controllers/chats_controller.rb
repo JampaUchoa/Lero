@@ -21,6 +21,10 @@ class ChatsController < ApplicationController
                 @chat.media_type = 1
                 @chat.remote_image_content_url = link
                 @chat.message = @message.gsub(link, "")
+              when "video/mp4", "video/webm"
+                @chat.media_type = 2
+                @chat.video_content = link
+                @chat.message = @message.gsub(link, "")
               end
             rescue => e
               #
@@ -55,6 +59,7 @@ class ChatsController < ApplicationController
         end
         @chatmsgs = Array.new
         @newchats.each do |m|
+
           @chatmsgs << {
             id: m.id,
             message: markdown(m.message),
@@ -63,8 +68,9 @@ class ChatsController < ApplicationController
             userid: m.user.id,
             username: h(m.user.name),
             photo: m.user.photo.url.to_s,
-#            media_type: m.media_type,
-            image_content: m.image_content.url.to_s
+            media_type: m.media_type,
+            image_content: m.image_content,
+            video_content: m.video_content
           }
         end
       end

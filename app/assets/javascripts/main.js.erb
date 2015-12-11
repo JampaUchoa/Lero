@@ -419,7 +419,7 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 
 					createdAt = new Date(this.created_at) //convert to JS time format
 
-					chatPrint(this.id, this.message, this.room, createdAt, this.userid, this.username, this.photo, this.image_content);
+					chatPrint(this.id, this.message, this.room, createdAt, this.userid, this.username, this.photo, this.media_type, this.image_content, this.video_content);
 
 					if (lastId < this.id){
 						lastId = this.id;					// for pinging more messages
@@ -588,7 +588,7 @@ $(".toggle-console").click(function(){
 
 });
 
-function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto, mediaContent) {
+function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto, mediaType, imageContent, videoContent) {
 
 	if (!userPhoto){
 			userPhoto = "<%= asset_path 'user-default.png' %>"
@@ -610,8 +610,20 @@ function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto, 
 		$(".message-content[data-id='-1']").remove();// remove the user message
 	}
 
-	if (mediaContent){
-		$(".message-content",".room[data-id="+ roomId +"]").last().append("<img src="+ mediaContent +" />");
+	if (mediaType){
+		switch (mediaType) {
+			case 1:
+				$(".message-content",".room[data-id="+ roomId +"]").last().append("<img src="+ imageContent +" />");
+				break;
+			case 2:
+				$(".message-content",".room[data-id="+ roomId +"]").last().append("\
+				<video loop='loop' preload='preload' controls='controls'> \
+				<source src="+ videoContent +" type='video/webm' /> \
+				<source src="+ videoContent +" type='video/mp4' /> \
+				Video file not supported by your browser \
+				</video>")
+				break;
+		}
 	}
 
 }
