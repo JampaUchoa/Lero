@@ -409,6 +409,9 @@ form{
     max-height: calc(100vh - 160px);
   }
 
+  video{
+    width: 100%;
+  }
 }
 
 .message-content + .message-content {

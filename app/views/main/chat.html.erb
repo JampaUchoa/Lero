@@ -141,29 +141,9 @@
         </div>
       </div>
 
-      <!--  image-->
-        <div class="media-content limiter">
-          <%#= image_tag p.mediacontent_url.to_s, alt: p.title %>
-        </div>
       <!--  youtoba --
           <div class="videoWrapper">
               <%#= raw(youtube_embed(p.linkcontent)) %>
-          </div>
-    <!--  !- gifv -
-          <div class="webm">
-            <video muted="muted" poster="<%#= p.mediacontent_url.to_s %>" loop="loop" preload="preload" controls="controls">
-              <%# if p.linkcontent.ends_with?('webm') %>
-                <source src="<%#= p.linkcontent %>" type="video/webm" />
-                <%# p.linkcontent.gsub!(/\bwebm\b/, "mp4") %>
-                <source src="<%#= p.linkcontent %>" type="video/mp4" />
-              <%# elsif p.linkcontent.ends_with?('mp4') %>
-                <source src="<%#= p.linkcontent %>" type="video/mp4" />
-              <%# end %>
-              <%# if p.linkcontent.ends_with?('mp4') %>
-                <source src="<%#= p.linkcontent %>" type="video/mp4" />
-              <%# end %>
-              <%#= t('post.show.nowebm') %>
-            </video>
           </div>
       <!-- site --
           <%#= link_to p.linkcontent, :rel => 'nofollow', :target => "_blank" do %>
