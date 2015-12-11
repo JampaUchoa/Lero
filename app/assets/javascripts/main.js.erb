@@ -157,30 +157,9 @@ $(".explore").click(function() {
 	displayChat();
 });
 
-//Join a room
-
-$(".room-pick").click(function() {
-
-	roomId = $(this).attr('data-id');
-	roomName = $(this).text();
-	$(this).remove();
-
-	$.ajax({
-			url: "/room/join/" + roomId,
-			type: "POST",
-			complete: function(data) {
-
-				$(".room-tabs").append("<li data-id="+ roomId +" class='room-tab'> "+ roomName + " </li>");
-				$("#chat-container").append("<div class='room room-active' data-id="+ roomId +"> </div>");
-				roomTabbing(roomId);
-
-			}
-	});
-});
-
-
 $(".room-card").click(function() {
 
+	"use strict;"
 	roomId = $(this).attr('data-id');
 	roomName = $("h6",this).text();
 
@@ -191,11 +170,26 @@ $(".room-card").click(function() {
 
 		$.ajax({
 				url: "/room/join/" + roomId,
-				type: "POST",
+				type: "GET",
 				complete: function(data) {
+
 					$(".room-tabs").append("<li data-id="+ roomId +" class='room-tab'> "+ roomName + " </li>");
 					$("#chat-container").append("<div class='room room-active' data-id="+ roomId +"> </div>");
+
+					response = data.responseText;
+					$(jQuery.parseJSON(response)).each(function() {
+
+						createdAt = new Date(this.created_at) //convert to JS time format
+
+						chatPrint(this.id, this.message, this.room, createdAt, this.userid, this.username, this.photo, this.media_type, this.image_content, this.video_content);
+
+						if (lastId < this.id){
+							lastId = this.id;					// for pinging more messages
+						}
+					});
+
 					roomTabbing(roomId);
+
 				}
 		});
 	}

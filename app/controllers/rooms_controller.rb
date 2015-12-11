@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  include ApplicationHelper
   def create
     if logged_in
       @room = Room.new(room_params)
@@ -28,16 +29,19 @@ class RoomsController < ApplicationController
   end
 
   def join
-    @room_id = (params[:id])
-    if current_user
-      subscribed = Tenant.find_by(user_id: current_user.id, room_id: @room_id)
+    room_id = (params[:id]).to_i
+    @room = Room.find_by(id: room_id)
+    if current_user && @room
+      subscribed = Tenant.find_by(user_id: current_user.id, room_id: room_id)
       if subscribed
         subscribed.update_attribute(:active, true)
       else
-        Tenant.create(user_id: current_user.id, room_id: @room_id)
+        Tenant.create(user_id: current_user.id, room_id: room_id)
       end
+      last_massages = @room.chats.order('id ASC').includes(:user).last(150)
+      @response = messagefy(last_massages)
     end
-    render json: {}
+    render json: @response
   end
 
   def leave

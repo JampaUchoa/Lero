@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   resources :rooms, only: [:index, :create, :update]
-  post '/room/join/:id/' => 'rooms#join'
+  get '/room/join/:id/' => 'rooms#join'
   post '/room/leave/:id/' => 'rooms#leave'
   get '/room/share/:id/' => 'rooms#share'
   get '/room/edit/:id/' => 'rooms#edit'
