@@ -69,7 +69,7 @@ class ChatsController < ApplicationController
             username: h(m.user.name),
             photo: m.user.photo.url.to_s,
             media_type: m.media_type,
-            image_content: m.image_content,
+            image_content: m.image_content.url.to_s,
             video_content: m.video_content
           }
         end
