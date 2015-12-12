@@ -415,8 +415,10 @@ div{
   }
 
   video{
-    width: 100%;
+    max-width: 100%;
+    max-height: 30vh;
   }
+
 }
 
 .message-content + .message-content {
