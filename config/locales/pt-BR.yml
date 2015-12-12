@@ -29,3 +29,13 @@ pt-BR:
   selectmessage: "Selecione a mensagem do usuario para banir"
   sharelink: "Link para compartilhar:"
   websiteshare: "ou em seu site com: "
+#alerts
+  namealert: Fulano!
+  namealertcall: Escreva o seu nome em baixo, para você poder conversar!
+  passalert: Fique Seguro!
+  passalertcall: Defina uma senha para conseguir conversar com o Lero em outros lugares!
+  photoalert: Defina seu perfil
+  photoalertcall: Adicione uma foto para as pessoas lhe conhecer melhor!
+  notificationalert: Fique ligado!
+  notificationcall1: Ative notificações para não perder nenhuma mensagem
+  notificationcall2: Clique aqui para ativar!

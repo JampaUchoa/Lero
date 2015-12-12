@@ -4,11 +4,11 @@
   <div class="alert-push"></div>
 
   <div class="alert-card" id="pass-set">
-    <h3> Fulano! </h3>
-    <p> Escreva o seu nome em baixo, para você poder conversar! </p>
+    <h3> <%= t('namealert') %> </h3>
+    <p> <%= t('namealertcall') %> </p>
 
     <%= form_for current_user, url: user_name_set_path, method: :patch, remote: true do |f| %>
-      <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: "Seu Nome", class: "form-input", value: nil ,rows: 1, required: true %>
+      <%= f.text_field :username, minlength: "2", maxlength: "15", placeholder: t('profilename'), class: "form-input", value: nil ,rows: 1, required: true %>
     <% end %>
   </div>
 
@@ -16,11 +16,11 @@
   <div class="alert-push"></div>
 
   <div class="alert-card" id="pass-set">
-    <h3> Fique Seguro! </h3>
-    <p> Defina uma senha para conseguir conversar com o Lero em outros lugares! </p>
+    <h3> <%= t('passalert') %> </h3>
+    <p><%= t('passalertcall') %> </p>
 
     <%= form_for current_user, url: user_password_set_path, method: :patch, remote: true do |f| %>
-      <%= f.password_field :password, minlength: "4", maxlength: "80", placeholder: "Senha", class: "form-input" ,rows: 1, required: true %>
+      <%= f.password_field :password, minlength: "4", maxlength: "80", placeholder: t('yourpass'), class: "form-input" ,rows: 1, required: true %>
     <% end %>
   </div>
 
@@ -28,17 +28,17 @@
   <div class="alert-push"></div>
 
   <div class="alert-card profile-edit" style="cursor:pointer">
-    <h3> Defina seu perfil </h3>
-    <p> Adicione uma foto para as pessoas lhe conhecer melhor! </p>
+    <h3><%= t('photoalert') %> </h3>
+    <p><%= t('photoalertcall') %> </p>
   </div>
 
 <% else %>
   <div class="alert-push enable-notifications hidden"></div>
 
   <div class="alert-card enable-notifications hidden" style="cursor:pointer">
-    <h3> Fique ligado! </h3>
-    <p> Ative notificações para não perder nenhuma mensagem </p>
-    <p> Clique aqui para ativar! </p>
+    <h3><%= t('notificationalert') %> </h3>
+    <p><%= t('notificationcall1') %> </p>
+    <p><%= t('notificationcall2') %> </p>
   </div>
 <% end %>
 

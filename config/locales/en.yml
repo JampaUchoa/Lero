@@ -20,6 +20,7 @@ en:
   messagebox: "Your message here..."
   save: "Save"
   guest: Guest
+  yourpass: Your pass...
 #js
   leroypm: Leroy -> You
   chat: Chat
@@ -29,3 +30,13 @@ en:
   selectmessage: "Select the message to ban"
   sharelink: "Room link: "
   websiteshare: "or in your website: "
+#alerts
+  namealert: Hey, you!
+  namealertcall: Write your name below, so you can chat
+  passalert: Be safe!
+  passalertcall: Define a password so you can come back from other places
+  photoalert: Faceless men
+  photoalertcall: Add a profile picture so people can see when it's you!
+  notificationalert: Watch out!
+  notificationcall1: Enable desktop notifications so you wont miss a thing!
+  notificationcall2: Click here to enable!
