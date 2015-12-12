@@ -189,6 +189,7 @@ $(".room-card").click(function() {
 		roomTabbing(roomId);
 	}
 	else {
+		roomTabbing(roomId);
 
 		$.ajax({
 				url: "/room/join/" + roomId,
@@ -209,8 +210,6 @@ $(".room-card").click(function() {
 							lastId = this.id;					// for pinging more messages
 						}
 					});
-
-					roomTabbing(roomId);
 
 				}
 		});
