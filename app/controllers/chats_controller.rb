@@ -18,9 +18,11 @@ class ChatsController < ApplicationController
                 a.get(link)
               case a.page.response['content-type'].to_s
               when "image/gif", "image/jpg", "image/png", "image/jpeg"
-                @chat.media_type = 1
-                @chat.remote_image_content_url = link
-                @chat.message = @message.gsub(link, "")
+                if a.page.response['content-length'].to_i < 3.megabytes
+                  @chat.media_type = 1
+                  @chat.remote_image_content_url = link
+                  @chat.message = @message.gsub(link, "")
+                end
               when "video/mp4", "video/webm"
                 if link.starts_with?('http://i.imgur.com/', 'https://i.imgur.com/', 'i.imgur.com/', 'http://imgur.com/')
                   @chat.remote_image_content_url = link.gsub(/\b.webm\b/, "h.jpg").gsub(/\b.mp4\b/, "h.jpg")
@@ -32,7 +34,7 @@ class ChatsController < ApplicationController
                 @chat.video_content = link
                 @chat.message = @message.gsub(link, "")
               end
-  #          rescue => e
+            rescue => e
               #
             end
           end
