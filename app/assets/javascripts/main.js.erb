@@ -440,10 +440,11 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 
 				localStorage.lastSaw = (lastId - notSeen);
 				firstPoll = false;
-				setTimeout(poll, 1300);
 
 			}
 	});
+
+	setTimeout(poll, 1300);
 
 	if (notSeen > 0 && !window_focus) {
 		document.title = "("+ notSeen +") " + originalTitle;
