@@ -1,7 +1,7 @@
 class ChatsController < ApplicationController
   include ApplicationHelper
   def sendmsg
-    if logged_in && !current_user.username.nil? && !user.banned_at
+    if logged_in && !current_user.username.nil? && !current_user.banned_at
       room_id = (params[:roomId])
       @message = (params[:message])
       link = (params[:link])
