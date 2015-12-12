@@ -40,6 +40,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find_by(id: params[:id])
+  end
+
+  def wipe
+    @user = User.find_by(id: params[:id])
+    if current_user && current_user.admin?
+      @user.banned_at = Time.now
+      @user.chats.destroy_all
+      @user.rooms.destroy_all
+      @user.save
+    end
+    render js: "alert('banned')"
+  end
+
   def hello
     @user = current_user
     @user.online = true

@@ -22,7 +22,8 @@ Rails.application.routes.draw do
 
   post '/user/hello' => 'users#hello'
   post '/user/goodbye' => 'users#goodbye'
-
+  get '/user/:id' => 'users#show'
+  delete '/user/wipe/:id' => 'users#wipe', as: 'wipe_user'
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'

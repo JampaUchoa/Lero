@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
   include ApplicationHelper
   def create
-    if logged_in
+    if logged_in && !user.banned_at
       @room = Room.new(room_params)
       @room.user_id = current_user.id
       if @room.save

@@ -115,6 +115,26 @@ $(".room-edit").click(function() {
 
 });
 
+
+$('#chat-container').on('click', ".message-user-name", function(){
+
+	userId = $(this).attr('data-user-name');
+
+	history.pushState({section: "chat"}, "User Profile", "");
+
+	windowTabbing("ajax-content");
+
+	$.ajax({
+			url: "/user/" + userId,
+			type: "GET",
+			success: function(data, textStatus) {
+
+			}
+		});
+
+});
+
+
 $('#chat-container').on('click', "img, .message-content", function(){
 	$(this).toggleClass("expanded");
 });
@@ -598,7 +618,7 @@ function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto, 
 	lastRoomUser = $(".message-content",".room[data-id="+ roomId +"]").last().attr('data-user-id') || 0
 
 	if (userId != lastRoomUser) {
-		$(".room[data-id="+ roomId +"]").append("<div class='message'> <div class='message-user-photo'> <img src='"+ userPhoto +"'/></div><div class='message-info-content'><span class='message-user-name'> "+ userName +" </span> <span class='message-time'> "+ timeAgo +"</span> 	<div class='message-content' data-id='"+ id +"' data-user-id='"+ userId +"'>" + message + "</div></div></div>");
+		$(".room[data-id="+ roomId +"]").append("<div class='message'> <div class='message-user-photo'> <img src='"+ userPhoto +"'/></div><div class='message-info-content'><span class='message-user-name' data-user-name="+ userId +"> "+ userName +" </span> <span class='message-time'> "+ timeAgo +"</span> 	<div class='message-content' data-id='"+ id +"' data-user-id='"+ userId +"'>" + message + "</div></div></div>");
 	}
 	else {
 		$(".message-info-content",".room[data-id="+ roomId +"]").last().append("<div class='message-content' data-id='"+ id +"' data-user-id='"+ userId +"'>" + message + "</div>");
