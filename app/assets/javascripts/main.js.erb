@@ -408,10 +408,10 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 	$.ajax({
 	    url: "/message/receive/" + lastId,
 	    type: "GET",
-	    complete: function(data) {
-				response = data.responseText;
+			dataType: "json",
+	    success: function(data) {
 
-				$(jQuery.parseJSON(response)).each(function() {
+				$(data).each(function() {
 
 					createdAt = new Date(this.created_at) //convert to JS time format
 
@@ -431,7 +431,7 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 
 					if (!firstPoll && !window_focus && this.userid != cUser.id){
 					roomName = $(".room-tab[data-id="+ this.room +"]").text();
-					notify(roomName + " @"+ this.username, jQuery(this.message).text(), "<%= asset_path 'lero.png' %>")
+					notify(roomName + " @"+ this.username, $(this.message).text(), "<%= asset_path 'lero.png' %>")
 					notSeen += 1;
 					notificationSound.play();
 					}
@@ -441,10 +441,12 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 				localStorage.lastSaw = (lastId - notSeen);
 				firstPoll = false;
 
+			},
+			complete: function(){
+				setTimeout(poll, 1300);
 			}
 	});
 
-	setTimeout(poll, 1300);
 
 	if (notSeen > 0 && !window_focus) {
 		document.title = "("+ notSeen +") " + originalTitle;

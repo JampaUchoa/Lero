@@ -4,7 +4,7 @@ module ApplicationHelper
     relation.each do |m|
       messages << {
         id: m.id,
-        message: emojify(m.message) || "",
+        message: emojify(markdown(m.message)) || "",
         room: m.room_id,
         created_at: m.created_at.utc.to_i*1000,
         userid: m.user.id,
