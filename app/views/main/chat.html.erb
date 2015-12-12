@@ -25,7 +25,7 @@
   <aside class="control row-bs <%= 'hidden-mobile' if !@joined.any? %>">
     <div class="side-head">
       <div class="side-back hidden">
-        <%= image_tag("side-back.png", class: "side-back") %>
+        <%= image_tag("side-back.png", class: "side-back", title: "Back") %>
       </div>
 
       <h2 class="side-title"> <%= t('rooms') %> </h2>
@@ -33,8 +33,8 @@
       <div class="side-actions">
         <%#= image_tag("toggle-console.png", class: "toggle-console") %>
         <% if current_user.username_set %>
-        <%= image_tag("profile-edit.png", class: "profile-edit hidden-desktop") %>
-        <%= image_tag("room-new.png", class: "room-new") %>
+        <%= image_tag("profile-edit.png", class: "profile-edit hidden-desktop", title: "Edit Profile") %>
+        <%= image_tag("room-new.png", class: "room-new", title: "New room") %>
         <% else %>
         <div class="login-button"> <%= t('login') %> </div>
         <% end %>
