@@ -1,5 +1,3 @@
-<% if true || I18n.locale.to_s == "pt-BR" %>
-
 <% if !current_user.username_set %>
   <div class="alert-push"></div>
 
@@ -40,6 +38,4 @@
     <p><%= t('notificationcall1') %> </p>
     <p><%= t('notificationcall2') %> </p>
   </div>
-<% end %>
-
 <% end %>
