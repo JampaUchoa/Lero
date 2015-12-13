@@ -57,6 +57,15 @@ class UsersController < ApplicationController
 
   def hello
     @user = current_user
+
+    require "geoip"
+    g = GeoIP.new("GeoLiteCity.dat").city(request.remote_ip)
+    if !g.nil?
+      @user.latitude = g.latitude
+      @user.longitude = g.longitude
+    end
+    @user.ip_address = request.remote_ip
+    
     @user.online = true
     @user.last_call = Time.now
     @user.sessions_count += 1
