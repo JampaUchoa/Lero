@@ -189,6 +189,9 @@ $(".room-card").click(function() {
 		roomTabbing(roomId);
 	}
 	else {
+
+		$(".room-tabs").append("<li data-id="+ roomId +" class='room-tab'> "+ roomName + " </li>");
+		$("#chat-container").append("<div class='room room-active' data-id="+ roomId +"> </div>");
 		roomTabbing(roomId);
 
 		$.ajax({
@@ -196,8 +199,6 @@ $(".room-card").click(function() {
 				type: "GET",
 				complete: function(data) {
 
-					$(".room-tabs").append("<li data-id="+ roomId +" class='room-tab'> "+ roomName + " </li>");
-					$("#chat-container").append("<div class='room room-active' data-id="+ roomId +"> </div>");
 
 					response = data.responseText;
 					$(jQuery.parseJSON(response)).each(function() {
