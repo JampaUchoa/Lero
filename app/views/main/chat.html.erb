@@ -3,22 +3,22 @@
   <%#= image_tag "home.png", class: "logo " %>
   <!-- Build a notifications counter -->
 
-<div class="top-side">
-<%= image_tag "lero.png", class: "logo explore" %>
-  <div class="profile-card profile-edit">
-  <% if current_user.photo.blank? %>
-  <%= image_tag "user-default.png" %>
-  <% else %>
-  <%= image_tag current_user.photo.url.to_s %>
-  <% end %>
+  <div class="top-side">
+  <%= image_tag "lero.png", class: "logo explore" %>
+    <div class="profile-card profile-edit">
+      <% if current_user.photo.blank? %>
+      <%= image_tag "user-default.png" %>
+      <% else %>
+      <%= image_tag current_user.photo.url.to_s %>
+      <% end %>
 
-  <% if current_user.username_set %>
-    <%= current_user.name %>
-  <% else %>
-    <%= t("guest") %>
-  <% end %>
+      <% if current_user.username_set %>
+        <%= current_user.name %>
+      <% else %>
+        <%= t("guest") %>
+      <% end %>
+    </div>
   </div>
-</div>
 </div>
 
 <div class="containerd">
@@ -31,10 +31,9 @@
       <h2 class="side-title"> <%= t('rooms') %> </h2>
 
       <div class="side-actions">
-        <%#= image_tag("toggle-console.png", class: "toggle-console") %>
         <% if current_user.username_set %>
-        <%= image_tag("profile-edit.png", class: "profile-edit hidden-desktop", title: "Edit Profile") %>
-        <%= image_tag("room-new.png", class: "room-new", title: "New room") %>
+          <%= image_tag("profile-edit.png", class: "profile-edit hidden-desktop", title: "Edit Profile") %>
+          <%= image_tag("room-new.png", class: "room-new", title: "New room") %>
         <% else %>
         <div class="login-button"> <%= t('login') %> </div>
         <% end %>
@@ -46,7 +45,7 @@
       <ul class="room-tabs">
         <% if @joined.any? %>
           <% @joined.each do |t| %>
-            <li class="room-tab" data-id="<%= t.room.id %>" data-moderator="<%= t.moderator %>"> <%= t.room.name %> </li>
+            <li class="room-tab" data-id="<%= t.room.id %>" data-moderator="<%= t.moderator %>"> <%= t.room.name %> <span>  </span> </li>
           <% end %>
         <% end %>
       </ul>

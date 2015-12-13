@@ -181,7 +181,6 @@ $(".explore").click(function() {
 
 $(".room-card").click(function() {
 
-	"use strict;"
 	roomId = $(this).attr('data-id');
 	roomName = $("h6",this).text();
 
@@ -190,7 +189,7 @@ $(".room-card").click(function() {
 	}
 	else {
 
-		$(".room-tabs").append("<li data-id="+ roomId +" class='room-tab'> "+ roomName + " </li>");
+		$(".room-tabs").append("<li data-id="+ roomId +" class='room-tab'> "+ roomName + " </li> <span> </span>");
 		$("#chat-container").append("<div class='room room-active' data-id="+ roomId +"> </div>");
 		roomTabbing(roomId);
 
@@ -376,8 +375,12 @@ function roomTabbing(roomId) {
 	$(".room").removeClass("room-active"); // all rooms hide
 
 	$(".room-tab").removeClass("room-tab-active"); // Remove all rooms as active
-	$(".room-tab[data-id="+ roomId +"]").addClass("room-tab-active"); // this room mark as active
-	$(".room-tab[data-id="+ roomId +"]").removeClass("room-tab-new"); // Remove new room notifications
+
+	thisTab = $(".room-tab[data-id="+ roomId +"]") // this room mark as active
+
+	thisTab.addClass("room-tab-active"); // this room mark as active
+	thisTab.removeClass("room-tab-new"); // Remove new room notifications
+	$("span", thisTab).text("");
 
 	$(".room[data-id="+ roomId +"]").addClass("room-active"); // then show the target room
 
@@ -423,8 +426,6 @@ function chatbottom() {
 // Fires for updates
 function poll() {
 
-activeTab = parseInt($(".room-tab-active").attr("data-id"));
-
 	$.ajax({
 	    url: "/message/receive/" + lastId,
 	    type: "GET",
@@ -445,8 +446,12 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 						chatbottom();
 					}
 
-					if (!firstPoll && localStorage.lastSaw < lastId && activeTab != this.room) {
-						$(".room-tab[data-id="+ this.room +"]").addClass("room-tab-new"); // Alert tabs
+					targetTab = $(".room-tab[data-id="+ this.room +"]")
+
+					if (!firstPoll && cUser.cRoomId != this.room) {
+						targetTab.addClass("room-tab-new"); // Alert tabs
+						readingPending = parseInt($("span",".room-tab[data-id="+ this.room +"]").text()) || 0;
+						$("span", targetTab).text(readingPending + 1); // Alert tabs
 					}
 
 					if (!firstPoll && !window_focus && this.userid != cUser.id){
@@ -458,7 +463,7 @@ activeTab = parseInt($(".room-tab-active").attr("data-id"));
 
 				});
 
-				localStorage.lastSaw = (lastId - notSeen);
+			//	localStorage.lastSaw = (lastId - notSeen);
 				firstPoll = false;
 
 			},
