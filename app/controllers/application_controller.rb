@@ -22,13 +22,23 @@ class ApplicationController < ActionController::Base
       else
         cookies.permanent[:locale] = "en"
       end
-      @user.language = I18n.locale = cookies.permanent[:locale] || "en"
+      @user.language = cookies.permanent[:locale] || "en"
       @user.name = @user.username = rand(1000..999999999999999)
       @user.ip_address = request.remote_ip
       @user.save!
       log_in @user
       remember(@user)
     end
+
+    if params[:hl].present?
+      case params[:hl]
+      when "por", "pt-BR", "pt", "pt_BR", "br"
+          params[:hl] = "pt-BR"
+        else
+          params[:hl] = "en"
+      end
+    end
+    I18n.locale = params[:hl] || cookies[:locale] || "en"
   end
 
 end
