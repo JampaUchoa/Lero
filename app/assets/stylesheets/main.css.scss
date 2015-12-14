@@ -400,6 +400,7 @@ div{
   display: inline;
   vertical-align: top;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .message-content{
@@ -531,4 +532,17 @@ font-weight: 200;
 
 .room-active{
   display: block !important;
+}
+
+.profile{
+
+  padding: 0 15px;
+  h3{
+  text-align: center;
+  }
+
+  p{
+
+  }
+
 }

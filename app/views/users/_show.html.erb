@@ -1,16 +1,18 @@
 <div class="profile">
   <div class="form-photo">
     <% if @user.photo? %>
-    <%= image_tag @user.photo.url.to_s %>
+      <%= image_tag @user.photo.url.to_s %>
     <% else %>
-    <%= image_tag "user-default.png" %>
+      <%= image_tag "user-default.png" %>
     <% end %>
   </div>
 
   <h3> <%= @user.name %> (@<%= @user.username %>) </h3>
-  <h4> [Beta] Developing... </h4>
+
+  <p> <%= @user.bio %> </p>
+
   <% if current_user.admin %>
-    <%= link_to "Wipe", wipe_user_path, method: "delete",data: { confirm: "SURE?" } %></li>
+    <%= link_to "Wipe", wipe_user_path, method: "delete", data: { confirm: "SURE?" },remote: true %></li>
   <% end %>
 
 </div>
