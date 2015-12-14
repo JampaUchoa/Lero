@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151211050642) do
+ActiveRecord::Schema.define(version: 20151214034136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,9 +45,11 @@ ActiveRecord::Schema.define(version: 20151211050642) do
     t.integer  "tenants_count", default: 0,     null: false
     t.integer  "chats_count",   default: 0,     null: false
     t.boolean  "nsfw",          default: false, null: false
+    t.float    "popularity",    default: 0.0,   null: false
   end
 
   add_index "rooms", ["nsfw"], name: "index_rooms_on_nsfw", using: :btree
+  add_index "rooms", ["popularity"], name: "index_rooms_on_popularity", using: :btree
   add_index "rooms", ["slug"], name: "index_rooms_on_slug", unique: true, using: :btree
   add_index "rooms", ["user_id"], name: "index_rooms_on_user_id", using: :btree
 
