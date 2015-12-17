@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
-before_save{
-  self.username = username.downcase
+before_validation{
+  self.username = username.parameterize
 #  self.email = email.downcase
 }
 
