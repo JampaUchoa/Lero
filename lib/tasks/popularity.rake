@@ -1,5 +1,5 @@
 task :popularity => :environment do
-
+# ranks room from popular, needs to be more soft
   Room.all.each do |r|
     score = 0
     score += Chat.where(room_id: r.id).where("created_at >= ?", 2.minutes.ago).count * 30

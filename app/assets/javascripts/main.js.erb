@@ -1,7 +1,6 @@
 $(document).on('page:change', function () {
 
-	originalTitle = $(document).find("title").text();
-//	window_focus = true;
+	originalTitle = $(document).find("title").text(); // the title when we clear the "(n)Title" will revert to
 	lastId = 0;
 	notSeen = 0;
 	window_focus = true;
@@ -21,54 +20,45 @@ cUser.admin = false;
 cUser.allowNSFW = false;
 cUser.cRoomId = getCookie("lastRoom");
 cUser.cRoomModerator = false;
-//currentUser.alertRooms = [];
 
-//=================================================================
+//===================================================================
 
 var notificationSound = new Audio('<%= asset_path "notification.mp3" %>');
 
 lastRoom = getCookie("lastRoom"); // The last room visited
 
-if (lastRoom && ($(".room-tab[data-id="+ lastRoom +"]").length > 0)) {// if a room preference exists  && it exists in the DOM
+if (lastRoom && ($(".room-tab[data-id="+ lastRoom +"]").length > 0)) { // go to the last visited room if it exists
 		roomTabbing(lastRoom); // show it
 	}
 
-	window.addEventListener("popstate", function(e) {
+window.addEventListener("popstate", function(e) { // This is a function for Android, on back press changes view
+	if (e.state && e.state.section == "chat") {
+		roomTabOut();
+		$(".chat").addClass("hidden-mobile");
+		$(".control").removeClass("hidden-mobile");
+		windowTabbing("main");
+	}
+});
 
-		// return to last state
-		if (e.state && e.state.section == "chat") {
-
-			roomTabOut();
-			$(".chat").addClass("hidden-mobile");
-			$(".control").removeClass("hidden-mobile");
-			windowTabbing("main");
-
-		}
-
-	});
-
-//======================================
+//==========================[Ask for desktop permissions if its not given]=============
 
 if(cUser.notificationSupport && !cUser.notificationPermit){
 
 	$(".enable-notifications").removeClass("hidden");
-
 	$(".enable-notifications").click(function() {
 
 		Notification.requestPermission(function(result) {
-  if (result === 'granted') {
-		cUser.notificationPermit = true
-  }
-	$(".enable-notifications").remove();
-
-});
+	  	if (result === 'granted') {
+				cUser.notificationPermit = true
+	  	}
+			$(".enable-notifications").remove();
+		});
 
 	});
 
-
 }
 
-// ============================[ Window logic] =================
+// ============================[ Window view logic] ==========================================
 
 $(".room-new").click(function() {
 
@@ -96,51 +86,43 @@ $(".profile-edit").click(function() {
 
 });
 
-$(".room-edit").click(function() {
+$(".room-edit").click(function() { // We will load this via AJAX
 
 	roomId = $(".room-active").attr('data-id');
 
 	history.pushState({section: "chat"}, "Editing", "");
 
 	windowTabbing("ajax-content");
-	//add a spinner
+	//TODOadd a spinner to make it fluid
 
 	$.ajax({
 			url: "/room/edit/" + roomId,
 			type: "GET",
 			success: function(data, textStatus) {
-
 			}
-		});
-
+	});
 });
 
 
-$('#chat-container').on('click', ".message-user-name", function(){
-
+$('#chat-container').on('click', ".message-user-name", function(){ // Show user profile
 	userId = $(this).attr('data-user-name');
-
 	history.pushState({section: "chat"}, "User Profile", "");
-
 	windowTabbing("ajax-content");
-
 	$.ajax({
 			url: "/user/" + userId,
 			type: "GET",
 			success: function(data, textStatus) {
-
 			}
-		});
-
+	});
 });
 
 
-$('#chat-container').on('click', "img, .message-content", function(){
+$('#chat-container').on('click', "img, .message-content", function(){ // Enlarge images on click
 	$(this).toggleClass("expanded");
 });
 
 
-function windowTabbing(name){
+function windowTabbing(name){ // This is for menu window view (left side content)
 
 	target = $(".window-"+ name)
 
@@ -164,9 +146,9 @@ function windowTabbing(name){
 
 // Show landing
 
-$(".explore").click(function() {
+$(".explore").click(function() { // Show the most popular rooms
 
-	$(".chat-title").text("Popular"); // resets the name to Lero
+	$(".chat-title").text("Popular");
 	$(".room-actions").addClass("hidden");
 	$(".landing").removeClass("hidden");
 	$("#compose").addClass("hidden");
@@ -179,7 +161,7 @@ $(".explore").click(function() {
 	displayChat();
 });
 
-$(".room-card").click(function() {
+$(".room-card").click(function() { //cards on popular sections, user is joining a room
 
 	roomId = $(this).attr('data-id');
 	roomName = $("h6",this).text();
@@ -193,25 +175,19 @@ $(".room-card").click(function() {
 		$("#chat-container").append("<div class='room room-active' data-id="+ roomId +"> </div>");
 		roomTabbing(roomId);
 
-		$.ajax({
-				url: "/room/join/" + roomId,
-				type: "GET",
-				complete: function(data) {
-
-
-					response = data.responseText;
-					$(jQuery.parseJSON(response)).each(function() {
-
-						createdAt = new Date(this.created_at) //convert to JS time format
-
-						chatPrint(this.id, this.message, this.room, createdAt, this.userid, this.username, this.photo, this.media_type, this.image_content, this.video_content);
-
-						if (lastId < this.id){
-							lastId = this.id;					// for pinging more messages
-						}
-					});
-
-				}
+		$.ajax({// Room message full update
+			url: "/room/join/" + roomId,
+			type: "GET",
+			complete: function(data) {
+				response = data.responseText;
+				$(jQuery.parseJSON(response)).each(function() {
+					createdAt = new Date(this.created_at) //convert to JS time format
+					chatPrint(this.id, this.message, this.room, createdAt, this.userid, this.username, this.photo, this.media_type, this.image_content, this.video_content);
+					if (lastId < this.id){
+						lastId = this.id;					// for pinging more messages
+					}
+				});
+			}
 		});
 	}
 
@@ -244,7 +220,7 @@ $(".room-leave").click(function() {
 
 });
 
-$(".room-hotlink").click(function() {
+$(".room-hotlink").click(function() {// show room join link
 
 	roomId = $(".room-active").attr('data-id');
 
@@ -264,22 +240,20 @@ $(".room-hotlink").click(function() {
 
 });
 
+//=============================== [ BAN USER ] ======================
+
 var userBanMode;
 
 $(".room-ban").click(function() {
-
 	roomId = $(".room-active").attr('data-id');
 	if (cUser.cRoomModerator && !userBanMode){
-
 		userBanMode = true;
 		$(".room-active").addClass("ban-mode");
 		leroyPrint(I18n.t("selectmessage"), roomId);
-
 	}
 	else {
 		removeBanMode();
 	}
-
 });
 
 $('#chat-container').on('click', ".message-content", function(){
@@ -287,7 +261,6 @@ $('#chat-container').on('click', ".message-content", function(){
 	if (userBanMode){
 		targetUser = $(this).attr("data-user-id");
 		roomId = $(".room-active").attr('data-id');
-
 		if (targetUser == -1){
 			leroyPrint(I18n.t("notme"), roomId);
 			chatbottom;
@@ -335,7 +308,7 @@ function roomTabOut() {
 
 }
 
-function roomTabbing(roomId) {
+function roomTabbing(roomId) {// Change rooms
 
 	targetRoom = $(".room-tab[data-id="+ roomId +"]")[0];
 	cUser.cRoomModerator = eval($(targetRoom).attr("data-moderator"));
@@ -435,37 +408,33 @@ function poll() {
 				$(data).each(function() {
 
 					createdAt = new Date(this.created_at) //convert to JS time format
-
 					chatPrint(this.id, this.message, this.room, createdAt, this.userid, this.username, this.photo, this.media_type, this.image_content, this.video_content);
 
 					if (lastId < this.id){
-						lastId = this.id;					// for pinging more messages
+						lastId = this.id;					//updates the last message received
 					}
 
 					if ($(".room-tab-active").length > 0){
-						chatbottom();
+						chatbottom(); //scrolls active tab to bottom, TOFIX: BAD UX user might be reading old msgs
 					}
 
 					targetTab = $(".room-tab[data-id="+ this.room +"]")
 
 					if (!firstPoll && cUser.cRoomId != this.room) {
-						targetTab.addClass("room-tab-new"); // Alert tabs
+						targetTab.addClass("room-tab-new"); // Make the tab orange
 						readingPending = parseInt($("span",".room-tab[data-id="+ this.room +"]").text()) || 0;
-						$("span", targetTab).text(readingPending + 1); // Alert tabs
+						$("span", targetTab).text(readingPending + 1); // Increase the notification count
 					}
 
 					if (!firstPoll && !window_focus && this.userid != cUser.id){
 					roomName = $(".room-tab[data-id="+ this.room +"]").text();
-					notify(roomName + " @"+ this.username, $(this.message).text(), "<%= asset_path 'lero.png' %>")
+					notify(roomName + " @"+ this.username, $(this.message).text(), "<%= asset_path 'lero.png' %>") // create a desktop notification
 					notSeen += 1;
 					notificationSound.play();
 					}
 
 				});
-
-			//	localStorage.lastSaw = (lastId - notSeen);
 				firstPoll = false;
-
 			},
 			complete: function(){
 				setTimeout(poll, 1300);
@@ -492,7 +461,6 @@ function poll() {
 */
 
 //Send on enter press
-
 $("#compose").keypress(function (e) {
     if (e.which == 13 && !e.shiftKey) {
 
@@ -506,7 +474,7 @@ $("#compose").keypress(function (e) {
 			sendRoom = $(this).attr("data-room-id");
 
 			createdAt = new Date();
-			chatPrint(-1, sendMessage, sendRoom, createdAt, cUser.id, cUser.name, cUser.photo); // send a user message with -1 id to be removed
+			chatPrint(-1, sendMessage, sendRoom, createdAt, cUser.id, cUser.name, cUser.photo); // send a user message with -1 id to be removed, this creates a faster response "illusion"
 			chatbottom();
 
 			$.ajax({
@@ -521,8 +489,8 @@ $("#compose").keypress(function (e) {
 					}
 				});
 
-			$('#link').val("");
-			$(this).val("");
+			$('#link').val(""); // Clear
+			$(this).val("");		// the fields
       e.preventDefault();
       }
   });
@@ -542,6 +510,7 @@ $(".login-button").click(function() {
 });
 
 //======== Hello and goodbye ===========
+// Users online count
 
 $.ajax({
 		url: "/user/hello",
@@ -564,12 +533,11 @@ $.ajax({
 	};
 //=============================
 
-$('#compose').on('paste', function () {
+$('#compose').on('paste', function () { // handles the user text input area
 
 	textbefore = $(this).val().length; // get the lenght of the text before pasting
-
   var element = this;
-  setTimeout(function () {
+  setTimeout(function () { // this checks for a sudden input lenght change A.K.A. user pasted something
     textAfter = $(element).val(); // text after
 		link = textAfter.substring(textbefore); // text after - text before
 
@@ -580,9 +548,15 @@ $('#compose').on('paste', function () {
   }, 100);
 });
 
+$(".toggle-console").click(function(){
+
+	$("#console").toggleClass("console-show");
+
+});
+
  //==================================
 
- function notify(title, body, icon) {
+ function notify(title, body, icon) { // desktop notifications
    var options = {
        body: body,
        icon: icon
@@ -590,14 +564,14 @@ $('#compose').on('paste', function () {
    var note = new Notification(title,options);
  }
 
-function displayMenu(){
+function displayMenu(){ // For mobile, switch the action window to right (menu)
 
 	$(".chat").addClass("hidden-mobile");
 	$(".control").removeClass("hidden-mobile");
 
 }
 
-function displayChat(){
+function displayChat(){ // For mobile, switch the action window left (chat)
 
 	$(".chat").removeClass("hidden-mobile");
 	$(".control").addClass("hidden-mobile");
@@ -606,15 +580,9 @@ function displayChat(){
 
 }
 
-$(".toggle-console").click(function(){
+function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto, mediaType, imageContent, videoContent) {// Print a message
 
-	$("#console").toggleClass("console-show");
-
-});
-
-function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto, mediaType, imageContent, videoContent) {
-
-	if (!userPhoto){
+	if (!userPhoto){// user did not set a photo
 			userPhoto = "<%= asset_path 'user-default.png' %>"
 	}
 
@@ -622,10 +590,10 @@ function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto, 
 
 	lastRoomUser = $(".message-content",".room[data-id="+ roomId +"]").last().attr('data-user-id') || 0
 
-	if (userId != lastRoomUser) {
+	if (userId != lastRoomUser) { // Show the name of the new user
 		$(".room[data-id="+ roomId +"]").append("<div class='message'> <div class='message-user-photo'> <img src='"+ userPhoto +"'/></div><div class='message-info-content'><span class='message-user-name' data-user-name="+ userId +"> "+ userName +" </span> <span class='message-time'> "+ timeAgo +"</span> 	<div class='message-content' data-id='"+ id +"' data-user-id='"+ userId +"'>" + message + "</div></div></div>");
 	}
-	else {
+	else { // append to last user message
 		$(".message-info-content",".room[data-id="+ roomId +"]").last().append("<div class='message-content' data-id='"+ id +"' data-user-id='"+ userId +"'>" + message + "</div>");
 		$(".message-time",".room[data-id="+ roomId +"]").last().text(timeAgo);
 	}
@@ -634,7 +602,11 @@ function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto, 
 		$(".message-content[data-id='-1']").remove();// remove the user message
 	}
 
-	if (mediaType){
+	if (mediaType){// Media content printing
+
+		// 1 = Image
+		// 2 = mp4, webm
+		// 3 TODO html as open graph object
 		switch (mediaType) {
 			case 1:
 				$(".message-content",".room[data-id="+ roomId +"]").last().append("<img src="+ imageContent +" />");
@@ -652,7 +624,7 @@ function chatPrint(id, message, roomId, createdAt, userId, userName, userPhoto, 
 
 }
 
-function leroyPrint (message, roomId){ // Print a client-side message as leroy
+function leroyPrint (message, roomId){ // Print a client-side message as leroy as PM to user
 
 	createdAt = new Date();
 	chatPrint("", message, roomId, createdAt, -1, I18n.t('leroypm'), "<%= asset_path 'leroy.png' %>");

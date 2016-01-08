@@ -4,9 +4,9 @@ module ApplicationHelper
     relation.each do |m|
       messages << {
         id: m.id,
-        message: emojify(markdown(m.message)) || "",
+        message: emojify(markdown(m.message)) || "", # hack to prevent "null" coming on images
         room: m.room_id,
-        created_at: m.created_at.utc.to_i*1000,
+        created_at: m.created_at.utc.to_i*1000, # we make like this so js can read it
         userid: m.user.id,
         username: h(m.user.name),
         photo: m.user.photo.url.to_s,
@@ -37,7 +37,7 @@ module ApplicationHelper
     markdown.render(text).html_safe
   end
 
-  def emojify(content)
+  def emojify(content) #doesnt work on unicode, needs to be uniform
     h(content).to_str.gsub(/:([\w+-]+):/) do |match|
       if emoji = Emoji.find_by_alias($1)
         %(<img alt="#$1" src="#{ActionController::Base.helpers.asset_path("emoji/#{emoji.image_filename}")}" style="vertical-align:middle" width="20" height="20" />)

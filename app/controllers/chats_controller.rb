@@ -35,7 +35,7 @@ class ChatsController < ApplicationController
                 @chat.message = @message.gsub(link, "")
               end
             rescue => e
-              #
+              # They sent a bad link (404, 500, not an url) just let it pass.
             end
           end
 
